@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title> Frontier Map</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .mapPart {
+      aspect-ratio: 1/1;
+      display:block;
+      position: absolute;
+      left: 50%;
+      transform: translate(-50%, 0%);
+      object-fit: contain;
+      }
+
+    .hidden {
+      display: none;
+    }
+
+    .hiddenCategory {
+      display: none;
+    }
+
+    #buttons {
+      border: 2px solid black;
+      outline: #CBBD93 solid 10px;
+      margin: auto;  
+      padding: 20px;
+      text-align: center;
+      font-size:30px;
+    }
+
+    #mapWrapper {
+      border: 2px solid black;
+      outline: #CBBD93 solid 10px;
+      padding: 20px;
+      position: relative;
+      height:512px;
+      overflow:scroll;
+      resize:both;
+      margin-left:auto;
+      margin-right:auto;
+      display:block;
+    }
+
+    input.largerCheckbox {
+      width:30px;
+      height:30px;
+    }
+
+    #mapBase {
+      z-index: -1;
+    }
+
+    #mapTowns {
+      z-index: 0;
+    }
+
+    #mapCryptids {
+      z-index: 1;
+    }
+
+    #mapLocales {
+      z-index: 2;
+    }
+
+    #mapEnvSites {
+      z-index: 3;
+    }
+
+    #mapFountains {
+      z-index: 4;
+    }
+
+    #mapText {
+      z-index:5;
+    }
+
+  </style>
+</head>
+
+<body>
+
+<div id = 'buttons'>
+  <input type="checkbox" id="showBiomes" class='largerCheckbox'>
+    <label for="showBiomes">Biomes</label>
+  <input type="checkbox" id="showFountains" class='largerCheckbox' onclick = 'updateDisplay("mapFountains")'>
+    <label for="showFountains">Three Rose Fountains</label>
+  <input type="checkbox" id="showEnvSites" class='largerCheckbox' onclick = 'updateDisplay("mapEnvSites")'>
+    <label for="showEnvSites">Environmental Sites</label>
+  <input type="checkbox" id="showLocales" class='largerCheckbox' onclick = 'updateDisplay("mapLocales")'>
+    <label for="showLocales">Locales</label>
+  <input type="checkbox" id="showCryptids" class='largerCheckbox' onclick = 'updateDisplay("mapCryptids")'>
+    <label for="showCryptids">Cryptids</label>
+  <input type="checkbox" id="showTowns" class='largerCheckbox' onclick = 'updateDisplay("mapTowns")'>
+    <label for="showTowns">Towns</label>
+  <input type="checkbox" id="showText" class='largerCheckbox' onclick = 'updateDisplay("mapText")'>
+    <label for='showText'>Text</label>
+    <br>
+  <input id = 'slider' type="range" min="1" max="10" value="1" step=".1">
+    <label for='slider'>Zoom</label>
+</div>
+
+<div id = 'mapWrapper'>
+  <img src = 'mapBase.webp' class = 'mapPart' id = 'mapBase'>
+  <img src = 'towns.webp'  class = 'mapPart towns hidden' id = 'mapTowns'>
+  <img src = 'cryptids.webp'  class = 'mapPart cryptids hidden' id = 'mapCryptids'>
+  <img src = 'locales.webp' class = 'mapPart locales hidden' id = 'mapLocales'>
+  <img src = 'envSites.webp' class = 'mapPart envSites hidden' id = 'mapEnvSites'>
+  <img src = 'fountains.webp' class = 'mapPart fountains hidden' id = 'mapFountains'>
+  <div id = 'mapText' class='mapPart hidden'>
+    <img src = 'townsText.webp' class = 'mapPart towns hiddenCategory' id = 'textTowns'>
+    <img src = 'cryptidsText.webp' class = 'mapPart cryptids hiddenCategory' id = 'textCryptids'>
+    <img src = 'localesText.webp' class = 'mapPart locales hiddenCategory' id = 'textLocales'>
+    <img src = 'envSitesText.webp' class = 'mapPart envSites hiddenCategory' id = 'textEnvSites'>
+  </div>
+</div>
+  
+
+
+<script type="text/javascript">
+
+  function updateDisplay(id) {
+    document.getElementById(id).classList.toggle('hidden');
+    if (id != 'mapText' || id != 'mapFountains') {
+      let category = document.getElementById(id).classList[1];
+      let elements = Array.from(document.getElementsByClassName(category));
+      let results = elements.filter((element) => element.id.includes("text"));
+      results[0].classList.toggle('hiddenCategory');
+    }
+  }
+
+  function zoom(magnification) {
+    const baseSize = document.getElementById('mapWrapper').offsetHeight;
+    let elements = Array.from(document.getElementsByClassName('mapPart'));
+
+      elements.forEach(element => {
+        element.style.height = baseSize * magnification + 'px'; 
+      });
+  }
+
+  function setHeights() {
+    let elements = Array.from(document.getElementsByClassName('mapPart'));
+    elements.forEach(element => {
+      element.style.height = "1024px";
+    });
+  }
+
+  document.getElementById('slider').oninput = function() {
+    element = document.getElementById('mapWrapper');
+    //Side to Side Scroll Bar
+    let maxScrollLeft = element.scrollWidth - element.clientWidth;
+    let ratioScrollLeft = element.scrollLeft/maxScrollLeft;
+    //Up and Down Scroll Bar
+    let maxScrollTop = element.scrollHeight - element.clientHeight;
+    let ratioScrollTop = element.scrollTop/maxScrollTop;
+
+    //Zoom Function
+    zoom(this.value);
+
+    //Adjust Side to Side
+    maxScrollLeft = element.scrollWidth - element.clientWidth;
+    element.scrollLeft = Math.round(ratioScrollLeft*maxScrollLeft);
+    //Adjust Up and Down
+    maxScrollTop = element.scrollHeight - element.clientHeight;
+    element.scrollTop= Math.round(ratioScrollTop*maxScrollTop);
+  };
+
+  function startup() {
+    setHeights();
+    zoom(document.getElementById('slider').value);
+  }
+
+  function main() {
+    startup();
+  }
+
+  main();
+</script>
+
+</body>
+
+</html>
