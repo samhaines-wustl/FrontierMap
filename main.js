@@ -1,16 +1,37 @@
+
+import iconData from './iconData.json' with {type: 'json'};
+
+//Zoom and Canvas Stuff
 let canvas = document.getElementById("canvas")
 let ctx = canvas.getContext('2d')
 
 let cameraOffset = { x: window.innerWidth/2, y: window.innerHeight/2 }
-let cameraZoom = .2
-const MAX_ZOOM = 2
-const MIN_ZOOM = 0.1
+let cameraZoom = .15
+const MAX_ZOOM = 1.5
+const MIN_ZOOM = 0.05
 const SCROLL_SENSITIVITY = 0.0005
-
-const ICON_SIZE = 512;
 
 let canvasWidth = window.innerWidth;
 let canvasHeight = window.innerHeight;
+
+
+//Other Stuff
+const ICON_SIZE = 256;
+
+
+let displaySettings = {
+    "admin": false, 
+    "town": false, 
+    "cryptid": false, 
+    "locale": false, 
+    "envSite": false,
+    "fountain": false,
+    "biome": false,
+    "faction": false
+}
+
+let iconImages = {};
+let blankMap;
 
 function draw()
 {
@@ -22,23 +43,37 @@ function draw()
     ctx.scale(cameraZoom, cameraZoom)
     ctx.translate( -canvasWidth / 2 + cameraOffset.x, -canvasHeight / 2 + cameraOffset.y )
     ctx.clearRect(0,0, canvasWidth, canvasHeight)
-
-    let img = document.getElementById('source')
-    ctx.drawImage(img, -1*img.width/2, -1*img.height/2);
+    ctx.drawImage(blankMap, -1*blankMap.width/2, -1*blankMap.height/2);
 
     //Draw Towns
-    drawTowns();
-    
-    requestAnimationFrame( draw )
+    drawIcons();
+
+    //Repeat the map
+    requestAnimationFrame( draw );
+}
+
+//Prep Icons
+function loadAllImages() {
+    blankMap = new Image();
+    blankMap.src = 'images/mapBase.webp';
+
+    loadIcons();
+}
+
+function loadIcons() {
+    iconImages.Town_1 = new Image();
+    iconImages.Town_1.src = 'images/icons/Town_1.png';
 }
 
 // Map Elements
-function drawTowns() {
-    let towns = document.getElementsByClassName('town');
-    Array.from(towns).forEach((t) => {
-        ctx.drawImage(t, 256, 256, 64, 64);
-    })
+function drawIcons() {
+    for (let i in iconData) {
+        if (iconData[i].permission_level == "public" ? displaySettings[iconData[i].type] : displaySettings.admin)
+            ctx.drawImage(iconImages[iconData[i].icon], iconData[i].x - ICON_SIZE/2, iconData[i].y - ICON_SIZE/2, ICON_SIZE, ICON_SIZE);
+    }
 }
+
+
 
 // All Zoom and Scroll Stuff
 
@@ -138,6 +173,8 @@ function adjustZoom(zoomAmount, zoomFactor)
     }
 }
 
+
+// Event Listeners
 canvas.addEventListener('mousedown', onPointerDown)
 canvas.addEventListener('touchstart', (e) => handleTouch(e, onPointerDown))
 canvas.addEventListener('mouseup', onPointerUp)
@@ -147,4 +184,5 @@ canvas.addEventListener('touchmove', (e) => handleTouch(e, onPointerMove))
 canvas.addEventListener( 'wheel', (e) => adjustZoom(e.deltaY*SCROLL_SENSITIVITY*-1))
 
 // Ready, set, go
+loadAllImages();
 draw()
