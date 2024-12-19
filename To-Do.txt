@@ -1,0 +1,10 @@
+To-Do List
+
+- Add Admin toggle (display)
+- Add Distance Calc
+- Add non scaling icons
+- Add increase/decrease icons and texts
+- Add biome toggle
+- Add Faction toggle and range
+- Add icon toggles similar to main branch version
+- Add icon adder
