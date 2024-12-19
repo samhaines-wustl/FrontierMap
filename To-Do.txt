@@ -1,7 +1,7 @@
 To-Do List
 
 - Add Admin toggle (display)
-- Add text reader 
+- Add Distance Calc
 - Add non scaling icons
 - Add increase/decrease icons and texts
 - Add biome toggle
