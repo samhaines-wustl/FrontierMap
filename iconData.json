@@ -2,16 +2,16 @@
     {
         "name": "Big Stone Gulch",
         "type": "town",
-        "icon": "Town_1",
+        "icon_src": "Town_1",
         "permission_level": "public",
         "x": 0,
         "y": 0
     },
     {
-        "name": "Big Stone Gulch",
-        "type": "Town",
-        "icon": "Town_1",
-        "permission_level": "admin",
+        "name": "Purity Snag",
+        "type": "town",
+        "icon_src": "Town_1",
+        "permission_level": "public",
         "x": 500,
         "y": 500
     }

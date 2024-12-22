@@ -31,6 +31,7 @@ let displaySettings = {
 }
 
 let iconImages = {};
+let visibleIcons = [];
 let blankMap;
 
 function draw()
@@ -52,7 +53,7 @@ function draw()
     requestAnimationFrame( draw );
 }
 
-//Prep Icons
+// Prep Icons
 function loadAllImages() {
     blankMap = new Image();
     blankMap.src = 'images/mapBase.webp';
@@ -67,15 +68,45 @@ function loadIcons() {
 
 // Map Elements
 function drawIcons() {
-    for (let i in iconData) {
-        if (iconData[i].permission_level == "public" ? displaySettings[iconData[i].type] : displaySettings.admin)
-            ctx.drawImage(iconImages[iconData[i].icon], iconData[i].x - ICON_SIZE/2, iconData[i].y - ICON_SIZE/2, ICON_SIZE, ICON_SIZE);
-    }
+    visibleIcons.forEach((icon) => {
+        ctx.drawImage(iconImages[icon.icon_src], icon.x - ICON_SIZE/2, icon.y - ICON_SIZE/2, ICON_SIZE, ICON_SIZE);
+    });
 }
 
 // Other
 function toggleDisplay(parameter) {
     displaySettings[parameter] = !displaySettings[parameter];
+    updateVisibleIcons();
+    refreshDistSelection();
+    console.log(visibleIcons);
+}
+
+function updateVisibleIcons() {
+    visibleIcons = [];
+    for (let i in iconData) {
+        if (iconData[i].permission_level == "public" ? displaySettings[iconData[i].type] : displaySettings.admin)
+            visibleIcons.push(iconData[i]);
+    }
+}
+
+// Refresh distance selection
+function refreshDistSelection() {
+    let select1 = document.getElementById('distLoc1');
+    let select2 = document.getElementById('distLoc2');
+    
+    //Clear out selects
+    while (select1.options.length > 0) {
+        select1.remove(0);
+        select2.remove(0);
+    }
+
+    //Prep new selects
+    select1.add(new Option("Nothing Selected"));
+    select2.add(new Option("Nothing Selected"));
+    visibleIcons.forEach((icon) => {
+        select1.add(new Option(icon.name));
+        select2.add(new Option(icon.name));
+    });
 }
 
 
@@ -188,10 +219,9 @@ canvas.addEventListener('mousemove', onPointerMove)
 canvas.addEventListener('touchmove', (e) => handleTouch(e, onPointerMove))
 canvas.addEventListener( 'wheel', (e) => adjustZoom(e.deltaY*SCROLL_SENSITIVITY*-1))
 
-document.getElementById('buttonTown').addEventListener('click', function() {toggleDisplay('town')});
+document.getElementById('toggleTown').addEventListener('click', function() {toggleDisplay('town')});
 
-
-console.log(displaySettings);
 // Ready, set, go
 loadAllImages();
+refreshDistSelection();
 draw()

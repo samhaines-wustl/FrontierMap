@@ -13,9 +13,31 @@
 <body>
   <canvas id="canvas"></canvas>
 
-  <button>Admin</button>
-  <button id="buttonTown">Towns</button>
+  <div>
+    <input id="toggleTown" type="checkbox">Towns</input>
+    <input id="toggleCrpytid" type="checkbox">Cryptids</input>
+    <input id="toggleLocale" type="checkbox">Locales</input>
+    <input id="toggleEnvSite" type="checkbox">Environmental Sites</input>
+    <input id="toggleFountain" type="checkbox">Fountains</input>
+    <input id="toggleText" type="checkbox">Text</input>
+    <input id="toggleBiome" type="checkbox">Biomes</input>
+    <input id="toggleFaction" type="checkbox">Factions</input>
+    <input id="toggleAdmin" type="checkbox">Admin</input>
+  </div>  
 
+  <div> 
+    Choose a starting location:
+    <select id="distLoc1">
+      <option value=""> Nothing Selected</option>
+    </select>
+    Choose a ending location:
+    <select id="distLoc2">
+      <option value=""> Nothing Selected</option>
+    </select>
+
+    <button>Calc Distance</button>
+  </div>
+  
   <script type="module" src="main.js"></script>
 </body>
 
