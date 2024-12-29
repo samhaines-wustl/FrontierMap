@@ -1,5 +1,5 @@
 
-import iconData from './iconData.json' with {type: 'json'};
+import locations from './locationsData.json' with {type: 'json'};
 
 //Zoom and Canvas Stuff
 let canvas = document.getElementById("canvas")
@@ -17,6 +17,7 @@ let canvasHeight = window.innerHeight;
 
 //Other Stuff
 const ICON_SIZE = 256;
+const PIXEL_TO_MILES = 16/96/4; //This is 16mi for 96mi on a 2048px, Am using size 8192 so divided by 4
 
 
 let displaySettings = {
@@ -53,7 +54,7 @@ function draw()
     requestAnimationFrame( draw );
 }
 
-// Prep Icons
+// Prep Images
 function loadAllImages() {
     blankMap = new Image();
     blankMap.src = 'images/mapBase.webp';
@@ -78,15 +79,42 @@ function toggleDisplay(parameter) {
     displaySettings[parameter] = !displaySettings[parameter];
     updateVisibleIcons();
     refreshDistSelection();
-    console.log(visibleIcons);
+    //console.log(visibleIcons);
 }
 
 function updateVisibleIcons() {
     visibleIcons = [];
-    for (let i in iconData) {
-        if (iconData[i].permission_level == "public" ? displaySettings[iconData[i].type] : displaySettings.admin)
-            visibleIcons.push(iconData[i]);
+    for (let i in locations) {
+        if (locations[i].permission_level == "public" ? displaySettings[locations[i].type] : displaySettings.admin)
+            visibleIcons.push(locations[i]);
     }
+}
+
+function calcDistance() {
+    let loc1 = document.getElementById("distLoc1").value;
+    let loc2 = document.getElementById('distLoc2').value;
+    
+    if (loc1 == 'Nothing Selected' || loc2 == 'Nothing Selected')
+        return;
+
+    let coords = [
+        {
+            "x": locations.find(x => x.name === loc1).x, 
+            "y": locations.find(x => x.name === loc1).y
+        },
+        {
+        "x": locations.find(x => x.name === loc2).x, 
+        "y": locations.find(x => x.name === loc2).y
+        }
+    ];
+    let xDif = coords[0].x - coords[1].x;
+    let yDif = coords[0].y - coords[1].y; 
+
+    let distanceInPixels = Math.sqrt(xDif*xDif + yDif*yDif);
+    let distanceInMiles = distanceInPixels*PIXEL_TO_MILES;
+
+    console.log(distanceInPixels);
+    console.log(distanceInMiles)
 }
 
 // Refresh distance selection
@@ -198,14 +226,14 @@ function adjustZoom(zoomAmount, zoomFactor)
         }
         else if (zoomFactor)
         {
-            console.log(zoomFactor)
+            //console.log(zoomFactor)
             cameraZoom = zoomFactor*lastZoom
         }
         
         cameraZoom = Math.min( cameraZoom, MAX_ZOOM )
         cameraZoom = Math.max( cameraZoom, MIN_ZOOM )
         
-        console.log(zoomAmount)
+        //console.log(zoomAmount)
     }
 }
 
@@ -220,6 +248,8 @@ canvas.addEventListener('touchmove', (e) => handleTouch(e, onPointerMove))
 canvas.addEventListener( 'wheel', (e) => adjustZoom(e.deltaY*SCROLL_SENSITIVITY*-1))
 
 document.getElementById('toggleTown').addEventListener('click', function() {toggleDisplay('town')});
+
+document.getElementById('distanceButton').addEventListener('click', calcDistance);
 
 // Ready, set, go
 loadAllImages();
