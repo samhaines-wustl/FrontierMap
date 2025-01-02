@@ -38,7 +38,7 @@ let displaySettings = {
 
 let adminSettings = {
     "admin": false, 
-    "loggingCoords": false
+    "grid": false
 }
 
 let iconImages = {};
@@ -51,7 +51,6 @@ function main() {
     initializeDisplaySettings();
     loadAllImages();
     locations = rawLocations.concat(initializeFountains());
-    console.log(locations);
 
 
     // Event Listeners
@@ -72,6 +71,9 @@ function main() {
     document.getElementById('toggleFaction').addEventListener('click', function() {toggleDisplay('faction')});
     document.getElementById('toggleText').addEventListener('click', function() {toggleDisplay('text')});
     document.getElementById('toggleLine').addEventListener('click', function() {toggleDisplay('line')});
+
+    document.getElementById('toggleAdmin').addEventListener('click', function() {toggleAdmin('admin')});
+    document.getElementById('toggleGrid').addEventListener('click', function() {toggleAdmin('grid')});
     
 
     document.getElementById('distButton').addEventListener('click', calcDistance);
@@ -108,6 +110,8 @@ function draw()
     ctx.fillText("8 mi", 4096 - 4096/20, 4096 - 4096/20);
 
     //Admin Stuff
+    if (adminSettings.grid)
+        drawCoordGrid();
 
     //Repeat the map
     requestAnimationFrame( draw );
@@ -145,7 +149,7 @@ function toggleDisplay(parameter) {
     refreshDistSelection();
 }
 
-function toggleConfigs(parameter) {
+function toggleAdmin(parameter) {
     adminSettings[parameter] = !adminSettings[parameter];
     updateVisibleIcons();
     refreshDistSelection();
@@ -263,6 +267,23 @@ function initializeDisplaySettings() {
 
 function initializeFountains() {
     return rawFountains.map(f => ({...f, icon_src: "Town_1", type: "fountain"}));
+}
+
+function drawCoordGrid() {
+    for (let x = -4000; x <= 3800; x +=200) {
+        for (let y = -3600; y <= 4200; y += 200) {
+            //Dot
+            ctx.beginPath();
+            ctx.arc(x,y, 2,0,2*Math.PI);
+            ctx.fillStyle = '#000000';
+            ctx.fill();
+            ctx.stroke();
+            //Text
+            ctx.fillStyle = "#000000";
+            ctx.font = "16px Arial";
+            ctx.fillText(" (" + x + "," + y + ")", x, y);
+        }
+    }
 }
 
 
