@@ -1,6 +1,6 @@
 [
     {
-        "name": "Big Stone Gulch",
+        "name": "Zero Zero",
         "type": "town",
         "icon_src": "Town_1",
         "permission_level": "public",
@@ -12,7 +12,31 @@
         "type": "town",
         "icon_src": "Town_1",
         "permission_level": "public",
-        "x": 500,
-        "y": 500
+        "x": 2850,
+        "y": 750
+    },
+    {
+        "name": "Big Stone Gulch",
+        "type": "town",
+        "icon_src": "Town_1",
+        "permission_level": "public",
+        "x": 3000,
+        "y": 600
+    },
+    {
+        "name": "Cactus Pass",
+        "type": "envSite",
+        "icon_src": "Town_1",
+        "permission_level": "public",
+        "x": 3010,
+        "y": 440
+    },
+    {
+        "name": "Sonora Ranch",
+        "type": "locale",
+        "icon_src": "Town_1",
+        "permission_level": "public",
+        "x": 2990,
+        "y": 310
     }
 ]

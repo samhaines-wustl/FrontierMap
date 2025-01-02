@@ -17,3 +17,33 @@ html, body
 {
     display: none;
 }
+
+table.distTableStyling {
+  border: 6px solid #948473;
+  background-color: #FFE3C6;
+  width: 50%;
+  text-align: center;
+}
+table.distTableStyling td, table.distTableStyling th {
+  border: 2px solid #948473;
+  padding: 2px 4px;
+}
+table.distTableStyling tbody td {
+  font-size: 12px;
+}
+table.distTableStyling thead {
+  background: #948473;
+  background: -moz-linear-gradient(top, #afa396 0%, #9e9081 66%, #948473 100%);
+  background: -webkit-linear-gradient(top, #afa396 0%, #9e9081 66%, #948473 100%);
+  background: linear-gradient(to bottom, #afa396 0%, #9e9081 66%, #948473 100%);
+}
+table.distTableStyling thead th {
+  font-size: 17px;
+  font-weight: bold;
+  color: #F0F0F0;
+  text-align: left;
+  border-left: 2px solid #948473;
+}
+table.distTableStyling thead th:first-child {
+  border-left: none;
+}

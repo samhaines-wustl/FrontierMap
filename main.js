@@ -16,24 +16,67 @@ let canvasHeight = window.innerHeight;
 
 
 //Other Stuff
-const ICON_SIZE = 256;
-const PIXEL_TO_MILES = 16/96/4; //This is 16mi for 96mi on a 2048px, Am using size 8192 so divided by 4
+const ICON_SIZE = 128;
+const FONT_SIZE = ICON_SIZE/2;
+const PIXEL_TO_MILES = 8/192/2; //This is 8mi for 196px on a 4096px, Am using size 8192 so divided by 2
+
+let distLines = [];
 
 
 let displaySettings = {
-    "admin": false, 
-    "town": false, 
+    "town": true, 
     "cryptid": false, 
-    "locale": false, 
-    "envSite": false,
+    "locale": true, 
+    "envSite": true,
     "fountain": false,
     "biome": false,
-    "faction": false
+    "faction": false,
+    "text": true,
+    "line": true
+}
+
+let adminSettings = {
+    "admin": false, 
+    "loggingCoords": false
 }
 
 let iconImages = {};
 let visibleIcons = [];
 let blankMap;
+
+
+function main() {
+    initializeDisplaySettings();
+
+
+    // Event Listeners
+    canvas.addEventListener('mousedown', onPointerDown)
+    canvas.addEventListener('touchstart', (e) => handleTouch(e, onPointerDown))
+    canvas.addEventListener('mouseup', onPointerUp)
+    canvas.addEventListener('touchend',  (e) => handleTouch(e, onPointerUp))
+    canvas.addEventListener('mousemove', onPointerMove)
+    canvas.addEventListener('touchmove', (e) => handleTouch(e, onPointerMove))
+    canvas.addEventListener( 'wheel', (e) => adjustZoom(e.deltaY*SCROLL_SENSITIVITY*-1))
+
+    document.getElementById('toggleTown').addEventListener('click', function() {toggleDisplay('town')});
+    document.getElementById('toggleCryptid').addEventListener('click', function() {toggleDisplay('cryptid')});
+    document.getElementById('toggleEnvSite').addEventListener('click', function() {toggleDisplay('envSite')});
+    document.getElementById('toggleFountain').addEventListener('click', function() {toggleDisplay('fountain')});
+    document.getElementById('toggleBiome').addEventListener('click', function() {toggleDisplay('biome')});
+    document.getElementById('toggleFaction').addEventListener('click', function() {toggleDisplay('faction')});
+    document.getElementById('toggleText').addEventListener('click', function() {toggleDisplay('text')});
+    document.getElementById('toggleLine').addEventListener('click', function() {toggleDisplay('line')});
+    
+
+    document.getElementById('distButton').addEventListener('click', calcDistance);
+
+
+    // Ready, set, go
+    updateVisibleIcons();
+    loadAllImages();
+    refreshDistSelection();
+    draw();
+}
 
 function draw()
 {
@@ -49,6 +92,17 @@ function draw()
 
     //Draw Towns
     drawIcons();
+
+    //Draw Lines
+    if (displaySettings.line)
+        drawDistLines();
+
+    //Draw Scale
+    ctx.fillStyle = "#ffffff";
+    ctx.font = FONT_SIZE*3+ "px Arial";
+    ctx.fillText("8 mi", 4096 - 4096/20, 4096 - 4096/20);
+
+    //Admin Stuff
 
     //Repeat the map
     requestAnimationFrame( draw );
@@ -71,6 +125,11 @@ function loadIcons() {
 function drawIcons() {
     visibleIcons.forEach((icon) => {
         ctx.drawImage(iconImages[icon.icon_src], icon.x - ICON_SIZE/2, icon.y - ICON_SIZE/2, ICON_SIZE, ICON_SIZE);
+        if (displaySettings.text) {
+            ctx.fillStyle = "#000000";
+            ctx.font = FONT_SIZE+ "px Arial";
+            ctx.fillText(icon.name, icon.x+ICON_SIZE/2, icon.y + ICON_SIZE/2);
+        }
     });
 }
 
@@ -80,6 +139,13 @@ function toggleDisplay(parameter) {
     updateVisibleIcons();
     refreshDistSelection();
     //console.log(visibleIcons);
+}
+
+function toggleConfigs(parameter) {
+    adminSettings[parameter] = !adminSettings[parameter];
+    updateVisibleIcons();
+    refreshDistSelection();
+    console.log(adminSettings);
 }
 
 function updateVisibleIcons() {
@@ -111,10 +177,58 @@ function calcDistance() {
     let yDif = coords[0].y - coords[1].y; 
 
     let distanceInPixels = Math.sqrt(xDif*xDif + yDif*yDif);
-    let distanceInMiles = distanceInPixels*PIXEL_TO_MILES;
+    let distanceInMiles = (distanceInPixels*PIXEL_TO_MILES).toFixed(1);
 
-    console.log(distanceInPixels);
-    console.log(distanceInMiles)
+    document.getElementById("distResult").textContent = distanceInMiles + " mi";
+
+    //Updating line Storage Array
+    distLines.push({
+        'x1': coords[0].x,
+        'y1': coords[0].y,
+        'x2': coords[1].x,
+        'y2': coords[1].y,
+        'name1': loc1,
+        'name2': loc2,
+        'distance': distanceInMiles
+    });
+    let table = document.getElementById('distTable')
+    let row = table.insertRow(-1)
+    let cells = [row.insertCell(0),row.insertCell(1),row.insertCell(2),row.insertCell(3)];
+    cells[0].innerHTML = distLines.at(-1).name1;
+    cells[1].innerHTML = distLines.at(-1).name2;
+    cells[2].innerHTML = distLines.at(-1).distance;
+    cells[3].innerHTML = '<button>X</button>';
+    cells[3].addEventListener('click', function() {removeDistLines(this.parentNode.rowIndex)});
+}
+
+function drawDistLines() {
+    distLines.forEach((l) => {
+        //Starting Circle
+        ctx.beginPath();
+            ctx.arc(l.x1,l.y1, ICON_SIZE/8,0,2*Math.PI);
+            ctx.fillStyle = '#B42E15';
+            ctx.fill();
+        ctx.stroke();
+        //Line b/w
+        //ctx.setLineDash([48,32])
+        ctx.beginPath();
+            ctx.lineWidth = 10;
+            ctx.strokeStyle = '#B42E15';
+            ctx.moveTo(l.x1, l.y1);
+            ctx.lineTo(l.x2, l.y2);
+        ctx.stroke();
+        //Ending Circle
+        ctx.beginPath();
+            ctx.arc(l.x2,l.y2, ICON_SIZE/8,0,2*Math.PI);
+            ctx.fillStyle = '#B42E15';
+            ctx.fill();
+        ctx.stroke();
+    })
+}
+
+function removeDistLines(index) {
+    document.getElementById('distTable').deleteRow(index);
+    distLines.splice(index-1, 1);
 }
 
 // Refresh distance selection
@@ -136,6 +250,25 @@ function refreshDistSelection() {
         select2.add(new Option(icon.name));
     });
 }
+
+function initializeDisplaySettings() {
+    for (let x in displaySettings) {
+        document.getElementById(String("toggle"+x.replace(/^./, char => char.toUpperCase()))).checked = displaySettings[x];
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -238,20 +371,5 @@ function adjustZoom(zoomAmount, zoomFactor)
 }
 
 
-// Event Listeners
-canvas.addEventListener('mousedown', onPointerDown)
-canvas.addEventListener('touchstart', (e) => handleTouch(e, onPointerDown))
-canvas.addEventListener('mouseup', onPointerUp)
-canvas.addEventListener('touchend',  (e) => handleTouch(e, onPointerUp))
-canvas.addEventListener('mousemove', onPointerMove)
-canvas.addEventListener('touchmove', (e) => handleTouch(e, onPointerMove))
-canvas.addEventListener( 'wheel', (e) => adjustZoom(e.deltaY*SCROLL_SENSITIVITY*-1))
+main();
 
-document.getElementById('toggleTown').addEventListener('click', function() {toggleDisplay('town')});
-
-document.getElementById('distanceButton').addEventListener('click', calcDistance);
-
-// Ready, set, go
-loadAllImages();
-refreshDistSelection();
-draw()

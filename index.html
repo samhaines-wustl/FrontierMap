@@ -15,28 +15,46 @@
 
   <div>
     <input id="toggleTown" type="checkbox">Towns</input>
-    <input id="toggleCrpytid" type="checkbox">Cryptids</input>
+    <input id="toggleCryptid" type="checkbox">Cryptids</input>
     <input id="toggleLocale" type="checkbox">Locales</input>
     <input id="toggleEnvSite" type="checkbox">Environmental Sites</input>
     <input id="toggleFountain" type="checkbox">Fountains</input>
     <input id="toggleText" type="checkbox">Text</input>
     <input id="toggleBiome" type="checkbox">Biomes</input>
     <input id="toggleFaction" type="checkbox">Factions</input>
-    <input id="toggleAdmin" type="checkbox">Admin</input>
+    <input id="toggleLine" type="checkbox"> Lines </input>
   </div>  
 
+  <div>
+    Admin Stuff:
+    <input id="toggleAdmin" type="checkbox">Admin</input>
+    <input id="toggleLoggingCoords" type="checkbox">Console Coords</input>
+  </div>
+
   <div> 
-    Choose a starting location:
+    Starting location:
     <select id="distLoc1">
       <option value=""> Nothing Selected</option>
     </select>
-    Choose a ending location:
+    Ending location:
     <select id="distLoc2">
       <option value=""> Nothing Selected</option>
     </select>
 
-    <button id="distanceButton">Calc Distance</button>
+    <button id="distButton">Calc Distance</button>
+    <span id="distResult"></span>
   </div>
+
+  <table class="distTableStyling" id="distTable">
+    <thead>
+      <tr>
+        <th>Starting</th>
+        <th>Ending</th>
+        <th>Miles</th>
+        <th>Remove</th>
+      </tr>
+    </thead>
+  </table>
   
   <script type="module" src="main.js"></script>
 </body>
