@@ -62,5 +62,13 @@
         "permission_level": "public",
         "x": 550,
         "y": -1170
+    },
+    {
+        "name": "Cinderheart Marauder",
+        "type": "cryptid",
+        "icon_src": "Town_1",
+        "permission_level": "public",
+        "x": 3150,
+        "y": 400
     }
 ]
