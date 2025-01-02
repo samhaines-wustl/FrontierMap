@@ -38,5 +38,29 @@
         "permission_level": "public",
         "x": 2990,
         "y": 310
+    },
+    {
+        "name": "Porcupine Kids",
+        "type": "cryptid",
+        "icon_src": "Town_1",
+        "permission_level": "public",
+        "x": -580,
+        "y": 1600
+    },
+    {
+        "name": "Pale Oak Geyser",
+        "type": "envSite",
+        "icon_src": "Town_1",
+        "permission_level": "public",
+        "x": -650,
+        "y": 1650
+    },
+    {
+        "name": "The Long Goodbye",
+        "type": "locale",
+        "icon_src": "Town_1",
+        "permission_level": "public",
+        "x": 550,
+        "y": -1170
     }
 ]

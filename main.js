@@ -1,5 +1,6 @@
 
-import locations from './locationsData.json' with {type: 'json'};
+import rawLocations from './json/locationsData.json' with {type: 'json'};
+import rawFountains from './json/fountainsData.json' with {type: 'json'};
 
 //Zoom and Canvas Stuff
 let canvas = document.getElementById("canvas")
@@ -42,11 +43,15 @@ let adminSettings = {
 
 let iconImages = {};
 let visibleIcons = [];
+let locations = [];
 let blankMap;
 
 
 function main() {
     initializeDisplaySettings();
+    loadAllImages();
+    locations = rawLocations.concat(initializeFountains());
+    console.log(locations);
 
 
     // Event Listeners
@@ -60,6 +65,7 @@ function main() {
 
     document.getElementById('toggleTown').addEventListener('click', function() {toggleDisplay('town')});
     document.getElementById('toggleCryptid').addEventListener('click', function() {toggleDisplay('cryptid')});
+    document.getElementById('toggleLocale').addEventListener('click', function() {toggleDisplay('locale')});
     document.getElementById('toggleEnvSite').addEventListener('click', function() {toggleDisplay('envSite')});
     document.getElementById('toggleFountain').addEventListener('click', function() {toggleDisplay('fountain')});
     document.getElementById('toggleBiome').addEventListener('click', function() {toggleDisplay('biome')});
@@ -73,7 +79,6 @@ function main() {
 
     // Ready, set, go
     updateVisibleIcons();
-    loadAllImages();
     refreshDistSelection();
     draw();
 }
@@ -90,7 +95,7 @@ function draw()
     ctx.clearRect(0,0, canvasWidth, canvasHeight)
     ctx.drawImage(blankMap, -1*blankMap.width/2, -1*blankMap.height/2);
 
-    //Draw Towns
+    //Draw Locations
     drawIcons();
 
     //Draw Lines
@@ -125,7 +130,7 @@ function loadIcons() {
 function drawIcons() {
     visibleIcons.forEach((icon) => {
         ctx.drawImage(iconImages[icon.icon_src], icon.x - ICON_SIZE/2, icon.y - ICON_SIZE/2, ICON_SIZE, ICON_SIZE);
-        if (displaySettings.text) {
+        if (displaySettings.text && Object.hasOwn(icon, 'name')) {
             ctx.fillStyle = "#000000";
             ctx.font = FONT_SIZE+ "px Arial";
             ctx.fillText(icon.name, icon.x+ICON_SIZE/2, icon.y + ICON_SIZE/2);
@@ -138,14 +143,12 @@ function toggleDisplay(parameter) {
     displaySettings[parameter] = !displaySettings[parameter];
     updateVisibleIcons();
     refreshDistSelection();
-    //console.log(visibleIcons);
 }
 
 function toggleConfigs(parameter) {
     adminSettings[parameter] = !adminSettings[parameter];
     updateVisibleIcons();
     refreshDistSelection();
-    console.log(adminSettings);
 }
 
 function updateVisibleIcons() {
@@ -179,8 +182,6 @@ function calcDistance() {
     let distanceInPixels = Math.sqrt(xDif*xDif + yDif*yDif);
     let distanceInMiles = (distanceInPixels*PIXEL_TO_MILES).toFixed(1);
 
-    document.getElementById("distResult").textContent = distanceInMiles + " mi";
-
     //Updating line Storage Array
     distLines.push({
         'x1': coords[0].x,
@@ -191,6 +192,7 @@ function calcDistance() {
         'name2': loc2,
         'distance': distanceInMiles
     });
+
     let table = document.getElementById('distTable')
     let row = table.insertRow(-1)
     let cells = [row.insertCell(0),row.insertCell(1),row.insertCell(2),row.insertCell(3)];
@@ -246,8 +248,10 @@ function refreshDistSelection() {
     select1.add(new Option("Nothing Selected"));
     select2.add(new Option("Nothing Selected"));
     visibleIcons.forEach((icon) => {
-        select1.add(new Option(icon.name));
-        select2.add(new Option(icon.name));
+        if (Object.hasOwn(icon, 'name')) {
+            select1.add(new Option(icon.name));
+            select2.add(new Option(icon.name));
+        }
     });
 }
 
@@ -255,6 +259,10 @@ function initializeDisplaySettings() {
     for (let x in displaySettings) {
         document.getElementById(String("toggle"+x.replace(/^./, char => char.toUpperCase()))).checked = displaySettings[x];
     }
+}
+
+function initializeFountains() {
+    return rawFountains.map(f => ({...f, icon_src: "Town_1", type: "fountain"}));
 }
 
 
