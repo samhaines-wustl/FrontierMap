@@ -126,14 +126,28 @@ function loadAllImages() {
 }
 
 function loadIcons() {
+    //Image not found
+    iconImages.image_not_found = new Image();
+    iconImages.image_not_found.src = 'images/icons/image_not_found.png';
+
+    //Towns
     iconImages.Town_1 = new Image();
     iconImages.Town_1.src = 'images/icons/Town_1.png';
+
+    console.log(iconImages);
 }
 
 // Map Elements
 function drawIcons() {
     visibleIcons.forEach((icon) => {
-        ctx.drawImage(iconImages[icon.icon_src], icon.x - ICON_SIZE/2, icon.y - ICON_SIZE/2, ICON_SIZE, ICON_SIZE);
+        let iconImage;
+        if (Object.hasOwn(iconImages, icon.icon_src))
+            iconImage = iconImages[icon.icon_src];
+        else
+            iconImage = iconImages['image_not_found'];
+
+        ctx.drawImage(iconImage, icon.x - ICON_SIZE/2, icon.y - ICON_SIZE/2, ICON_SIZE, ICON_SIZE);
+        
         if (displaySettings.text && Object.hasOwn(icon, 'name')) {
             ctx.fillStyle = "#000000";
             ctx.font = FONT_SIZE+ "px Arial";

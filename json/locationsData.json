@@ -2,7 +2,7 @@
     {
         "name": "Zero Zero",
         "type": "town",
-        "icon_src": "Town_1",
+        "icon_src": "own_1",
         "permission_level": "public",
         "x": 0,
         "y": 0
