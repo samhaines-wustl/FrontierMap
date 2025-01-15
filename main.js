@@ -23,40 +23,64 @@ const PIXEL_TO_MILES = 8/192/2; //This is 8mi for 196px on a 4096px, Am using si
 
 let distLines = [];
 
-
-let displaySettings = {
-    "town": true, 
-    "cryptid": false, 
-    "locale": true, 
-    "envSite": true,
-    "fountain": false,
-    "biome": false,
-    "faction": false,
-    "text": true,
-    "line": true
-}
-
-let adminSettings = {
-    "admin": false, 
-    "grid": false
-}
-
 let iconImages = {};
+let settings = [];
 let visibleIcons = [];
 let locations = [];
 let blankMap;
 
-class iconCategory {
+class IconCategory {
     constructor(name, count) {
         this.name = name;
         this.count = count;
     }
 }
 
+class Setting {
+    constructor(display, name, level, initial, onClickFunc) {
+        this.display = display;
+        this.name = name;
+        this.level = level;
+        this.val = false;
+        if (typeof initial == "boolean")
+            this.val = initial;
+        this.onClickFunc = onClickFunc;
+        //Creating element
+        this.createElement();
+    }
+
+    createElement() {
+        let div;
+        switch (this.level) {
+            case "Public":
+                div = document.getElementById('publicSettings');
+                break;
+            case "Admin":
+                div = document.getElementById('adminSettings');
+                break;
+        }
+        let input = document.createElement("input");
+
+        input.type = 'checkbox';
+        input.checked = this.val;
+        let currentIndex = settings.length;
+        input.addEventListener('click', function() {settings[currentIndex].flipValue()});
+
+        let node = document.createTextNode(" "+ this.display + ":");
+        div.appendChild(node);
+        div.appendChild(input);
+    }
+
+    flipValue() {
+        this.val = !this.val;
+        this.onClickFunc();
+    }
+}
+
 
 function main() {
     locations = rawLocations.concat(initializeFountains());
-    initializeDisplaySettings();
+    prepareSettings();
     loadAllImages();
 
 
@@ -68,20 +92,6 @@ function main() {
     canvas.addEventListener('mousemove', onPointerMove)
     canvas.addEventListener('touchmove', (e) => handleTouch(e, onPointerMove))
     canvas.addEventListener( 'wheel', (e) => adjustZoom(e.deltaY*SCROLL_SENSITIVITY*-1))
-
-    document.getElementById('toggleTown').addEventListener('click', function() {toggleDisplay('town')});
-    document.getElementById('toggleCryptid').addEventListener('click', function() {toggleDisplay('cryptid')});
-    document.getElementById('toggleLocale').addEventListener('click', function() {toggleDisplay('locale')});
-    document.getElementById('toggleEnvSite').addEventListener('click', function() {toggleDisplay('envSite')});
-    document.getElementById('toggleFountain').addEventListener('click', function() {toggleDisplay('fountain')});
-    document.getElementById('toggleBiome').addEventListener('click', function() {toggleDisplay('biome')});
-    document.getElementById('toggleFaction').addEventListener('click', function() {toggleDisplay('faction')});
-    document.getElementById('toggleText').addEventListener('click', function() {toggleDisplay('text')});
-    document.getElementById('toggleLine').addEventListener('click', function() {toggleDisplay('line')});
-
-    document.getElementById('toggleAdmin').addEventListener('click', function() {toggleAdmin('admin')});
-    document.getElementById('toggleGrid').addEventListener('click', function() {toggleAdmin('grid')});
-    
 
     document.getElementById('distButton').addEventListener('click', calcDistance);
 
@@ -108,7 +118,7 @@ function draw()
     drawIcons();
 
     //Draw Lines
-    if (displaySettings.line)
+    if (settings.find(o => o.name === "line").val)
         drawDistLines();
 
     //Draw Scale
@@ -117,7 +127,7 @@ function draw()
     ctx.fillText("8 mi", 4096 - 4096/20, 4096 - 4096/20);
 
     //Admin Stuff
-    if (adminSettings.grid)
+    if (settings.find(o => o.name === "grid").val)
         drawCoordGrid();
 
     //Repeat the map
@@ -142,28 +152,47 @@ function loadIcons() {
 
     //Rest of images
     let iconFileData = [
-        new iconCategory("Bottle", 1), 
-        new iconCategory("Cactus", 2),
-        new iconCategory("Cryptid", 4),
-        new iconCategory("Food", 1),
-        new iconCategory("Fountain", 1),
-        new iconCategory("Horse", 2),
-        new iconCategory("Mine", 1),
-        new iconCategory("Money", 3),
-        new iconCategory("Mountain", 4),
-        new iconCategory("Saloon", 1),
-        new iconCategory("Temple", 1),
-        new iconCategory("Town", 2),
-        new iconCategory("Tree", 1),
-        new iconCategory("Vase", 2)
+        new IconCategory("Bottle", 1), 
+        new IconCategory("Cactus", 2),
+        new IconCategory("Cryptid", 4),
+        new IconCategory("Food", 1),
+        new IconCategory("Fountain", 1),
+        new IconCategory("Horse", 2),
+        new IconCategory("Mine", 1),
+        new IconCategory("Money", 3),
+        new IconCategory("Mountain", 4),
+        new IconCategory("Saloon", 1),
+        new IconCategory("Temple", 1),
+        new IconCategory("Town", 2),
+        new IconCategory("Tree", 1),
+        new IconCategory("Vase", 2)
     ];
-    iconFileData.forEach((iconCategory) => {
-        for (let i = 1; i <= iconCategory.count; i++) {
-            let imageName = iconCategory.name + "_" + i;
+    iconFileData.forEach((category) => {
+        for (let i = 1; i <= category.count; i++) {
+            let imageName = category.name + "_" + i;
             iconImages[imageName] = new Image();
             iconImages[imageName].src = prefix + imageName + '.png';
         }
     });
+}
+
+//Prep Settings
+function prepareSettings() {
+    settings.push(new Setting("Towns", "town", "Public", true, updateVisibleIcons)),
+    settings.push(new Setting("Cryptids", "cryptid", "Public", true, updateVisibleIcons)),
+    settings.push(new Setting("Locales", "locale", "Public", true, updateVisibleIcons)),
+    settings.push(new Setting("Environmental Sites", "envSite", "Public", true, updateVisibleIcons)),
+    settings.push(new Setting("Fountains", "fountain", "Public", true, updateVisibleIcons)),
+    settings.push(new Setting("Text", "text", "Public", true, notYetImplement)),
+    settings.push(new Setting("Biomes", "biome", "Public", false, notYetImplement)),
+    settings.push(new Setting("Factions", "faction", "Public", true, notYetImplement)),
+    settings.push(new Setting("Lines", "line", "Public", true, notYetImplement)),
+    settings.push(new Setting("Grid", "grid", "Admin", false, notYetImplement)),
+    settings.push(new Setting("Admin", "admin", "Admin", false, notYetImplement))
+};
+
+function notYetImplement() {
+    console.log("Not yet implement");
 }
 
 // Map Elements
@@ -177,7 +206,7 @@ function drawIcons() {
 
         ctx.drawImage(iconImage, icon.x - ICON_SIZE/2, icon.y - ICON_SIZE/2, ICON_SIZE, ICON_SIZE);
 
-        if (displaySettings.text && Object.hasOwn(icon, 'name')) {
+        if (settings.find(o => o.name === "text").val && Object.hasOwn(icon, 'name')) {
             ctx.fillStyle = "#000000";
             ctx.font = FONT_SIZE+ "px Arial";
             ctx.fillText(icon.name, icon.x+ICON_SIZE/2, icon.y + ICON_SIZE/2);
@@ -185,23 +214,11 @@ function drawIcons() {
     });
 }
 
-// Other
-function toggleDisplay(parameter) {
-    displaySettings[parameter] = !displaySettings[parameter];
-    updateVisibleIcons();
-    refreshDistSelection();
-}
-
-function toggleAdmin(parameter) {
-    adminSettings[parameter] = !adminSettings[parameter];
-    updateVisibleIcons();
-    refreshDistSelection();
-}
 
 function updateVisibleIcons() {
     visibleIcons = [];
     for (let i in locations) {
-        if (locations[i].permission_level == "public" ? displaySettings[locations[i].type] : displaySettings.admin)
+        if (locations[i].permission_level == "public" ? settings.find(o => o.name === locations[i].type).val : settings.find(o => o.name === 'admin').val)
             visibleIcons.push(locations[i]);
     }
 }
@@ -300,12 +317,6 @@ function refreshDistSelection() {
             select2.add(new Option(icon.name));
         }
     });
-}
-
-function initializeDisplaySettings() {
-    for (let x in displaySettings) {
-        document.getElementById(String("toggle"+x.replace(/^./, char => char.toUpperCase()))).checked = displaySettings[x];
-    }
 }
 
 function initializeFountains() {
