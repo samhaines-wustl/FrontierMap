@@ -11,7 +11,11 @@
 </head>
 
 <body>
-  <canvas id="canvas"></canvas>
+  
+  <!--<div id = "test"><img src="images/PipTheTroll.png" alt="Pip" width="500" height="333"  id = 'panzoom-element'></div>-->
+
+  <!--<div id="canvasContainer"><canvas></canvas></div>-->
+  <div id="canvasContainer"><img src="images/mapBase.webp" alt="Map" id='panzoom-element'> </div>
   
   <div id="publicSettings"></div>
   <div id="adminSettings"></div>
@@ -39,7 +43,9 @@
       </tr>
     </thead>
   </table>
-  
+
+
+  <script src="https://unpkg.com/@panzoom/panzoom@4.6.0/dist/panzoom.min.js"></script>
   <script type="module" src="main.js"></script>
 </body>
 

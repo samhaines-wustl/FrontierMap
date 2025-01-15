@@ -3,13 +3,11 @@ html, body
     height: 100%;
     margin: 0;
     padding: 0px;
-    overflow: hidden;
 }
 
-#canvas
+canvas
 {
-  width: 75%;
-  height: 75%;
+  height: 400px;
   background: #4C4C59;
 }
 
@@ -46,4 +44,15 @@ table.distTableStyling thead th {
 }
 table.distTableStyling thead th:first-child {
   border-left: none;
+}
+
+#canvasContainer {
+  height: 500px;
+  width: 500px;
+  border: 1px solid #4CAF50;
+}
+
+img {
+  height:100%;
+  width:100%;
 }
