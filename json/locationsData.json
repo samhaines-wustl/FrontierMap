@@ -2,7 +2,7 @@
     {
         "name": "Zero Zero",
         "type": "town",
-        "icon_src": "own_1",
+        "icon_src": "Zero_Zero",
         "permission_level": "public",
         "x": 0,
         "y": 0
@@ -10,7 +10,7 @@
     {
         "name": "Purity Snag",
         "type": "town",
-        "icon_src": "Town_1",
+        "icon_src": "Mine_1",
         "permission_level": "public",
         "x": 2850,
         "y": 750
@@ -26,7 +26,7 @@
     {
         "name": "Cactus Pass",
         "type": "envSite",
-        "icon_src": "Town_1",
+        "icon_src": "Cactus_2",
         "permission_level": "public",
         "x": 3010,
         "y": 440
@@ -34,7 +34,7 @@
     {
         "name": "Sonora Ranch",
         "type": "locale",
-        "icon_src": "Town_1",
+        "icon_src": "Horse_2",
         "permission_level": "public",
         "x": 2990,
         "y": 310
@@ -42,7 +42,7 @@
     {
         "name": "Porcupine Kids",
         "type": "cryptid",
-        "icon_src": "Town_1",
+        "icon_src": "Cryptid_4",
         "permission_level": "public",
         "x": -580,
         "y": 1600
@@ -50,7 +50,7 @@
     {
         "name": "Pale Oak Geyser",
         "type": "envSite",
-        "icon_src": "Town_1",
+        "icon_src": "Mountain_4",
         "permission_level": "public",
         "x": -650,
         "y": 1650
@@ -58,7 +58,7 @@
     {
         "name": "The Long Goodbye",
         "type": "locale",
-        "icon_src": "Town_1",
+        "icon_src": "Money_1",
         "permission_level": "public",
         "x": 550,
         "y": -1170
@@ -66,7 +66,7 @@
     {
         "name": "Cinderheart Marauder",
         "type": "cryptid",
-        "icon_src": "Town_1",
+        "icon_src": "Cryptid_1",
         "permission_level": "public",
         "x": 3150,
         "y": 400

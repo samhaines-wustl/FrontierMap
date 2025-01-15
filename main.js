@@ -46,11 +46,18 @@ let visibleIcons = [];
 let locations = [];
 let blankMap;
 
+class iconCategory {
+    constructor(name, count) {
+        this.name = name;
+        this.count = count;
+    }
+}
+
 
 function main() {
+    locations = rawLocations.concat(initializeFountains());
     initializeDisplaySettings();
     loadAllImages();
-    locations = rawLocations.concat(initializeFountains());
 
 
     // Event Listeners
@@ -126,15 +133,37 @@ function loadAllImages() {
 }
 
 function loadIcons() {
+    //Location
+    let prefix = 'images/icons/';
+
     //Image not found
     iconImages.image_not_found = new Image();
-    iconImages.image_not_found.src = 'images/icons/image_not_found.png';
+    iconImages.image_not_found.src = prefix + 'image_not_found.png';
 
-    //Towns
-    iconImages.Town_1 = new Image();
-    iconImages.Town_1.src = 'images/icons/Town_1.png';
-
-    console.log(iconImages);
+    //Rest of images
+    let iconFileData = [
+        new iconCategory("Bottle", 1), 
+        new iconCategory("Cactus", 2),
+        new iconCategory("Cryptid", 4),
+        new iconCategory("Food", 1),
+        new iconCategory("Fountain", 1),
+        new iconCategory("Horse", 2),
+        new iconCategory("Mine", 1),
+        new iconCategory("Money", 3),
+        new iconCategory("Mountain", 4),
+        new iconCategory("Saloon", 1),
+        new iconCategory("Temple", 1),
+        new iconCategory("Town", 2),
+        new iconCategory("Tree", 1),
+        new iconCategory("Vase", 2)
+    ];
+    iconFileData.forEach((iconCategory) => {
+        for (let i = 1; i <= iconCategory.count; i++) {
+            let imageName = iconCategory.name + "_" + i;
+            iconImages[imageName] = new Image();
+            iconImages[imageName].src = prefix + imageName + '.png';
+        }
+    });
 }
 
 // Map Elements
@@ -147,7 +176,7 @@ function drawIcons() {
             iconImage = iconImages['image_not_found'];
 
         ctx.drawImage(iconImage, icon.x - ICON_SIZE/2, icon.y - ICON_SIZE/2, ICON_SIZE, ICON_SIZE);
-        
+
         if (displaySettings.text && Object.hasOwn(icon, 'name')) {
             ctx.fillStyle = "#000000";
             ctx.font = FONT_SIZE+ "px Arial";
@@ -280,7 +309,7 @@ function initializeDisplaySettings() {
 }
 
 function initializeFountains() {
-    return rawFountains.map(f => ({...f, icon_src: "Town_1", type: "fountain"}));
+    return rawFountains.map(f => ({...f, icon_src: "Fountain_1", type: "fountain"}));
 }
 
 function drawCoordGrid() {
