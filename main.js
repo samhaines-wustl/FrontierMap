@@ -45,6 +45,7 @@ class Setting {
         if (typeof initial == "boolean")
             this.val = initial;
         this.onClickFunc = onClickFunc;
+
         //Creating element
         this.createElement();
     }
@@ -64,19 +65,56 @@ class Setting {
         input.type = 'checkbox';
         input.checked = this.val;
         let currentIndex = settings.length;
-        input.addEventListener('click', function() {settings[currentIndex].flipValue()});
+        input.addEventListener('click', function() {settings[currentIndex].click()});
 
         let node = document.createTextNode(" "+ this.display + ":");
         div.appendChild(node);
         div.appendChild(input);
     }
 
-    flipValue() {
+    click() {
         this.val = !this.val;
         this.onClickFunc();
     }
 }
 
+class Location {
+    constructor(name, type, src, x, y, level) {
+        this.name = name;
+        this.type = type;
+        this.src = src;
+        this.x = x;
+        this.y = y;
+        this.level = level;
+        this.visible = false;
+        this.iconSize = ICON_SIZE;
+        this.fontSize = FONT_SIZE;
+    }
+
+    static fountainConstructor(x, y, permission_level) {
+        return new Location("TRF", "fountain", "Fountain_1", x, y, permission_level);
+    }
+
+    draw() {
+        if (this.visible) {
+            let iconImage;
+            if (Object.hasOwn(iconImages, this.src))
+                iconImage = iconImages[this.src];
+            else
+                iconImage = iconImages['image_not_found'];
+            ctx.drawImage(iconImage, this.x - this.iconSize/2, this.y - this.iconSize/2, this.iconSize, this.iconSize);
+
+            if (settings.find(o => o.name === "text").val && this.name != "TRF")
+                drawText();
+        }
+    }
+
+    drawText() {
+        ctx.fillStyle = "#000000";
+        ctx.font = this.fontSize+ "px Arial";
+        ctx.fillText(this.name, this.x+this.iconSize/2, this.y + this.iconSize/2);
+    }
+}
 
 function main() {
     locations = rawLocations.concat(initializeFountains());
