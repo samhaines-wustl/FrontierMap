@@ -22,11 +22,10 @@ const FONT_SIZE = ICON_SIZE/2;
 const PIXEL_TO_MILES = 8/192/2; //This is 8mi for 196px on a 4096px, Am using size 8192 so divided by 2
 
 let distLines = [];
-
-let iconImages = {};
+let iconImages = [];
 let settings = [];
-let visibleIcons = [];
 let locations = [];
+
 let blankMap;
 
 class IconCategory {
@@ -74,7 +73,7 @@ class Setting {
 
     click() {
         this.val = !this.val;
-        this.onClickFunc();
+        this.onClickFunc(this.name, this.val);
     }
 }
 
@@ -86,7 +85,7 @@ class Location {
         this.x = x;
         this.y = y;
         this.level = level;
-        this.visible = false;
+        this.visible = settings.find(o => o.name === this.type).val;
         this.iconSize = ICON_SIZE;
         this.fontSize = FONT_SIZE;
     }
@@ -95,17 +94,32 @@ class Location {
         return new Location("TRF", "fountain", "Fountain_1", x, y, permission_level);
     }
 
+    static drawAllLocations() {
+        locations.forEach((loc) => {
+            loc.draw();
+        });
+    }
+
+    static updateVisibility(type, visibleVal) {
+        locations.forEach( (loc) => {
+            if (loc.type == type)
+                loc.visible = visibleVal;
+        });
+    }
+
     draw() {
         if (this.visible) {
-            let iconImage;
-            if (Object.hasOwn(iconImages, this.src))
-                iconImage = iconImages[this.src];
-            else
-                iconImage = iconImages['image_not_found'];
-            ctx.drawImage(iconImage, this.x - this.iconSize/2, this.y - this.iconSize/2, this.iconSize, this.iconSize);
-
-            if (settings.find(o => o.name === "text").val && this.name != "TRF")
-                drawText();
+            if (this.level == 'public' || settings.find(o => o.name === 'admin').val) {
+                let iconImage;
+                if (Object.hasOwn(iconImages, this.src))
+                    iconImage = iconImages[this.src];
+                else
+                    iconImage = iconImages['image_not_found'];
+                ctx.drawImage(iconImage, this.x - this.iconSize/2, this.y - this.iconSize/2, this.iconSize, this.iconSize);
+    
+                if (settings.find(o => o.name === "text").val && this.name != "TRF")
+                    this.drawText();
+            }
         }
     }
 
@@ -116,11 +130,15 @@ class Location {
     }
 }
 
-function main() {
-    locations = rawLocations.concat(initializeFountains());
-    prepareSettings();
-    loadAllImages();
 
+
+
+
+function main() {
+    //Preparing data
+    prepareSettings();
+    prepareLocations();
+    loadAllImages();
 
     // Event Listeners
     canvas.addEventListener('mousedown', onPointerDown)
@@ -134,14 +152,12 @@ function main() {
     document.getElementById('distButton').addEventListener('click', calcDistance);
 
 
-    // Ready, set, go
-    updateVisibleIcons();
+    //Drawing
     refreshDistSelection();
     draw();
 }
 
-function draw()
-{
+function draw() {
     canvas.width = window.innerWidth
     canvas.height = window.innerHeight
     
@@ -153,7 +169,8 @@ function draw()
     ctx.drawImage(blankMap, -1*blankMap.width/2, -1*blankMap.height/2);
 
     //Draw Locations
-    drawIcons();
+    //drawIcons();
+    Location.drawAllLocations();
 
     //Draw Lines
     if (settings.find(o => o.name === "line").val)
@@ -212,16 +229,17 @@ function loadIcons() {
             iconImages[imageName].src = prefix + imageName + '.png';
         }
     });
+    console.log(iconImages);
 }
 
 //Prep Settings
 function prepareSettings() {
-    settings.push(new Setting("Towns", "town", "Public", true, updateVisibleIcons)),
-    settings.push(new Setting("Cryptids", "cryptid", "Public", true, updateVisibleIcons)),
-    settings.push(new Setting("Locales", "locale", "Public", true, updateVisibleIcons)),
-    settings.push(new Setting("Environmental Sites", "envSite", "Public", true, updateVisibleIcons)),
-    settings.push(new Setting("Fountains", "fountain", "Public", true, updateVisibleIcons)),
-    settings.push(new Setting("Text", "text", "Public", true, notYetImplement)),
+    settings.push(new Setting("Towns", "town", "Public", true, Location.updateVisibility)),
+    settings.push(new Setting("Cryptids", "cryptid", "Public", true, Location.updateVisibility)),
+    settings.push(new Setting("Locales", "locale", "Public", true, Location.updateVisibility)),
+    settings.push(new Setting("Environmental Sites", "envSite", "Public", true, Location.updateVisibility)),
+    settings.push(new Setting("Fountains", "fountain", "Public", true, Location.updateVisibility)),
+    settings.push(new Setting("Text", "text", "Public", false, notYetImplement)),
     settings.push(new Setting("Biomes", "biome", "Public", false, notYetImplement)),
     settings.push(new Setting("Factions", "faction", "Public", true, notYetImplement)),
     settings.push(new Setting("Lines", "line", "Public", true, notYetImplement)),
@@ -229,36 +247,18 @@ function prepareSettings() {
     settings.push(new Setting("Admin", "admin", "Admin", false, notYetImplement))
 };
 
-function notYetImplement() {
-    console.log("Not yet implement");
-}
-
-// Map Elements
-function drawIcons() {
-    visibleIcons.forEach((icon) => {
-        let iconImage;
-        if (Object.hasOwn(iconImages, icon.icon_src))
-            iconImage = iconImages[icon.icon_src];
-        else
-            iconImage = iconImages['image_not_found'];
-
-        ctx.drawImage(iconImage, icon.x - ICON_SIZE/2, icon.y - ICON_SIZE/2, ICON_SIZE, ICON_SIZE);
-
-        if (settings.find(o => o.name === "text").val && Object.hasOwn(icon, 'name')) {
-            ctx.fillStyle = "#000000";
-            ctx.font = FONT_SIZE+ "px Arial";
-            ctx.fillText(icon.name, icon.x+ICON_SIZE/2, icon.y + ICON_SIZE/2);
-        }
+function prepareLocations() {
+    rawLocations.forEach((loc) => {
+        locations.push(new Location(loc.name, loc.type, loc.icon_src, loc.x, loc.y, loc.permission_level));
+    });
+    rawFountains.forEach((loc) => {
+        locations.push(Location.fountainConstructor(loc.x, loc.y, loc.permission_level));
     });
 }
 
-
-function updateVisibleIcons() {
-    visibleIcons = [];
-    for (let i in locations) {
-        if (locations[i].permission_level == "public" ? settings.find(o => o.name === locations[i].type).val : settings.find(o => o.name === 'admin').val)
-            visibleIcons.push(locations[i]);
-    }
+function notYetImplement() {
+    console.log("Not yet implement");
+    //console.log(settings);
 }
 
 function calcDistance() {
@@ -349,16 +349,12 @@ function refreshDistSelection() {
     //Prep new selects
     select1.add(new Option("Nothing Selected"));
     select2.add(new Option("Nothing Selected"));
-    visibleIcons.forEach((icon) => {
-        if (Object.hasOwn(icon, 'name')) {
+    locations.forEach((icon) => {
+        if (Object.hasOwn(icon, 'name') && icon.type != 'fountain') {
             select1.add(new Option(icon.name));
             select2.add(new Option(icon.name));
         }
     });
-}
-
-function initializeFountains() {
-    return rawFountains.map(f => ({...f, icon_src: "Fountain_1", type: "fountain"}));
 }
 
 function drawCoordGrid() {
