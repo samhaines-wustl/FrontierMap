@@ -104,6 +104,7 @@ class Location {
             if (loc.type == type)
                 loc.visible = visibleVal;
         });
+        TravelLine.refreshDistSelection();
     }
 
     draw() {
@@ -145,6 +146,27 @@ class TravelLine {
 
     static drawAllLines() {
         travelLines.forEach((l) => l.draw());
+    }
+
+    static refreshDistSelection() {
+        let select1 = document.getElementById('distLoc1');
+        let select2 = document.getElementById('distLoc2');
+        
+        //Clear out selects
+        while (select1.options.length > 0) {
+            select1.remove(0);
+            select2.remove(0);
+        }
+    
+        //Prep new selects
+        select1.add(new Option("Nothing Selected"));
+        select2.add(new Option("Nothing Selected"));
+        locations.forEach((icon) => {
+            if (Object.hasOwn(icon, 'name') && icon.type != 'fountain' && icon.visible) {
+                select1.add(new Option(icon.name));
+                select2.add(new Option(icon.name));
+            }
+        });
     }
 
     calcDistance() {
@@ -213,7 +235,7 @@ function main() {
 
 
     //Drawing
-    refreshDistSelection();
+    TravelLine.refreshDistSelection();
     draw();
 }
 
@@ -325,31 +347,10 @@ function prepareTravelLines() {
     console.log(travelLines);
 }
 
+
 function notYetImplement() {
     console.log("Not yet implement");
     //console.log(settings);
-}
-
-// Refresh distance selection
-function refreshDistSelection() {
-    let select1 = document.getElementById('distLoc1');
-    let select2 = document.getElementById('distLoc2');
-    
-    //Clear out selects
-    while (select1.options.length > 0) {
-        select1.remove(0);
-        select2.remove(0);
-    }
-
-    //Prep new selects
-    select1.add(new Option("Nothing Selected"));
-    select2.add(new Option("Nothing Selected"));
-    locations.forEach((icon) => {
-        if (Object.hasOwn(icon, 'name') && icon.type != 'fountain') {
-            select1.add(new Option(icon.name));
-            select2.add(new Option(icon.name));
-        }
-    });
 }
 
 function drawCoordGrid() {
