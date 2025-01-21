@@ -162,7 +162,7 @@ class TravelLine {
         select1.add(new Option("Nothing Selected"));
         select2.add(new Option("Nothing Selected"));
         locations.forEach((icon) => {
-            if (Object.hasOwn(icon, 'name') && icon.type != 'fountain' && icon.visible) {
+            if (icon.type != 'fountain' && icon.visible && (icon.level == 'public' || settings.find(o => o.name === 'admin').val)) {
                 select1.add(new Option(icon.name));
                 select2.add(new Option(icon.name));
             }
@@ -290,13 +290,14 @@ function loadIcons() {
     let iconFileData = [
         new IconCategory("Bottle", 1), 
         new IconCategory("Cactus", 2),
+        new IconCategory("City", 2),
         new IconCategory("Cryptid", 4),
         new IconCategory("Food", 1),
         new IconCategory("Fountain", 1),
         new IconCategory("Horse", 2),
         new IconCategory("Mine", 1),
         new IconCategory("Money", 3),
-        new IconCategory("Mountain", 4),
+        new IconCategory("Mountain", 5),
         new IconCategory("Saloon", 1),
         new IconCategory("Temple", 1),
         new IconCategory("Town", 2),
@@ -310,6 +311,7 @@ function loadIcons() {
             iconImages[imageName].src = prefix + imageName + '.png';
         }
     });
+    console.log(iconImages);
 }
 
 //Prep Settings
@@ -324,7 +326,7 @@ function prepareSettings() {
     settings.push(new Setting("Factions", "faction", "Public", true, notYetImplement)),
     settings.push(new Setting("Lines", "line", "Public", true, notYetImplement)),
     settings.push(new Setting("Grid", "grid", "Admin", false, notYetImplement)),
-    settings.push(new Setting("Admin", "admin", "Admin", false, notYetImplement))
+    settings.push(new Setting("Admin", "admin", "Admin", false, TravelLine.refreshDistSelection))
 };
 
 function prepareLocations() {

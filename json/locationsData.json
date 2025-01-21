@@ -70,5 +70,85 @@
         "permission_level": "public",
         "x": 3150,
         "y": 400
+    },
+    {
+        "name": "Rattlebank",
+        "type": "town",
+        "icon_src": "Town_2",
+        "permission_level": "public",
+        "x": 2450,
+        "y": 1810
+    },
+    {
+        "name": "Slowspring",
+        "type": "town",
+        "icon_src": "Saloon_1",
+        "permission_level": "public",
+        "x": 2400,
+        "y": 1170
+    },
+    {
+        "name": "Casey Alexander's Abode",
+        "type": "locale",
+        "icon_src": "Temple_1",
+        "permission_level": "public",
+        "x": 2600,
+        "y": 1200
+    },
+    {
+        "name": "Heiferwall's Mirror",
+        "type": "cryptid",
+        "icon_src": "Cryptid_3",
+        "permission_level": "admin",
+        "x": 890,
+        "y": 1230
+    },
+    {
+        "name": "Old Winds Court",
+        "type": "locale",
+        "icon_src": "Cryptid_2",
+        "permission_level": "admin",
+        "x": 1245,
+        "y": 1700
+    },
+    {
+        "name": "Crescent Canyon",
+        "type": "envSite",
+        "icon_src": "Mountain_5",
+        "permission_level": "admin",
+        "x": 3330,
+        "y": 1550
+    },
+    {
+        "name": "Crescent Canyon Ranch",
+        "type": "locale",
+        "icon_src": "Horse_1",
+        "permission_level": "admin",
+        "x": 3390,
+        "y": 1310
+    },
+    {
+        "name": "Coppervale",
+        "type": "town",
+        "icon_src": "Town_1",
+        "permission_level": "admin",
+        "x": 1450,
+        "y": 390
+    },
+    {
+        "name": "Warmpass Quarry",
+        "type": "cryptid",
+        "icon_src": "Mine_1",
+        "permission_level": "admin",
+        "x": 1645,
+        "y": 1760
+    },
+    {
+        "name": "New Almondport",
+        "type": "town",
+        "icon_src": "City_2",
+        "permission_level": "admin",
+        "x": 1940,
+        "y": 2375
     }
 ]
