@@ -22,6 +22,7 @@ const FONT_SIZE = ICON_SIZE/2;
 const PIXEL_TO_MILES = 8/192/2; //This is 8mi for 196px on a 4096px, Am using size 8192 so divided by 2
 
 let distLines = [];
+let travelLines = [];
 let iconImages = [];
 let settings = [];
 let locations = [];
@@ -95,9 +96,7 @@ class Location {
     }
 
     static drawAllLocations() {
-        locations.forEach((loc) => {
-            loc.draw();
-        });
+        locations.forEach((loc) => loc.draw());
     }
 
     static updateVisibility(type, visibleVal) {
@@ -130,6 +129,67 @@ class Location {
     }
 }
 
+class TravelLine {
+    constructor(loc1, loc2) {
+        this.loc1 = loc1;
+        this.loc2 = loc2;
+        this.distance = this.calcDistance();
+
+        this.addToTable();
+    }
+
+    static removeTravelLine(index) {
+        document.getElementById('distTable').deleteRow(index);
+        travelLines.splice(index-1, 1);
+    }
+
+    static drawAllLines() {
+        travelLines.forEach((l) => l.draw());
+    }
+
+    calcDistance() {
+        let xDif = this.loc1.x - this.loc2.x
+        let yDif = this.loc1.y - this.loc2.y
+
+        let distPixels = Math.sqrt(xDif**2 + yDif**2)
+        return (distPixels*PIXEL_TO_MILES).toFixed(1);
+    }
+
+    addToTable() {
+        let table = document.getElementById('distTable')
+        let row = table.insertRow(-1)
+        let cells = [row.insertCell(0),row.insertCell(1),row.insertCell(2),row.insertCell(3)];
+        cells[0].innerHTML = this.loc1.name;
+        cells[1].innerHTML = this.loc2.name;
+        cells[2].innerHTML = this.distance;
+        cells[3].innerHTML = '<button>X</button>';
+        cells[3].addEventListener('click', function() {TravelLine.removeTravelLine(this.parentNode.rowIndex)});
+    }
+
+    draw() {
+    //Starting Circle
+        ctx.beginPath();
+        ctx.arc(this.loc1.x,this.loc1.y, ICON_SIZE/8,0,2*Math.PI);
+        ctx.fillStyle = '#B42E15';
+        ctx.fill();
+        ctx.stroke();
+   //Line b/w
+   //ctx.setLineDash([48,32])
+        ctx.beginPath();
+        ctx.lineWidth = 10;
+        ctx.strokeStyle = '#B42E15';
+        ctx.moveTo(this.loc1.x, this.loc1.y);
+        ctx.lineTo(this.loc2.x, this.loc2.y);
+        ctx.stroke();
+   //Ending Circle
+        ctx.beginPath();
+        ctx.arc(this.loc2.x,this.loc2.y, ICON_SIZE/8,0,2*Math.PI);
+        ctx.fillStyle = '#B42E15';
+        ctx.fill();
+        ctx.stroke(); 
+    }
+}
+
 
 
 
@@ -149,7 +209,7 @@ function main() {
     canvas.addEventListener('touchmove', (e) => handleTouch(e, onPointerMove))
     canvas.addEventListener( 'wheel', (e) => adjustZoom(e.deltaY*SCROLL_SENSITIVITY*-1))
 
-    document.getElementById('distButton').addEventListener('click', calcDistance);
+    document.getElementById('distButton').addEventListener('click', prepareTravelLines);
 
 
     //Drawing
@@ -173,8 +233,7 @@ function draw() {
     Location.drawAllLocations();
 
     //Draw Lines
-    if (settings.find(o => o.name === "line").val)
-        drawDistLines();
+    TravelLine.drawAllLines();
 
     //Draw Scale
     ctx.fillStyle = "#ffffff";
@@ -229,7 +288,6 @@ function loadIcons() {
             iconImages[imageName].src = prefix + imageName + '.png';
         }
     });
-    console.log(iconImages);
 }
 
 //Prep Settings
@@ -256,83 +314,20 @@ function prepareLocations() {
     });
 }
 
-function notYetImplement() {
-    console.log("Not yet implement");
-    //console.log(settings);
-}
-
-function calcDistance() {
+function prepareTravelLines() {
     let loc1 = document.getElementById("distLoc1").value;
     let loc2 = document.getElementById('distLoc2').value;
     
     if (loc1 == 'Nothing Selected' || loc2 == 'Nothing Selected')
         return;
-
-    let coords = [
-        {
-            "x": locations.find(x => x.name === loc1).x, 
-            "y": locations.find(x => x.name === loc1).y
-        },
-        {
-        "x": locations.find(x => x.name === loc2).x, 
-        "y": locations.find(x => x.name === loc2).y
-        }
-    ];
-    let xDif = coords[0].x - coords[1].x;
-    let yDif = coords[0].y - coords[1].y; 
-
-    let distanceInPixels = Math.sqrt(xDif*xDif + yDif*yDif);
-    let distanceInMiles = (distanceInPixels*PIXEL_TO_MILES).toFixed(1);
-
-    //Updating line Storage Array
-    distLines.push({
-        'x1': coords[0].x,
-        'y1': coords[0].y,
-        'x2': coords[1].x,
-        'y2': coords[1].y,
-        'name1': loc1,
-        'name2': loc2,
-        'distance': distanceInMiles
-    });
-
-    let table = document.getElementById('distTable')
-    let row = table.insertRow(-1)
-    let cells = [row.insertCell(0),row.insertCell(1),row.insertCell(2),row.insertCell(3)];
-    cells[0].innerHTML = distLines.at(-1).name1;
-    cells[1].innerHTML = distLines.at(-1).name2;
-    cells[2].innerHTML = distLines.at(-1).distance;
-    cells[3].innerHTML = '<button>X</button>';
-    cells[3].addEventListener('click', function() {removeDistLines(this.parentNode.rowIndex)});
+    else
+        travelLines.push(new TravelLine(locations.find(o => o.name === loc1), locations.find(o => o.name === loc2)));
+    console.log(travelLines);
 }
 
-function drawDistLines() {
-    distLines.forEach((l) => {
-        //Starting Circle
-        ctx.beginPath();
-            ctx.arc(l.x1,l.y1, ICON_SIZE/8,0,2*Math.PI);
-            ctx.fillStyle = '#B42E15';
-            ctx.fill();
-        ctx.stroke();
-        //Line b/w
-        //ctx.setLineDash([48,32])
-        ctx.beginPath();
-            ctx.lineWidth = 10;
-            ctx.strokeStyle = '#B42E15';
-            ctx.moveTo(l.x1, l.y1);
-            ctx.lineTo(l.x2, l.y2);
-        ctx.stroke();
-        //Ending Circle
-        ctx.beginPath();
-            ctx.arc(l.x2,l.y2, ICON_SIZE/8,0,2*Math.PI);
-            ctx.fillStyle = '#B42E15';
-            ctx.fill();
-        ctx.stroke();
-    })
-}
-
-function removeDistLines(index) {
-    document.getElementById('distTable').deleteRow(index);
-    distLines.splice(index-1, 1);
+function notYetImplement() {
+    console.log("Not yet implement");
+    //console.log(settings);
 }
 
 // Refresh distance selection
