@@ -8,8 +8,9 @@ html, body
 
 #canvas
 {
-  width: 75%;
-  height: 75%;
+  
+  height: 100%;
+  width: 100%;
   background: #4C4C59;
 }
 
@@ -47,3 +48,27 @@ table.distTableStyling thead th {
 table.distTableStyling thead th:first-child {
   border-left: none;
 }
+
+.container {  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "canvas canvas canvas canvas public_settings"
+    "canvas canvas canvas canvas public_settings"
+    "canvas canvas canvas canvas admin_settings"
+    "canvas canvas canvas canvas admin_settings"
+    "distance_calculator distance_calculator distance_calculator distance_calculator distance_calculator";
+  width: 1000px; 
+  height: 1000px; 
+}
+
+.canvas { grid-area: canvas; border: 4px dashed #a3cfb1; position: relative;}
+
+.public_settings { grid-area: public_settings; border: 4px dashed #a3cfb1;}
+
+.admin_settings { grid-area: admin_settings; border: 4px dashed #a3cfb1;}
+
+.distance_calculator { grid-area: distance_calculator; border: 4px dashed #a3cfb1;}
+
