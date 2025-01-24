@@ -6,3 +6,5 @@ To-Do List
 - Add Faction toggle and range
 - Add icon adder
 - Reformat page w/ Grid
+- Add console log of coordinates of cursor on canvas
+- Add a moveable icon with editable location and icon for easier adding

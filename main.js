@@ -6,14 +6,16 @@ import rawFountains from './json/fountainsData.json' with {type: 'json'};
 let canvas = document.getElementById("canvas")
 let ctx = canvas.getContext('2d')
 
-let cameraOffset = { x: window.innerWidth/2, y: window.innerHeight/2 }
-let cameraZoom = .15
+let cameraOffset = { x:  canvas.parentElement.offsetWidth/2, y: canvas.parentElement.offsetHeight/2 }
+let cameraZoom = .1
 const MAX_ZOOM = 1.5
 const MIN_ZOOM = 0.05
 const SCROLL_SENSITIVITY = 0.0005
 
-let canvasWidth = window.innerWidth;
-let canvasHeight = window.innerHeight;
+//let canvasWidth = window.innerWidth;
+//let canvasHeight = window.innerHeight;
+let canvasWidth = canvas.parentElement.offsetWidth;
+let canvasHeight = canvas.parentElement.offsetHeight;
 
 
 //Other Stuff
@@ -240,8 +242,8 @@ function main() {
 }
 
 function draw() {
-    canvas.width = window.innerWidth
-    canvas.height = window.innerHeight
+    canvas.width = canvas.parentElement.offsetWidth
+    canvas.height = canvas.parentElement.offsetHeight
     
     // Translate to the canvas centre before zooming - so you'll always zoom on what you're looking directly at
     ctx.translate( canvasWidth / 2, canvasHeight / 2 )
@@ -371,7 +373,6 @@ function drawCoordGrid() {
         }
     }
 }
-
 
 
 

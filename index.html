@@ -11,22 +11,35 @@
 </head>
 
 <body>
-  <canvas id="canvas"></canvas>
+  <div class="container">
+    <div class="canvas">
+      <canvas class= "canvas" id="canvas"></canvas>
+    </div>
+    <div class="public_settings" id="publicSettings"></div>
+    <div class="admin_settings" id="adminSettings"></div>
+    <div class="distance_calculator">
+      Starting location:
+      <select id="distLoc1">
+        <option value=""> Nothing Selected</option>
+      </select>
+      Ending location:
+      <select id="distLoc2">
+        <option value=""> Nothing Selected</option>
+      </select>
+      <button id="distButton">Calc Distance</button>
+    </div>
+  </div>
+ 
   
-  <div id="publicSettings"></div>
-  <div id="adminSettings"></div>
-
+  <div id="customIcon"></div>
+    <label for="customX"> X value: </label>
+    <input type="range" id="customX" name="customX" value="0" min="-4000" max="4000" oninput="this.nextElementSibling.value = this.value">
+    <output>0</output>
+    <label for="customY"> Y value: </label>
+    <input type="range" id="customY" name="customY" value="0" min="-4000" max="4000" oninput="this.nextElementSibling.value = this.value">
+    <output>0</output>
   <div> 
-    Starting location:
-    <select id="distLoc1">
-      <option value=""> Nothing Selected</option>
-    </select>
-    Ending location:
-    <select id="distLoc2">
-      <option value=""> Nothing Selected</option>
-    </select>
-
-    <button id="distButton">Calc Distance</button>
+    
   </div>
 
   <table class="distTableStyling" id="distTable">
