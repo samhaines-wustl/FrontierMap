@@ -62,16 +62,36 @@ class Setting {
                 div = document.getElementById('adminSettings');
                 break;
         }
-        let input = document.createElement("input");
 
+        // Holds everything
+        let smallerDiv = document.createElement("div");
+        smallerDiv.style.lineHeight = "34px";
+
+        //Set up label, input, and span node
+        let label = document.createElement("label");
+        label.classList.add("switch");
+
+        let input = document.createElement("input");
         input.type = 'checkbox';
         input.checked = this.val;
+
+        let span = document.createElement("span");
+        span.classList.add("slider");
+        span.classList.add("round");
+
         let currentIndex = settings.length;
         input.addEventListener('click', function() {settings[currentIndex].click()});
 
-        let node = document.createTextNode(" "+ this.display + ":");
-        div.appendChild(node);
-        div.appendChild(input);
+        let text = document.createTextNode(" "+ this.display + ": ");
+
+        //Appending Nodes
+        label.appendChild(input);
+        label.appendChild(span);
+
+        smallerDiv.appendChild(text);
+        smallerDiv.appendChild(label);
+
+        div.appendChild(smallerDiv);
     }
 
     click() {
