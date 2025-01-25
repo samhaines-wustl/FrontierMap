@@ -65,7 +65,10 @@ class Setting {
 
         // Holds everything
         let smallerDiv = document.createElement("div");
-        smallerDiv.style.lineHeight = "34px";
+        smallerDiv.style.lineHeight = "24px";
+
+        //Linebreak
+        let linebreak = document.createElement("br");
 
         //Set up label, input, and span node
         let label = document.createElement("label");
@@ -92,6 +95,7 @@ class Setting {
         smallerDiv.appendChild(label);
 
         div.appendChild(smallerDiv);
+        div.appendChild(linebreak);
     }
 
     click() {
@@ -341,7 +345,7 @@ function prepareSettings() {
     settings.push(new Setting("Towns", "town", "Public", true, Location.updateVisibility)),
     settings.push(new Setting("Cryptids", "cryptid", "Public", true, Location.updateVisibility)),
     settings.push(new Setting("Locales", "locale", "Public", true, Location.updateVisibility)),
-    settings.push(new Setting("Environmental Sites", "envSite", "Public", true, Location.updateVisibility)),
+    settings.push(new Setting("Env. Sites", "envSite", "Public", true, Location.updateVisibility)),
     settings.push(new Setting("Fountains", "fountain", "Public", true, Location.updateVisibility)),
     settings.push(new Setting("Text", "text", "Public", false, notYetImplement)),
     settings.push(new Setting("Biomes", "biome", "Public", false, notYetImplement)),
