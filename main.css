@@ -13,6 +13,37 @@ html, body
   background: #4C4C59;
 }
 
+.hidden 
+{
+  display: none;
+}
+/*
+For SVG Test
+*/
+
+#container {
+  width: 2048px;
+  height: 2048px;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+
+}
+
+#textClickDisplay {
+  position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+}
+.viewport {
+    position: relative;
+    width: 700px;
+    height: 700px;
+    overflow: hidden;
+    background-color: #4C4C59;
+}
+
 /*
 Styling for Table
 */

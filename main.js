@@ -238,10 +238,111 @@ class TravelLine {
     }
 }
 
+/*
+    SVG Testing
+*/
+
+const MAX_Z = 10
+const MIN_Z = 1
+let cur_z = document.querySelector('#test').value
+
+function setZoom(el, scale, transformOrigin) {
+    el.style.transform = `scale(${scale})`;
+    el.style.transformOrigin = `${transformOrigin[0] * 100}% ${transformOrigin[1] * 100}%`;
+  }
+
+  document.querySelector('#test').addEventListener('input', function() {
+    const scale = this.value / 10;
+    setZoom(document.querySelector('#container'), scale, [0, 0]);
+  });
+
+  setZoom(document.querySelector('#container'), 3/10, [0, 0])
+  
+  function clickSVG(val) {
+      document.getElementById('textClickDisplay').innerHTML = val
+  }
+  
+  var deltaX = 0;
+  var deltaY = 0;
+  var scale = 1.0;
+  
+  var drag = {
+      elem: null,
+      x: 0,
+      y: 0,
+      state: false
+  };
+  var delta = {
+      x: 0,
+      y: 0
+  };
+  
+  
+  $('.viewport').mousedown(function(e) {
+      if (!drag.state && e.which == 1) {
+          drag.elem = $('#container');
+          drag.x = e.pageX;
+          drag.y = e.pageY;
+          drag.state = true;
+      }
+      return false;
+  });
+  
+  
+  $('.viewport').mousemove(function(e) {
+      
+      if (drag.state) {
+          delta.x = e.pageX - drag.x;
+          delta.y = e.pageY - drag.y;
+       
+          var cur_offset = $(drag.elem).offset();
+  
+          $(drag.elem).offset({
+              left: (cur_offset.left + delta.x),
+              top: (cur_offset.top + delta.y)
+          });
+  
+          drag.x = e.pageX;
+          drag.y = e.pageY;
+      }
+  });
+  
+  $('.viewport').mouseup(function() {
+      if (drag.state) {
+          drag.state = false;
+      }
+  });
+  
+  $('.viewport').on('contextmenu', function () {
+      return false;
+  });
+
+  document.getElementById('circle').addEventListener("click", function() {clickSVG('cirlce');});
+  document.getElementById('bottle').addEventListener("click", function() {clickSVG('bottle');});
+
+  document.getElementById('vp1').addEventListener("wheel", (e) => wheelTest(e.deltaY*-1));
+  document.getElementById('recenter').addEventListener("click", function() {
+    setZoom(document.querySelector('#container'), 3/10, [0.5, 0.5])
+    let el = $('#container');
+    el.offset({
+        left: 30,
+        top: 30
+    });
+    cur_z = 3;
+  })
+
+function wheelTest(va) {
+    if (va > 1)
+        cur_z = Math.min(MAX_Z, cur_z+1)
+    else
+        cur_z = Math.max(MIN_Z, cur_z-1)
+    setZoom(document.querySelector('#container'), cur_z/10, [.5, .5])
+}
 
 
-
-
+/*
+Normal
+*/
 function main() {
     //Preparing data
     prepareSettings();

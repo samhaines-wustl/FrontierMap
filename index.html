@@ -8,9 +8,11 @@
   <link rel="icon" type="image/png" href="favicon/favicon-96x96.png" sizes="96x96" />
   <link rel="icon" type="image/svg+xml" href="favicon/favicon.svg" />
   <link rel="shortcut icon" href="favicon/favicon.ico" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 
 <body>
+  <div class="hidden">
   <div class="container">
     <div class="canvas">
       <canvas class= "canvas" id="canvas"
@@ -52,6 +54,40 @@
   <div> 
     
   </div>
+  </div>
+
+  <input id="test" min="1" max="10" value="3" step="1" type="range" />
+  <input id="recenter" type="button" value="Recenter">
+  <div class="viewport" id="vp1">
+  <div id="container">
+    <svg height="2048" width="2048">
+      <image
+        height="2048"
+        width="2048"
+        href="images/mapBase.webp"
+      />
+      <circle
+        cx="100"
+        cy="50"
+        r="40"
+        stroke="green"
+        stroke-width="4"
+        fill="yellow"
+        id="circle"
+      />
+      <image
+        x="0"
+        y="160"
+        width="128"
+        height="128"
+        href="images/icons/Bottle_1.png"
+        id="bottle"
+      />
+    </svg>
+  </div>
+  </div>
+  <span id="textClickDisplay">Empty</span>
+
 
  
   
