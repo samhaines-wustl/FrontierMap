@@ -2,169 +2,169 @@
     {
         "name": "Zero Zero",
         "type": "town",
-        "icon_src": "Zero_Zero",
+        "icon_src": "image_not_found",
         "permission_level": "public",
-        "x": 0,
-        "y": 0
+        "x": 1024,
+        "y": 1024
     },
     {
         "name": "Purity Snag",
         "type": "town",
         "icon_src": "Mine_1",
         "permission_level": "public",
-        "x": 2850,
-        "y": 750
+        "x": 1754,
+        "y": 1212
     },
     {
         "name": "Big Stone Gulch",
         "type": "town",
         "icon_src": "Town_1",
         "permission_level": "public",
-        "x": 3000,
-        "y": 600
+        "x": 1793,
+        "y": 1178
     },
     {
         "name": "Cactus Pass",
         "type": "envSite",
         "icon_src": "Cactus_2",
         "permission_level": "public",
-        "x": 3010,
-        "y": 440
+        "x": 1795,
+        "y": 1137
     },
     {
         "name": "Sonora Ranch",
         "type": "locale",
         "icon_src": "Horse_2",
         "permission_level": "public",
-        "x": 2990,
-        "y": 310
+        "x": 1790,
+        "y": 1104
     },
     {
         "name": "Porcupine Kids",
         "type": "cryptid",
         "icon_src": "Cryptid_4",
         "permission_level": "public",
-        "x": -580,
-        "y": 1600
+        "x": 877,
+        "y": 1435
     },
     {
         "name": "Pale Oak Geyser",
         "type": "envSite",
         "icon_src": "Mountain_4",
         "permission_level": "public",
-        "x": -650,
-        "y": 1650
+        "x": 859,
+        "y": 1447
     },
     {
         "name": "The Long Goodbye",
         "type": "locale",
         "icon_src": "Money_1",
         "permission_level": "public",
-        "x": 550,
-        "y": -1170
+        "x": 1166,
+        "y": 729
     },
     {
         "name": "Cinderheart Marauder",
         "type": "cryptid",
         "icon_src": "Cryptid_1",
         "permission_level": "public",
-        "x": 3150,
-        "y": 400
+        "x": 1831,
+        "y": 1127
     },
     {
         "name": "Rattlebank",
         "type": "town",
         "icon_src": "Town_2",
         "permission_level": "public",
-        "x": 2450,
-        "y": 1810
+        "x": 1652,
+        "y": 1488
     },
     {
         "name": "Slowspring",
         "type": "town",
         "icon_src": "Saloon_1",
         "permission_level": "public",
-        "x": 2400,
-        "y": 1170
+        "x": 1639,
+        "y": 1325
     },
     {
         "name": "Casey Alexander's Abode",
         "type": "locale",
         "icon_src": "Temple_1",
         "permission_level": "public",
-        "x": 2600,
-        "y": 1200
+        "x": 1691,
+        "y": 1332
     },
     {
         "name": "Heiferwall's Mirror",
         "type": "cryptid",
         "icon_src": "Cryptid_3",
         "permission_level": "admin",
-        "x": 890,
-        "y": 1230
+        "x": 1253,
+        "y": 1340
     },
     {
         "name": "Old Winds Court",
         "type": "locale",
         "icon_src": "Cryptid_2",
         "permission_level": "admin",
-        "x": 1245,
-        "y": 1700
+        "x": 1344,
+        "y": 1460
     },
     {
         "name": "Crescent Canyon",
         "type": "envSite",
         "icon_src": "Mountain_5",
         "permission_level": "admin",
-        "x": 3330,
-        "y": 1550
+        "x": 1877,
+        "y": 1422
     },
     {
         "name": "Crescent Canyon Ranch",
         "type": "locale",
         "icon_src": "Horse_1",
         "permission_level": "admin",
-        "x": 3390,
-        "y": 1310
+        "x": 1893,
+        "y": 1360
     },
     {
         "name": "Coppervale",
         "type": "town",
         "icon_src": "Town_1",
         "permission_level": "public",
-        "x": 1450,
-        "y": 390
+        "x": 1396,
+        "y": 1125
     },
     {
         "name": "Warmpass Quarry",
         "type": "cryptid",
         "icon_src": "Mine_1",
         "permission_level": "admin",
-        "x": 1645,
-        "y": 1760
+        "x": 1446,
+        "y": 1476
     },
     {
         "name": "New Almondport",
         "type": "town",
         "icon_src": "City_2",
         "permission_level": "admin",
-        "x": 1940,
-        "y": 2375
+        "x": 1522,
+        "y": 1633
     },
     {
         "name": "Domain of the Remorhaz",
         "type": "cryptid",
         "icon_src": "Cryptid_1",
         "permission_level": "public",
-        "x": 1750,
-        "y": 770
+        "x": 1473,
+        "y": 1222
     },
     {
         "name": "Scorpion Catacombs",
         "type": "envSite",
         "icon_src": "Mountain_1",
         "permission_level": "public",
-        "x": 1639,
-        "y": 610
+        "x": 1445,
+        "y": 1181
     }
 ]

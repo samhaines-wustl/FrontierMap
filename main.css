@@ -21,6 +21,25 @@ html, body
 For SVG Test
 */
 
+svg text {
+  display: none;
+}
+svg g:hover text {
+  display: block;
+}
+
+
+.icon {
+  width: 32px;
+}
+
+.icon-text {
+  text-anchor: middle;
+  dominant-baseline: middle;
+  filter: url(#rounded-corners);
+  font-weight: bold;
+}
+
 #container {
   width: 2048px;
   height: 2048px;
@@ -29,6 +48,7 @@ For SVG Test
   top: 0px;
 
 }
+
 
 #textClickDisplay {
   position: absolute;

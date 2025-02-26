@@ -2,41 +2,18 @@
 import rawLocations from './json/locationsData.json' with {type: 'json'};
 import rawFountains from './json/fountainsData.json' with {type: 'json'};
 
-//Zoom and Canvas Stuff
-let canvas = document.getElementById("canvas")
-let ctx = canvas.getContext('2d')
-
-let cameraOffset = { x:  canvas.parentElement.offsetWidth/2, y: canvas.parentElement.offsetHeight/2 }
-let cameraZoom = .1
-const MAX_ZOOM = 1.5
-const MIN_ZOOM = 0.05
-const SCROLL_SENSITIVITY = 0.0005
-
-//let canvasWidth = window.innerWidth;
-//let canvasHeight = window.innerHeight;
-let canvasWidth = canvas.parentElement.offsetWidth;
-let canvasHeight = canvas.parentElement.offsetHeight;
-
 
 //Other Stuff
-const ICON_SIZE = 128;
+const ICON_SIZE = 32;
 const FONT_SIZE = ICON_SIZE/2;
 const PIXEL_TO_MILES = 8/192/2; //This is 8mi for 196px on a 4096px, Am using size 8192 so divided by 2
+const SVGNS = "http://www.w3.org/2000/svg";
 
 let distLines = [];
 let travelLines = [];
-let iconImages = [];
 let settings = [];
 let locations = [];
 
-let blankMap;
-
-class IconCategory {
-    constructor(name, count) {
-        this.name = name;
-        this.count = count;
-    }
-}
 
 class Setting {
     constructor(display, name, level, initial, onClickFunc) {
@@ -105,54 +82,45 @@ class Setting {
 }
 
 class Location {
-    constructor(name, type, src, x, y, level) {
+    constructor(name, type, src, x, y) {
         this.name = name;
         this.type = type;
-        this.src = src;
+        this.src = "images/icons/" + src + ".png";
         this.x = x;
         this.y = y;
-        this.level = level;
-        this.visible = settings.find(o => o.name === this.type).val;
-        this.iconSize = ICON_SIZE;
-        this.fontSize = FONT_SIZE;
     }
 
     static fountainConstructor(x, y, permission_level) {
         return new Location("TRF", "fountain", "Fountain_1", x, y, permission_level);
     }
 
-    static drawAllLocations() {
-        locations.forEach((loc) => loc.draw());
+    static makeAllLocations() {
+        locations.forEach((loc) => loc.makeElement());
     }
 
-    static updateVisibility(type, visibleVal) {
-        locations.forEach( (loc) => {
-            if (loc.type == type)
-                loc.visible = visibleVal;
-        });
-        TravelLine.refreshDistSelection();
-    }
-
-    draw() {
-        if (this.visible) {
-            if (this.level == 'public' || settings.find(o => o.name === 'admin').val) {
-                let iconImage;
-                if (Object.hasOwn(iconImages, this.src))
-                    iconImage = iconImages[this.src];
-                else
-                    iconImage = iconImages['image_not_found'];
-                ctx.drawImage(iconImage, this.x - this.iconSize/2, this.y - this.iconSize/2, this.iconSize, this.iconSize);
-    
-                if (settings.find(o => o.name === "text").val && this.name != "TRF")
-                    this.drawText();
-            }
-        }
-    }
-
-    drawText() {
-        ctx.fillStyle = "#000000";
-        ctx.font = this.fontSize+ "px Arial";
-        ctx.fillText(this.name, this.x+this.iconSize/2, this.y + this.iconSize/2);
+    makeElement() {
+        //group element
+        let g = document.createElementNS(SVGNS, 'g');
+        g.addEventListener('mouseover', (e) => { //Reappends node so that it is drawn first (nothing covers text)
+            document.getElementById("SVG_Map").appendChild(e.target.parentNode);
+        })
+        //image
+        let el = document.createElementNS(SVGNS, 'image');
+        el.setAttributeNS(null, 'x', this.x-ICON_SIZE/2);
+        el.setAttributeNS(null, 'y', this.y-ICON_SIZE/2);
+        el.setAttributeNS(null, 'href', this.src);
+        el.classList.add("icon");
+        el.classList.add("icon-" + this.type);
+        //text
+        let txt = document.createElementNS(SVGNS, "text");
+        txt.setAttributeNS(null, 'x', this.x);
+        txt.setAttributeNS(null, 'y', this.y-ICON_SIZE);
+        txt.classList.add("icon-text");
+        txt.textContent = this.name;
+        //Apending
+        g.appendChild(el);
+        g.appendChild(txt);
+        document.getElementById("SVG_Map").appendChild(g);
     }
 }
 
@@ -242,29 +210,16 @@ class TravelLine {
     SVG Testing
 */
 
-const MAX_Z = 10
-const MIN_Z = 1
-let cur_z = document.querySelector('#test').value
+const MAX_ZOOM = 15
+const MIN_ZOOM = 3
+let currentZoom = 3
+let zoomScale = 1
 
-function setZoom(el, scale, transformOrigin) {
-    el.style.transform = `scale(${scale})`;
-    el.style.transformOrigin = `${transformOrigin[0] * 100}% ${transformOrigin[1] * 100}%`;
+function setZoom(el, scale) {
+    el.style.transform = `scale(${scale/10})`;
+    el.style.transformOrigin = `50% 50%`;
+    document.getElementById("zoomLevelDisplay").innerHTML = (scale/3).toFixed(1);
   }
-
-  document.querySelector('#test').addEventListener('input', function() {
-    const scale = this.value / 10;
-    setZoom(document.querySelector('#container'), scale, [0, 0]);
-  });
-
-  setZoom(document.querySelector('#container'), 3/10, [0, 0])
-  
-  function clickSVG(val) {
-      document.getElementById('textClickDisplay').innerHTML = val
-  }
-  
-  var deltaX = 0;
-  var deltaY = 0;
-  var scale = 1.0;
   
   var drag = {
       elem: null,
@@ -317,27 +272,50 @@ function setZoom(el, scale, transformOrigin) {
       return false;
   });
 
-  document.getElementById('circle').addEventListener("click", function() {clickSVG('cirlce');});
-  document.getElementById('bottle').addEventListener("click", function() {clickSVG('bottle');});
-
   document.getElementById('vp1').addEventListener("wheel", (e) => wheelTest(e.deltaY*-1));
-  document.getElementById('recenter').addEventListener("click", function() {
-    setZoom(document.querySelector('#container'), 3/10, [0.5, 0.5])
+  document.getElementById('recenter').addEventListener("click", function() {recenterMap();})
+
+function recenterMap() {
+    setZoom(document.querySelector('#container'), currentZoom)
     let el = $('#container');
     el.offset({
         left: 30,
-        top: 30
+        top: 50
     });
-    cur_z = 3;
-  })
+    currentZoom = 3;
+}
+
+recenterMap();
 
 function wheelTest(va) {
     if (va > 1)
-        cur_z = Math.min(MAX_Z, cur_z+1)
+        currentZoom = Math.min(MAX_ZOOM, currentZoom+zoomScale)
     else
-        cur_z = Math.max(MIN_Z, cur_z-1)
-    setZoom(document.querySelector('#container'), cur_z/10, [.5, .5])
+        currentZoom = Math.max(MIN_ZOOM, currentZoom-zoomScale)
+    setZoom(document.querySelector('#container'), currentZoom)
 }
+    
+// Find your root SVG element
+var svg = document.querySelector('svg');
+
+// Create an SVGPoint for future math
+var pt = svg.createSVGPoint();
+
+// Get point in global SVG space
+function cursorPoint(evt){
+  pt.x = evt.clientX; pt.y = evt.clientY;
+  return pt.matrixTransform(svg.getScreenCTM().inverse());
+}
+
+svg.addEventListener('mousemove',function(evt){
+  var loc = cursorPoint(evt);
+  // Use loc.x and loc.y here
+  let el = document.getElementById('mouseCoords');
+  el.innerHTML = "X: " + loc.x.toFixed(1) + ", Y: " + loc.y.toFixed(1);
+},false);
+
+
+
 
 
 /*
@@ -347,16 +325,6 @@ function main() {
     //Preparing data
     prepareSettings();
     prepareLocations();
-    loadAllImages();
-
-    // Event Listeners
-    canvas.addEventListener('mousedown', onPointerDown)
-    canvas.addEventListener('touchstart', (e) => handleTouch(e, onPointerDown))
-    canvas.addEventListener('mouseup', onPointerUp)
-    canvas.addEventListener('touchend',  (e) => handleTouch(e, onPointerUp))
-    canvas.addEventListener('mousemove', onPointerMove)
-    canvas.addEventListener('touchmove', (e) => handleTouch(e, onPointerMove))
-    canvas.addEventListener( 'wheel', (e) => adjustZoom(e.deltaY*SCROLL_SENSITIVITY*-1))
 
     document.getElementById('distButton').addEventListener('click', prepareTravelLines);
 
@@ -364,81 +332,15 @@ function main() {
     //Drawing
     TravelLine.refreshDistSelection();
     draw();
+    console.log("Done Main");
+    //let c = new Location(rawLocations[0].name, rawLocations[0].type, rawLocations[0].icon_src, rawLocations[0].x, rawLocations[0].y)
+    //c.makeElement();
+    Location.makeAllLocations();
+    console.log("Done all icons")
 }
 
 function draw() {
-    canvas.width = canvas.parentElement.offsetWidth
-    canvas.height = canvas.parentElement.offsetHeight
     
-    // Translate to the canvas centre before zooming - so you'll always zoom on what you're looking directly at
-    ctx.translate( canvasWidth / 2, canvasHeight / 2 )
-    ctx.scale(cameraZoom, cameraZoom)
-    ctx.translate( -canvasWidth / 2 + cameraOffset.x, -canvasHeight / 2 + cameraOffset.y )
-    ctx.clearRect(0,0, canvasWidth, canvasHeight)
-    ctx.drawImage(blankMap, -1*blankMap.width/2, -1*blankMap.height/2);
-
-    //Draw Locations
-    //drawIcons();
-    Location.drawAllLocations();
-
-    //Draw Lines
-    TravelLine.drawAllLines();
-
-    //Draw Scale
-    ctx.fillStyle = "#ffffff";
-    ctx.font = FONT_SIZE*3+ "px Arial";
-    ctx.fillText("8 mi", 4096 - 4096/20, 4096 - 4096/20);
-
-    //Admin Stuff
-    if (settings.find(o => o.name === "grid").val)
-        drawCoordGrid();
-
-    //Repeat the map
-    requestAnimationFrame( draw );
-}
-
-// Prep Images
-function loadAllImages() {
-    blankMap = new Image();
-    blankMap.src = 'images/mapBase.webp';
-
-    loadIcons();
-}
-
-function loadIcons() {
-    //Location
-    let prefix = 'images/icons/';
-
-    //Image not found
-    iconImages.image_not_found = new Image();
-    iconImages.image_not_found.src = prefix + 'image_not_found.png';
-
-    //Rest of images
-    let iconFileData = [
-        new IconCategory("Bottle", 1), 
-        new IconCategory("Cactus", 2),
-        new IconCategory("City", 2),
-        new IconCategory("Cryptid", 4),
-        new IconCategory("Food", 1),
-        new IconCategory("Fountain", 1),
-        new IconCategory("Horse", 2),
-        new IconCategory("Mine", 1),
-        new IconCategory("Money", 3),
-        new IconCategory("Mountain", 5),
-        new IconCategory("Saloon", 1),
-        new IconCategory("Temple", 1),
-        new IconCategory("Town", 2),
-        new IconCategory("Tree", 1),
-        new IconCategory("Vase", 2)
-    ];
-    iconFileData.forEach((category) => {
-        for (let i = 1; i <= category.count; i++) {
-            let imageName = category.name + "_" + i;
-            iconImages[imageName] = new Image();
-            iconImages[imageName].src = prefix + imageName + '.png';
-        }
-    });
-    console.log(iconImages);
 }
 
 //Prep Settings
@@ -476,7 +378,6 @@ function prepareTravelLines() {
     console.log(travelLines);
 }
 
-
 function notYetImplement() {
     console.log("Not yet implement");
     //console.log(settings);
@@ -498,119 +399,6 @@ function drawCoordGrid() {
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// All Zoom and Scroll Stuff
-
-// Gets the relevant location from a mouse or single touch event
-function getEventLocation(e)
-{
-    if (e.touches && e.touches.length == 1)
-    {
-        return { x:e.touches[0].clientX, y: e.touches[0].clientY }
-    }
-    else if (e.clientX && e.clientY)
-    {
-        return { x: e.clientX, y: e.clientY }        
-    }
-}
-
-let isDragging = false
-let dragStart = { x: 0, y: 0 }
-
-function onPointerDown(e)
-{
-    isDragging = true
-    dragStart.x = getEventLocation(e).x/cameraZoom - cameraOffset.x
-    dragStart.y = getEventLocation(e).y/cameraZoom - cameraOffset.y
-}
-
-function onPointerUp(e)
-{
-    isDragging = false
-    initialPinchDistance = null
-    lastZoom = cameraZoom
-}
-
-function onPointerMove(e)
-{
-    if (isDragging)
-    {
-        cameraOffset.x = getEventLocation(e).x/cameraZoom - dragStart.x
-        cameraOffset.y = getEventLocation(e).y/cameraZoom - dragStart.y
-    }
-}
-
-function handleTouch(e, singleTouchHandler)
-{
-    if ( e.touches.length == 1 )
-    {
-        singleTouchHandler(e)
-    }
-    else if (e.type == "touchmove" && e.touches.length == 2)
-    {
-        isDragging = false
-        handlePinch(e)
-    }
-}
-
-let initialPinchDistance = null
-let lastZoom = cameraZoom
-
-function handlePinch(e)
-{
-    e.preventDefault()
-    
-    let touch1 = { x: e.touches[0].clientX, y: e.touches[0].clientY }
-    let touch2 = { x: e.touches[1].clientX, y: e.touches[1].clientY }
-    
-    // This is distance squared, but no need for an expensive sqrt as it's only used in ratio
-    let currentDistance = (touch1.x - touch2.x)**2 + (touch1.y - touch2.y)**2
-    
-    if (initialPinchDistance == null)
-    {
-        initialPinchDistance = currentDistance
-    }
-    else
-    {
-        adjustZoom( null, currentDistance/initialPinchDistance )
-    }
-}
-
-function adjustZoom(zoomAmount, zoomFactor)
-{
-    if (!isDragging)
-    {
-        if (zoomAmount)
-        {
-            cameraZoom += zoomAmount
-        }
-        else if (zoomFactor)
-        {
-            //console.log(zoomFactor)
-            cameraZoom = zoomFactor*lastZoom
-        }
-        
-        cameraZoom = Math.min( cameraZoom, MAX_ZOOM )
-        cameraZoom = Math.max( cameraZoom, MIN_ZOOM )
-        
-        //console.log(zoomAmount)
-    }
-}
-
 
 main();
 
