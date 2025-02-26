@@ -6,20 +6,20 @@ import rawFountains from './json/fountainsData.json' with {type: 'json'};
 //Constants
 const ICON_SIZE = 32;
 const FONT_SIZE = ICON_SIZE/2;
-const PIXEL_TO_MILES = 8/192/2; //This is 8mi for 196px on a 4096px, Am using size 8192 so divided by 2
+const PIXEL_TO_MILES = 8/192*2; //This is 8mi for 196px on a 4096px, Am using size 2048 so multiple by 2
 const SVGNS = "http://www.w3.org/2000/svg";
 const MAX_ZOOM = 15
 const MIN_ZOOM = 3
 const ZOOM_SCALE = 1
 
-let distLines = [];
 let travelLines = [];
 let settings = [];
 let locations = [];
 
 let currentZoom = 3
-let svgMap = document.querySelector('#svgMap')
-
+let svgMap = document.querySelector('#svgMap');
+let allIconG = document.createElementNS(SVGNS, 'g');
+allIconG.setAttribute('id', 'allIconGroup') ;
 
 //Dragging for map
 let drag = {
@@ -111,25 +111,28 @@ class Location {
         this.y = y;
     }
 
-    static fountainConstructor(x, y, permission_level) {
-        return new Location("TRF", "fountain", "Fountain_1", x, y, permission_level);
+    static fountainConstructor(x, y) {
+        return new Location("TRF", "fountain", "Fountain_1", x, y);
     }
 
     static makeAllLocations() {
         locations.forEach((loc) => loc.makeElement());
+        svgMap.appendChild(allIconG);
     }
 
     makeElement() {
         //group element
         let g = document.createElementNS(SVGNS, 'g');
         g.addEventListener('mouseover', (e) => { //Reappends node so that it is drawn first (nothing covers text)
-            svgMap.appendChild(e.target.parentNode);
+            allIconG.appendChild(e.target.parentNode);
         })
         //image
         let el = document.createElementNS(SVGNS, 'image');
         el.setAttributeNS(null, 'x', this.x-ICON_SIZE/2);
         el.setAttributeNS(null, 'y', this.y-ICON_SIZE/2);
         el.setAttributeNS(null, 'href', this.src);
+        el.setAttributeNS(null, 'originalX', this.x);
+        el.setAttributeNS(null, 'originalY', this.y);
         el.classList.add("icon");
         el.classList.add("icon-" + this.type);
         //text
@@ -141,7 +144,7 @@ class Location {
         //Apending
         g.appendChild(el);
         g.appendChild(txt);
-        svgMap.appendChild(g);
+        allIconG.appendChild(g);
     }
 }
 
@@ -150,17 +153,15 @@ class TravelLine {
         this.loc1 = loc1;
         this.loc2 = loc2;
         this.distance = this.calcDistance();
+        this.r = "5px";
 
         this.addToTable();
+        this.makeElements();
     }
 
     static removeTravelLine(index) {
         document.getElementById('distTable').deleteRow(index);
         travelLines.splice(index-1, 1);
-    }
-
-    static drawAllLines() {
-        travelLines.forEach((l) => l.draw());
     }
 
     static refreshDistSelection() {
@@ -177,7 +178,7 @@ class TravelLine {
         select1.add(new Option("Nothing Selected"));
         select2.add(new Option("Nothing Selected"));
         locations.forEach((icon) => {
-            if (icon.type != 'fountain' && icon.visible && (icon.level == 'public' || settings.find(o => o.name === 'admin').val)) {
+            if (icon.type != 'fountain') {
                 select1.add(new Option(icon.name));
                 select2.add(new Option(icon.name));
             }
@@ -203,27 +204,33 @@ class TravelLine {
         cells[3].addEventListener('click', function() {TravelLine.removeTravelLine(this.parentNode.rowIndex)});
     }
 
-    draw() {
-    //Starting Circle
-        ctx.beginPath();
-        ctx.arc(this.loc1.x,this.loc1.y, ICON_SIZE/8,0,2*Math.PI);
-        ctx.fillStyle = '#B42E15';
-        ctx.fill();
-        ctx.stroke();
-   //Line b/w
-   //ctx.setLineDash([48,32])
-        ctx.beginPath();
-        ctx.lineWidth = 10;
-        ctx.strokeStyle = '#B42E15';
-        ctx.moveTo(this.loc1.x, this.loc1.y);
-        ctx.lineTo(this.loc2.x, this.loc2.y);
-        ctx.stroke();
-   //Ending Circle
-        ctx.beginPath();
-        ctx.arc(this.loc2.x,this.loc2.y, ICON_SIZE/8,0,2*Math.PI);
-        ctx.fillStyle = '#B42E15';
-        ctx.fill();
-        ctx.stroke(); 
+    makeElements() {
+        //group element
+        let g = document.createElementNS(SVGNS, 'g');
+        //first circle
+        let c1 = document.createElementNS(SVGNS, 'circle')
+        c1.setAttributeNS(null, 'cx', this.loc1.x);
+        c1.setAttributeNS(null, 'cy', this.loc1.y);
+        c1.setAttributeNS(null, 'r', this.r);
+        c1.classList.add("travel-dot");
+        //second circle
+        let c2 = document.createElementNS(SVGNS, 'circle')
+        c2.setAttributeNS(null, 'cx', this.loc2.x);
+        c2.setAttributeNS(null, 'cy', this.loc2.y);
+        c2.setAttributeNS(null, 'r', this.r);
+        c2.classList.add("travel-dot");
+        //dotted line
+        let line = document.createElementNS(SVGNS, 'line');
+        line.setAttributeNS(null, "x1", this.loc1.x);
+        line.setAttributeNS(null, 'y1', this.loc1.y);
+        line.setAttributeNS(null, "x2", this.loc2.x);
+        line.setAttributeNS(null, 'y2', this.loc2.y);
+        line.classList.add("travel-line");
+        //Append
+        g.appendChild(c1);
+        g.appendChild(c2);
+        g.appendChild(line);
+        svgMap.appendChild(g);
     }
 }
 
@@ -232,19 +239,14 @@ function main() {
     prepareSettings();
     prepareLocations();
     prepareEventListeners();
-
     
-
-    
-
-
     //Drawing
     TravelLine.refreshDistSelection();
-    console.log("Done Main");
     Location.makeAllLocations();
     console.log("Done all icons");
     //Set up default map view
     resetMap();
+    console.log("Finished in main");
 }
 
 //Prepare Functions
@@ -267,14 +269,11 @@ function prepareLocations() {
         locations.push(new Location(loc.name, loc.type, loc.icon_src, loc.x, loc.y, loc.permission_level));
     });
     rawFountains.forEach((loc) => {
-        locations.push(Location.fountainConstructor(loc.x, loc.y, loc.permission_level));
+        locations.push(Location.fountainConstructor(loc.x, loc.y));
     });
 }
 
 function prepareEventListeners() {
-    //Old
-    document.getElementById('distButton').addEventListener('click', prepareTravelLines);
-
     //Mouse
         //Zoom map
         $('.viewport').on('wheel', function(e) {
@@ -333,10 +332,12 @@ function prepareEventListeners() {
 
     //Buttons
     document.getElementById('recenterButton').addEventListener("click", function() {resetMap();})
+    document.getElementById('distButton').addEventListener('click', function() {makeTravelLine();});
+
 
 }
 
-function prepareTravelLines() {
+function makeTravelLine() {
     let loc1 = document.getElementById("distLoc1").value;
     let loc2 = document.getElementById('distLoc2').value;
     
@@ -344,9 +345,7 @@ function prepareTravelLines() {
         return;
     else
         travelLines.push(new TravelLine(locations.find(o => o.name === loc1), locations.find(o => o.name === loc2)));
-    console.log(travelLines);
 }
-
 
 function notYetImplement() {
     console.log("Not yet implement");
@@ -362,8 +361,17 @@ function setZoom(el, scale) {
 } 
 
 function scaleIconAndText(scale) {
-    $('.icon').css("width", MAX_ZOOM/scale * ICON_SIZE/2 + ICON_SIZE/2 + "px");
-    $('.icon-text').css("font-size", MAX_ZOOM/scale * FONT_SIZE/2 + FONT_SIZE/2 + "px");
+    let newIconSize = MAX_ZOOM/scale * ICON_SIZE/2 + ICON_SIZE/2;
+    let newFontSize = MAX_ZOOM/scale * FONT_SIZE/2 + FONT_SIZE/2;
+    $('.icon').css("width",  newIconSize + "px");
+    $('.icon-text').css("font-size",  newFontSize + "px");
+    let elements = document.getElementsByClassName('icon');
+
+    for (let i = 0; i < elements.length; i++) {
+        elements.item(i).setAttribute('x', elements.item(i).getAttribute('originalX') - newIconSize/2);
+        elements.item(i).setAttribute('y', elements.item(i).getAttribute('originalY') - newIconSize/2);
+    }
+    
 }
 
 function resetMap() {
@@ -371,8 +379,8 @@ function resetMap() {
     setZoom(document.querySelector('#container'), currentZoom);
     let el = $('#container');
     el.offset({
-        left: 30,
-        top: 50
+        left: 50,
+        top: 70
     });
 }
 

@@ -46,13 +46,24 @@ SVG Map
   font-size: 16px;
 }
 
+.travel-line {
+  stroke: red;
+  stroke-width: 2;
+  stroke-dasharray: 30,10;
+}
+
+.travel-dot {
+  stroke: red;
+  fill: red;
+}
+
 /*
 SVG text display
 */
 svg text {
   display: none;
 }
-svg g:hover text {
+svg g g:hover text {
   display: block;
 }
 

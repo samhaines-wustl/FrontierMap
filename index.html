@@ -16,29 +16,9 @@
   <div class="container">
     <div class="public_settings" id="publicSettings"></div>
     <div class="admin_settings" id="adminSettings"></div>
-    <div class="distance_calculator">
-      Starting location:
-      <select id="distLoc1">
-        <option value=""> Nothing Selected</option>
-      </select>
-      Ending location:
-      <select id="distLoc2">
-        <option value=""> Nothing Selected</option>
-      </select>
-      <button id="distButton">Calc Distance</button>
-      <table class="distTableStyling" id="distTable">
-        <thead>
-          <tr>
-            <th>Starting</th>
-            <th>Ending</th>
-            <th>Miles</th>
-            <th>Remove</th>
-          </tr>
-        </thead>
-      </table>
-    </div>
+    
   </div>
-</div>
+  </div>
 
   <span>Current Zoom Level: </span><span id="zoomLevelDisplay"></span> <br>
   <input id="recenterButton" type="button" value="Reset">
@@ -70,6 +50,27 @@
     </div>
   </div>
   <span id="mouseCoords">X: ?, Y: ?</span>
+  <div class="distance_calculator">
+    Starting location:
+    <select id="distLoc1">
+      <option value=""> Nothing Selected</option>
+    </select>
+    Ending location:
+    <select id="distLoc2">
+      <option value=""> Nothing Selected</option>
+    </select>
+    <button id="distButton">Calc Distance</button>
+    <table class="distTableStyling" id="distTable">
+      <thead>
+        <tr>
+          <th>Starting</th>
+          <th>Ending</th>
+          <th>Miles</th>
+          <th>Remove</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
 
 
  
