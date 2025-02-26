@@ -1,3 +1,6 @@
+/*
+Standard html nodes
+*/
 html, body
 {
     height: 100%;
@@ -5,29 +8,31 @@ html, body
     padding: 0px;
 }
 
-#canvas
-{
-  
-  height: 100%;
-  width: 100%;
-  background: #4C4C59;
-}
-
 .hidden 
 {
   display: none;
 }
+
 /*
-For SVG Test
+SVG Map
 */
+#container {
+  width: 2048px;
+  height: 2048px;
+  position: absolute;
+  left: 0px;
+  top: 0px;
 
-svg text {
-  display: none;
-}
-svg g:hover text {
-  display: block;
 }
 
+.viewport {
+    position: relative;
+    width: 700px;
+    height: 700px;
+    overflow: hidden;
+    border: 11px outset #a0cfd3;
+    background: #4c4c59; 
+}
 
 .icon {
   width: 32px;
@@ -40,29 +45,16 @@ svg g:hover text {
   font-weight: bold;
 }
 
-#container {
-  width: 2048px;
-  height: 2048px;
-  position: absolute;
-  left: 0px;
-  top: 0px;
-
+/*
+SVG text display
+*/
+svg text {
+  display: none;
+}
+svg g:hover text {
+  display: block;
 }
 
-
-#textClickDisplay {
-  position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-}
-.viewport {
-    position: relative;
-    width: 700px;
-    height: 700px;
-    overflow: hidden;
-    background-color: #4C4C59;
-}
 
 /*
 Styling for Table
@@ -116,8 +108,6 @@ Styling for grid
   width: 1000px; 
   height: 1000px; 
 }
-
-.canvas { grid-area: canvas; border: 4px dashed #a3cfb1; position: relative;}
 
 .public_settings { grid-area: public_settings; border: 4px dashed #a3cfb1;}
 

@@ -3,17 +3,38 @@ import rawLocations from './json/locationsData.json' with {type: 'json'};
 import rawFountains from './json/fountainsData.json' with {type: 'json'};
 
 
-//Other Stuff
+//Constants
 const ICON_SIZE = 32;
 const FONT_SIZE = ICON_SIZE/2;
 const PIXEL_TO_MILES = 8/192/2; //This is 8mi for 196px on a 4096px, Am using size 8192 so divided by 2
 const SVGNS = "http://www.w3.org/2000/svg";
+const MAX_ZOOM = 15
+const MIN_ZOOM = 3
+const ZOOM_SCALE = 1
 
 let distLines = [];
 let travelLines = [];
 let settings = [];
 let locations = [];
 
+let currentZoom = 3
+let svgMap = document.querySelector('#svgMap')
+
+
+//Dragging for map
+let drag = {
+    elem: null,
+    x: 0,
+    y: 0,
+    state: false
+};
+let delta = {
+    x: 0,
+    y: 0
+};
+
+//Reading cursor coords
+let curosrPoint = svgMap.createSVGPoint();
 
 class Setting {
     constructor(display, name, level, initial, onClickFunc) {
@@ -102,7 +123,7 @@ class Location {
         //group element
         let g = document.createElementNS(SVGNS, 'g');
         g.addEventListener('mouseover', (e) => { //Reappends node so that it is drawn first (nothing covers text)
-            document.getElementById("SVG_Map").appendChild(e.target.parentNode);
+            svgMap.appendChild(e.target.parentNode);
         })
         //image
         let el = document.createElementNS(SVGNS, 'image');
@@ -120,7 +141,7 @@ class Location {
         //Apending
         g.appendChild(el);
         g.appendChild(txt);
-        document.getElementById("SVG_Map").appendChild(g);
+        svgMap.appendChild(g);
     }
 }
 
@@ -206,144 +227,26 @@ class TravelLine {
     }
 }
 
-/*
-    SVG Testing
-*/
-
-const MAX_ZOOM = 15
-const MIN_ZOOM = 3
-let currentZoom = 3
-let zoomScale = 1
-
-function setZoom(el, scale) {
-    el.style.transform = `scale(${scale/10})`;
-    el.style.transformOrigin = `50% 50%`;
-    document.getElementById("zoomLevelDisplay").innerHTML = (scale/3).toFixed(1);
-  }
-  
-  var drag = {
-      elem: null,
-      x: 0,
-      y: 0,
-      state: false
-  };
-  var delta = {
-      x: 0,
-      y: 0
-  };
-  
-  
-  $('.viewport').mousedown(function(e) {
-      if (!drag.state && e.which == 1) {
-          drag.elem = $('#container');
-          drag.x = e.pageX;
-          drag.y = e.pageY;
-          drag.state = true;
-      }
-      return false;
-  });
-  
-  
-  $('.viewport').mousemove(function(e) {
-      
-      if (drag.state) {
-          delta.x = e.pageX - drag.x;
-          delta.y = e.pageY - drag.y;
-       
-          var cur_offset = $(drag.elem).offset();
-  
-          $(drag.elem).offset({
-              left: (cur_offset.left + delta.x),
-              top: (cur_offset.top + delta.y)
-          });
-  
-          drag.x = e.pageX;
-          drag.y = e.pageY;
-      }
-  });
-  
-  $('.viewport').mouseup(function() {
-      if (drag.state) {
-          drag.state = false;
-      }
-  });
-  
-  $('.viewport').on('contextmenu', function () {
-      return false;
-  });
-
-  document.getElementById('vp1').addEventListener("wheel", (e) => wheelTest(e.deltaY*-1));
-  document.getElementById('recenter').addEventListener("click", function() {recenterMap();})
-
-function recenterMap() {
-    setZoom(document.querySelector('#container'), currentZoom)
-    let el = $('#container');
-    el.offset({
-        left: 30,
-        top: 50
-    });
-    currentZoom = 3;
-}
-
-recenterMap();
-
-function wheelTest(va) {
-    if (va > 1)
-        currentZoom = Math.min(MAX_ZOOM, currentZoom+zoomScale)
-    else
-        currentZoom = Math.max(MIN_ZOOM, currentZoom-zoomScale)
-    setZoom(document.querySelector('#container'), currentZoom)
-}
-    
-// Find your root SVG element
-var svg = document.querySelector('svg');
-
-// Create an SVGPoint for future math
-var pt = svg.createSVGPoint();
-
-// Get point in global SVG space
-function cursorPoint(evt){
-  pt.x = evt.clientX; pt.y = evt.clientY;
-  return pt.matrixTransform(svg.getScreenCTM().inverse());
-}
-
-svg.addEventListener('mousemove',function(evt){
-  var loc = cursorPoint(evt);
-  // Use loc.x and loc.y here
-  let el = document.getElementById('mouseCoords');
-  el.innerHTML = "X: " + loc.x.toFixed(1) + ", Y: " + loc.y.toFixed(1);
-},false);
-
-
-
-
-
-/*
-Normal
-*/
 function main() {
     //Preparing data
     prepareSettings();
     prepareLocations();
+    prepareEventListeners();
 
-    document.getElementById('distButton').addEventListener('click', prepareTravelLines);
+    //Set up default map view
+    resetMap();
+
+    
 
 
     //Drawing
     TravelLine.refreshDistSelection();
-    draw();
     console.log("Done Main");
-    //let c = new Location(rawLocations[0].name, rawLocations[0].type, rawLocations[0].icon_src, rawLocations[0].x, rawLocations[0].y)
-    //c.makeElement();
     Location.makeAllLocations();
     console.log("Done all icons")
 }
 
-function draw() {
-    
-}
-
-//Prep Settings
+//Prepare Functions
 function prepareSettings() {
     settings.push(new Setting("Towns", "town", "Public", true, Location.updateVisibility)),
     settings.push(new Setting("Cryptids", "cryptid", "Public", true, Location.updateVisibility)),
@@ -367,6 +270,71 @@ function prepareLocations() {
     });
 }
 
+function prepareEventListeners() {
+    //Old
+    document.getElementById('distButton').addEventListener('click', prepareTravelLines);
+
+    //Mouse
+        //Zoom map
+        $('.viewport').on('wheel', function(e) {
+            if (e.originalEvent.deltaY < 0) //Zoom in
+                currentZoom = Math.min(MAX_ZOOM, currentZoom+ZOOM_SCALE);
+            else //Zoom out
+                currentZoom = Math.max(MIN_ZOOM, currentZoom-ZOOM_SCALE);
+            setZoom(document.querySelector('#container'), currentZoom)
+        })
+      
+        //Dragging map
+        $('.viewport').mousedown(function(e) {
+            if (!drag.state && e.which == 1) {
+                drag.elem = $('#container');
+                drag.x = e.pageX;
+                drag.y = e.pageY;
+                drag.state = true;
+            }
+            return false;
+        });
+        $('.viewport').mousemove(function(e) {
+            
+            if (drag.state) {
+                delta.x = e.pageX - drag.x;
+                delta.y = e.pageY - drag.y;
+            
+                var cur_offset = $(drag.elem).offset();
+
+                $(drag.elem).offset({
+                    left: (cur_offset.left + delta.x),
+                    top: (cur_offset.top + delta.y)
+                });
+
+                drag.x = e.pageX;
+                drag.y = e.pageY;
+            }
+        });
+        $('.viewport').mouseup(function() {
+            if (drag.state) {
+                drag.state = false;
+            }
+        });
+        $('.viewport').on('contextmenu', function () {
+            return false;
+        });
+
+        //Mouse coordinates
+        svgMap.addEventListener('mousemove',function(e) {
+            curosrPoint.x = e.clientX;
+            curosrPoint.y = e.clientY;
+            let loc = curosrPoint.matrixTransform(svgMap.getScreenCTM().inverse());
+            // Use loc.x and loc.y here
+            let el = document.getElementById('mouseCoords');
+            el.innerHTML = "X: " + loc.x.toFixed(1) + ", Y: " + loc.y.toFixed(1);
+        },false);
+
+    //Buttons
+    document.getElementById('recenterButton').addEventListener("click", function() {resetMap();})
+
+}
+
 function prepareTravelLines() {
     let loc1 = document.getElementById("distLoc1").value;
     let loc2 = document.getElementById('distLoc2').value;
@@ -378,27 +346,27 @@ function prepareTravelLines() {
     console.log(travelLines);
 }
 
+
 function notYetImplement() {
     console.log("Not yet implement");
     //console.log(settings);
 }
 
-function drawCoordGrid() {
-    for (let x = -4000; x <= 3800; x +=200) {
-        for (let y = -3600; y <= 4200; y += 200) {
-            //Dot
-            ctx.beginPath();
-            ctx.arc(x,y, 2,0,2*Math.PI);
-            ctx.fillStyle = '#000000';
-            ctx.fill();
-            ctx.stroke();
-            //Text
-            ctx.fillStyle = "#000000";
-            ctx.font = "16px Arial";
-            ctx.fillText(" (" + x + "," + y + ")", x, y);
-        }
-    }
-}
+//Zoom function
+function setZoom(el, scale) {
+    el.style.transform = `scale(${scale/10})`;
+    el.style.transformOrigin = `50% 50%`;
+    document.getElementById("zoomLevelDisplay").innerHTML = (scale/3).toFixed(1);
+} 
 
+function resetMap() {
+    currentZoom = 3;
+    setZoom(document.querySelector('#container'), currentZoom);
+    let el = $('#container');
+    el.offset({
+        left: 30,
+        top: 50
+    });
+}
 main();
 

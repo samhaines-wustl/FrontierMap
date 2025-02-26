@@ -38,25 +38,13 @@
       </table>
     </div>
   </div>
- 
-  
-  <div id="customIcon"></div>
-    <label for="customX"> X value: </label>
-    <input type="range" id="customX" name="customX" value="0" min="-4000" max="4000" oninput="this.nextElementSibling.value = this.value">
-    <output>0</output>
-    <label for="customY"> Y value: </label>
-    <input type="range" id="customY" name="customY" value="0" min="-4000" max="4000" oninput="this.nextElementSibling.value = this.value">
-    <output>0</output>
-  <div> 
-    
-  </div>
-  </div>
+</div>
 
   <span>Current Zoom Level: </span><span id="zoomLevelDisplay"></span> <br>
-  <input id="recenter" type="button" value="Recenter">
-  <div class="viewport" id="vp1">
+  <input id="recenterButton" type="button" value="Reset">
+  <div class="viewport" id="viewportMap">
     <div id="container">
-      <svg id="SVG_Map" height="2048" width="2048">
+      <svg id="svgMap" height="2048" width="2048">
         
         <defs>
           <filter id="rounded-corners" x="-5%" width="110%" y="0%" height="100%">
@@ -81,7 +69,6 @@
       </svg>
     </div>
   </div>
-  <span id="textClickDisplay">Empty</span>
   <span id="mouseCoords">X: ?, Y: ?</span>
 
 
