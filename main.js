@@ -233,8 +233,7 @@ function main() {
     prepareLocations();
     prepareEventListeners();
 
-    //Set up default map view
-    resetMap();
+    
 
     
 
@@ -243,7 +242,9 @@ function main() {
     TravelLine.refreshDistSelection();
     console.log("Done Main");
     Location.makeAllLocations();
-    console.log("Done all icons")
+    console.log("Done all icons");
+    //Set up default map view
+    resetMap();
 }
 
 //Prepare Functions
@@ -357,7 +358,13 @@ function setZoom(el, scale) {
     el.style.transform = `scale(${scale/10})`;
     el.style.transformOrigin = `50% 50%`;
     document.getElementById("zoomLevelDisplay").innerHTML = (scale/3).toFixed(1);
+    scaleIconAndText(scale);
 } 
+
+function scaleIconAndText(scale) {
+    $('.icon').css("width", MAX_ZOOM/scale * ICON_SIZE/2 + ICON_SIZE/2 + "px");
+    $('.icon-text').css("font-size", MAX_ZOOM/scale * FONT_SIZE/2 + FONT_SIZE/2 + "px");
+}
 
 function resetMap() {
     currentZoom = 3;
@@ -368,5 +375,6 @@ function resetMap() {
         top: 50
     });
 }
+
 main();
 

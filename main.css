@@ -43,6 +43,7 @@ SVG Map
   dominant-baseline: middle;
   filter: url(#rounded-corners);
   font-weight: bold;
+  font-size: 16px;
 }
 
 /*
