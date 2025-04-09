@@ -12,18 +12,10 @@
 </head>
 
 <body>
-  <div class="hidden">
-  <div class="container">
-    <div class="public_settings" id="publicSettings"></div>
-    <div class="admin_settings" id="adminSettings"></div>
-    
-  </div>
-  </div>
-
   <span>Current Zoom Level: </span><span id="zoomLevelDisplay"></span> <br>
   <input id="recenterButton" type="button" value="Reset">
-  <div class="viewport" id="viewportMap">
-    <div id="container">
+  <div class="viewport">
+    <div id="container" height="2048" width="2048">
       <svg id="svgMap" height="2048" width="2048">
         
         <defs>

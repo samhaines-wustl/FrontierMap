@@ -236,7 +236,6 @@ class TravelLine {
 
 function main() {
     //Preparing data
-    prepareSettings();
     prepareLocations();
     prepareEventListeners();
     
@@ -248,21 +247,6 @@ function main() {
     resetMap();
     console.log("Finished in main");
 }
-
-//Prepare Functions
-function prepareSettings() {
-    settings.push(new Setting("Towns", "town", "Public", true, Location.updateVisibility)),
-    settings.push(new Setting("Cryptids", "cryptid", "Public", true, Location.updateVisibility)),
-    settings.push(new Setting("Locales", "locale", "Public", true, Location.updateVisibility)),
-    settings.push(new Setting("Env. Sites", "envSite", "Public", true, Location.updateVisibility)),
-    settings.push(new Setting("Fountains", "fountain", "Public", true, Location.updateVisibility)),
-    settings.push(new Setting("Text", "text", "Public", false, notYetImplement)),
-    settings.push(new Setting("Biomes", "biome", "Public", false, notYetImplement)),
-    settings.push(new Setting("Factions", "faction", "Public", true, notYetImplement)),
-    settings.push(new Setting("Lines", "line", "Public", true, notYetImplement)),
-    settings.push(new Setting("Grid", "grid", "Admin", false, notYetImplement)),
-    settings.push(new Setting("Admin", "admin", "Admin", false, TravelLine.refreshDistSelection))
-};
 
 function prepareLocations() {
     rawLocations.forEach((loc) => {
@@ -277,11 +261,26 @@ function prepareEventListeners() {
     //Mouse
         //Zoom map
         $('.viewport').on('wheel', function(e) {
-            if (e.originalEvent.deltaY < 0) //Zoom in
-                currentZoom = Math.min(MAX_ZOOM, currentZoom+ZOOM_SCALE);
-            else //Zoom out
-                currentZoom = Math.max(MIN_ZOOM, currentZoom-ZOOM_SCALE);
-            setZoom(document.querySelector('#container'), currentZoom)
+            //Get mouse coords
+            let mouseCoords = getMapCoords(e.clientX, e.clientY)
+            let transformOriginString = Math.min(Math.max((mouseCoords.x/2048*100).toFixed(0), 0),100) + '% ' + Math.min(Math.max((mouseCoords.y/2048*100).toFixed(0), 0),100) + '%'
+            
+            if (e.originalEvent.deltaY < 0)  {
+                //Zoom in
+                let newZoom = currentZoom+ZOOM_SCALE
+                if (newZoom <= MAX_ZOOM) {
+                    currentZoom = newZoom
+                    setZoom(document.querySelector('#container'), currentZoom, transformOriginString)
+                }
+            }
+            else {
+                //Zoom out
+                let newZoom = currentZoom - ZOOM_SCALE
+                if (newZoom >= MIN_ZOOM) {
+                    currentZoom = newZoom
+                    setZoom(document.querySelector('#container'), currentZoom, transformOriginString)
+                }
+            }
         })
       
         //Dragging map
@@ -322,12 +321,13 @@ function prepareEventListeners() {
 
         //Mouse coordinates
         svgMap.addEventListener('mousemove',function(e) {
-            curosrPoint.x = e.clientX;
+            let coords = getMapCoords(e.clientX, e.clientY);
+            /*curosrPoint.x = e.clientX;
             curosrPoint.y = e.clientY;
             let loc = curosrPoint.matrixTransform(svgMap.getScreenCTM().inverse());
-            // Use loc.x and loc.y here
+            // Use loc.x and loc.y here*/
             let el = document.getElementById('mouseCoords');
-            el.innerHTML = "X: " + loc.x.toFixed(1) + ", Y: " + loc.y.toFixed(1);
+            el.innerHTML = "X: " + coords.x.toFixed(1) + ", Y: " + coords.y.toFixed(1);
         },false);
 
     //Buttons
@@ -353,9 +353,11 @@ function notYetImplement() {
 }
 
 //Zoom function
-function setZoom(el, scale) {
-    el.style.transform = `scale(${scale/10})`;
-    el.style.transformOrigin = `50% 50%`;
+function setZoom(el, scale, transformOrigin) {
+    console.log(transformOrigin)
+    //el.style.transform = `scale(${scale/10})`;
+    //el.style.transformOrigin = transformOrigin;
+    el.style.transform = `scale(${scale/10}) translate(2000px, 0px)`
     document.getElementById("zoomLevelDisplay").innerHTML = (scale/3).toFixed(1);
     scaleIconAndText(scale);
 } 
@@ -376,12 +378,19 @@ function scaleIconAndText(scale) {
 
 function resetMap() {
     currentZoom = 3;
-    setZoom(document.querySelector('#container'), currentZoom);
+    setZoom(document.querySelector('#container'), currentZoom, "50% 50%");
     let el = $('#container');
     el.offset({
         left: 50,
         top: 70
     });
+}
+
+function getMapCoords(x ,y) {
+    cursorPoint.x = x;
+    cursorPoint.y = y;
+    let loc = cursorPoint.matrixTransform(svgMap.getScreenCTM().inverse());
+    return {x: loc.x, y: loc.y}
 }
 
 main();
