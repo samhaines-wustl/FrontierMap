@@ -6,6 +6,7 @@ html, body
     height: 100%;
     margin: 0;
     padding: 0px;
+    overflow: none;
 }
 
 .hidden 
@@ -16,16 +17,15 @@ html, body
 /*
 SVG Map
 */
-#container {
-  width: 2048px;
-  height: 2048px;
+#svgContainer {
   position: absolute;
   left: 0px;
   top: 0px;
+  border: 20px solid #ff6550;
 
 }
 
-.viewport {
+#svgContainer {
     position: relative;
     width: 700px;
     height: 700px;

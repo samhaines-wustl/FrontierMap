@@ -10,14 +10,14 @@ const PIXEL_TO_MILES = 8/192*2; //This is 8mi for 196px on a 4096px, Am using si
 const SVGNS = "http://www.w3.org/2000/svg";
 const MAX_ZOOM = 15
 const MIN_ZOOM = 3
-const ZOOM_SCALE = 1
+const ZOOM_SCALE = 1.1
 
 let travelLines = [];
 let settings = [];
 let locations = [];
 
-let currentZoom = 3
-let svgMap = document.querySelector('#svgMap');
+
+
 let allIconG = document.createElementNS(SVGNS, 'g');
 allIconG.setAttribute('id', 'allIconGroup') ;
 
@@ -33,8 +33,96 @@ let delta = {
     y: 0
 };
 
-//Reading cursor coords
-let curosrPoint = svgMap.createSVGPoint();
+class SVGCanvas {
+    static DEFAULT_VIEWBOX = {x:0, y: 50, w: 6000, h: 6000}
+    static DEFAULT_SCALE = .33
+
+    constructor(image, container) {
+        this.image = image;
+        this.container = container;
+        this.size = {w: this.image.clientWidth, h: this.image.clientHeight}
+
+        this.isPanning = false;
+        this.viewBox = SVGCanvas.DEFAULT_VIEWBOX;
+        this.scale = SVGCanvas.DEFAULT_SCALE;
+        this.startPoint = {x:0,y:0};
+
+        this.resetView();
+        console.log("constructed")
+    }
+
+    addZoomEvents() {
+        let that = this;
+        this.container.onmousewheel = function(e) {
+            e.preventDefault();
+            var w = that.viewBox.w;
+            var h = that.viewBox.h;
+            var mx = e.offsetX;//mouse x  
+            var my = e.offsetY;    
+            var dw = -1*w*Math.sign(e.deltaY)*0.05;
+            var dh = -1*h*Math.sign(e.deltaY)*0.05;
+            var dx = dw*mx/that.size.w;
+            var dy = dh*my/that.size.h;
+            that.viewBox = { 
+                x:that.viewBox.x+dx,
+                y:that.viewBox.y+dy,
+                w:that.viewBox.w-dw,
+                h:that.viewBox.h-dh
+            };
+            that.scale = that.size.w/that.viewBox.w;
+            that.image.setAttribute('viewBox', `${that.viewBox.x} ${that.viewBox.y} ${that.viewBox.w} ${that.viewBox.h}`);
+        }
+    }
+
+    addPanEvents() {
+        let that = this;
+        that.container.onmousedown = function(e){
+            that.isPanning = true;
+            that.startPoint = {x:e.x,y:e.y};   
+        }
+         
+        that.container.onmousemove = function(e){
+            if (that.isPanning) {
+                var endPoint = {x:e.x,y:e.y};
+                var dx = (that.startPoint.x - endPoint.x)/that.scale;
+                var dy = (that.startPoint.y - endPoint.y)/that.scale;
+                var movedViewBox = {
+                    x:that.viewBox.x+dx,
+                    y:that.viewBox.y+dy,
+                    w:that.viewBox.w,
+                    h:that.viewBox.h
+                };
+                that.image.setAttribute('viewBox', `${movedViewBox.x} ${movedViewBox.y} ${movedViewBox.w} ${movedViewBox.h}`);
+            }
+        }
+         
+        that.container.onmouseup = function(e){
+            if (that.isPanning){ 
+                var endPoint = {x:e.x,y:e.y};
+                var dx = (that.startPoint.x - endPoint.x)/that.scale;
+                var dy = (that.startPoint.y - endPoint.y)/that.scale;
+                that.viewBox = {
+                    x:that.viewBox.x+dx,
+                    y:that.viewBox.y+dy,
+                    w:that.viewBox.w,
+                    h:that.viewBox.h
+                };
+                that.image.setAttribute('viewBox', `${that.viewBox.x} ${that.viewBox.y} ${that.viewBox.w} ${that.viewBox.h}`);
+                that.isPanning = false;
+            }
+        }
+         
+        that.container.onmouseleave = function(e){
+            that.isPanning = false;
+        }
+    }
+
+    resetView() {
+        this.viewbox = SVGCanvas.DEFAULT_VIEWBOX
+        this.scale = SVGCanvas.DEFAULT_SCALE
+        this.image.setAttribute('viewBox', `${this.viewbox.x} ${this.viewbox.y} ${this.viewbox.w} ${this.viewbox.h}`); 
+    }
+}
 
 class Setting {
     constructor(display, name, level, initial, onClickFunc) {
@@ -49,7 +137,6 @@ class Setting {
         //Creating element
         this.createElement();
     }
-
     createElement() {
         let div;
         switch (this.level) {
@@ -235,154 +322,42 @@ class TravelLine {
 }
 
 function main() {
+    let svgCanvas = new SVGCanvas(document.getElementById("svgMap"), document.getElementById("svgContainer"))
+    svgCanvas.addZoomEvents();
+    svgCanvas.addPanEvents();
+
     //Preparing data
     prepareSettings();
     prepareLocations();
     prepareEventListeners();
 
     //Drawing
-    TravelLine.refreshDistSelection();
-    Location.makeAllLocations();
     console.log("Done all icons");
-    //Set up default map view
-    resetMap();
     console.log("Finished in main");
 }
 
-//Prepare Functions
-function prepareSettings() {
-    settings.push(new Setting("Towns", "town", "Public", true, Location.updateVisibility)),
-    settings.push(new Setting("Cryptids", "cryptid", "Public", true, Location.updateVisibility)),
-    settings.push(new Setting("Locales", "locale", "Public", true, Location.updateVisibility)),
-    settings.push(new Setting("Env. Sites", "envSite", "Public", true, Location.updateVisibility)),
-    settings.push(new Setting("Fountains", "fountain", "Public", true, Location.updateVisibility)),
-    settings.push(new Setting("Text", "text", "Public", false, notYetImplement)),
-    settings.push(new Setting("Biomes", "biome", "Public", false, notYetImplement)),
-    settings.push(new Setting("Factions", "faction", "Public", true, notYetImplement)),
-    settings.push(new Setting("Lines", "line", "Public", true, notYetImplement)),
-    settings.push(new Setting("Grid", "grid", "Admin", false, notYetImplement)),
-    settings.push(new Setting("Admin", "admin", "Admin", false, TravelLine.refreshDistSelection))
-};
-
-function prepareLocations() {
-    rawLocations.forEach((loc) => {
-        locations.push(new Location(loc.name, loc.type, loc.icon_src, loc.x, loc.y, loc.permission_level));
-    });
-    rawFountains.forEach((loc) => {
-        locations.push(Location.fountainConstructor(loc.x, loc.y));
-    });
-}
 
 function prepareEventListeners() {
-    //Mouse
-        //Zoom map
-        $('.viewport').on('wheel', function(e) {
-            if (e.originalEvent.deltaY < 0) //Zoom in
-                currentZoom = Math.min(MAX_ZOOM, currentZoom+ZOOM_SCALE);
-            else //Zoom out
-                currentZoom = Math.max(MIN_ZOOM, currentZoom-ZOOM_SCALE);
-            setZoom(document.querySelector('#container'), currentZoom)
-        })
-      
-        //Dragging map
-        $('.viewport').mousedown(function(e) {
-            if (!drag.state && e.which == 1) {
-                drag.elem = $('#container');
-                drag.x = e.pageX;
-                drag.y = e.pageY;
-                drag.state = true;
-            }
-            return false;
-        });
-        $('.viewport').mousemove(function(e) {
-            
-            if (drag.state) {
-                delta.x = e.pageX - drag.x;
-                delta.y = e.pageY - drag.y;
-            
-                var cur_offset = $(drag.elem).offset();
-
-                $(drag.elem).offset({
-                    left: (cur_offset.left + delta.x),
-                    top: (cur_offset.top + delta.y)
-                });
-
-                drag.x = e.pageX;
-                drag.y = e.pageY;
-            }
-        });
-        $('.viewport').mouseup(function() {
-            if (drag.state) {
-                drag.state = false;
-            }
-        });
-        $('.viewport').on('contextmenu', function () {
-            return false;
-        });
-         
+   
         //Mouse coordinates
-        svgMap.addEventListener('mousemove',function(e) {
-            curosrPoint.x = e.clientX;
+        SVG_IMAGE.addEventListener('mousemove',function(e) {
+            let coords = getMapCoords(e.clientX, e.clientY);
+            /*curosrPoint.x = e.clientX;
             curosrPoint.y = e.clientY;
             let loc = curosrPoint.matrixTransform(svgMap.getScreenCTM().inverse());
-            // Use loc.x and loc.y here
+            // Use loc.x and loc.y here */
             let el = document.getElementById('mouseCoords');
-            el.innerHTML = "X: " + loc.x.toFixed(1) + ", Y: " + loc.y.toFixed(1);
+            el.innerHTML = "X: " + coords.x.toFixed(1) + ", Y: " + coords.y.toFixed(1);
         },false);
-
-    //Buttons
-    document.getElementById('recenterButton').addEventListener("click", function() {resetMap();})
-    document.getElementById('distButton').addEventListener('click', function() {makeTravelLine();});
-
-
+        
 }
 
-function makeTravelLine() {
-    let loc1 = document.getElementById("distLoc1").value;
-    let loc2 = document.getElementById('distLoc2').value;
-    
-    if (loc1 == 'Nothing Selected' || loc2 == 'Nothing Selected')
-        return;
-    else
-        travelLines.push(new TravelLine(locations.find(o => o.name === loc1), locations.find(o => o.name === loc2)));
-}
-
-function notYetImplement() {
-    console.log("Not yet implement");
-    //console.log(settings);
-}
-
-//Zoom function
-function setZoom(el, scale) {
-    el.style.transform = `scale(${scale/10})`;
-    el.style.transformOrigin = `50% 50%`;
-    document.getElementById("zoomLevelDisplay").innerHTML = (scale/3).toFixed(1);
-    scaleIconAndText(scale);
-} 
-
-function scaleIconAndText(scale) {
-    let newIconSize = MAX_ZOOM/scale * ICON_SIZE/2 + ICON_SIZE/2;
-    let newFontSize = MAX_ZOOM/scale * FONT_SIZE/2 + FONT_SIZE/2;
-    $('.icon').css("width",  newIconSize + "px");
-    $('.icon-text').css("font-size",  newFontSize + "px");
-    let elements = document.getElementsByClassName('icon');
-
-    for (let i = 0; i < elements.length; i++) {
-        elements.item(i).setAttribute('x', elements.item(i).getAttribute('originalX') - newIconSize/2);
-        elements.item(i).setAttribute('y', elements.item(i).getAttribute('originalY') - newIconSize/2);
-    }
-    
-}
-
-function resetMap() {
-    currentZoom = 3;
-    setZoom(document.querySelector('#container'), currentZoom);
-    let el = $('#container');
-    el.offset({
-        left: 50,
-        top: 70
-    });
+function getMapCoords(x ,y) {
+    let cursorPoint = svgMap.createSVGPoint();
+    cursorPoint.x = x;
+    cursorPoint.y = y;
+    let loc = cursorPoint.matrixTransform(svgMap.getScreenCTM().inverse());
+    return {x: loc.x, y: loc.y}
 }
 
 main();
-

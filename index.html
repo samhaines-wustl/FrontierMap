@@ -12,19 +12,9 @@
 </head>
 
 <body>
-  <div class="hidden">
-  <div class="container">
-    <div class="public_settings" id="publicSettings"></div>
-    <div class="admin_settings" id="adminSettings"></div>
-    
-  </div>
-  </div>
-
-  <span>Current Zoom Level: </span><span id="zoomLevelDisplay"></span> <br>
-  <input id="recenterButton" type="button" value="Reset">
-  <div class="viewport" id="viewportMap">
-    <div id="container">
+    <div id="svgContainer">
       <svg id="svgMap" height="2048" width="2048">
+        <g id="zoom">
         
         <defs>
           <filter id="rounded-corners" x="-5%" width="110%" y="0%" height="100%">
@@ -46,35 +36,16 @@
           width="2048"
           href="images/mapBase.webp"
         />
-      </svg>
-    </div>
+        <g>
+          <circle r="45" cx="1050" cy="50" fill="red" />
+          <circle r="45" cx="50" cy="250" fill="red" stroke="green" stroke-width="3" opacity="0.5" />
+        </g>
+      </g>
+      </svg></div>
   </div>
-  <span id="mouseCoords">X: ?, Y: ?</span>
-  <div class="distance_calculator">
-    Starting location:
-    <select id="distLoc1">
-      <option value=""> Nothing Selected</option>
-    </select>
-    Ending location:
-    <select id="distLoc2">
-      <option value=""> Nothing Selected</option>
-    </select>
-    <button id="distButton">Calc Distance</button>
-    <table class="distTableStyling" id="distTable">
-      <thead>
-        <tr>
-          <th>Starting</th>
-          <th>Ending</th>
-          <th>Miles</th>
-          <th>Remove</th>
-        </tr>
-      </thead>
-    </table>
-  </div>
+  <button id="viewBoxGet">here</button>
+  <button id="resetView">Reset</button>
 
-
- 
-  
   <script type="module" src="main.js"></script>
 </body>
 
