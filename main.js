@@ -327,28 +327,36 @@ function main() {
     svgCanvas.addPanEvents();
 
     //Preparing data
-    prepareSettings();
+    //prepareSettings();
     prepareLocations();
     prepareEventListeners();
 
     //Drawing
+    Location.makeAllLocations();
     console.log("Done all icons");
     console.log("Finished in main");
 }
 
+function prepareLocations() {
+    rawLocations.forEach((loc) => {
+        locations.push(new Location(loc.name, loc.type, loc.icon_src, loc.x, loc.y, loc.permission_level));
+    });
+    rawFountains.forEach((loc) => {
+        locations.push(Location.fountainConstructor(loc.x, loc.y, loc.permission_level));
+    });
+}
 
 function prepareEventListeners() {
-   
-        //Mouse coordinates
+        /* Mouse coordinates 
         SVG_IMAGE.addEventListener('mousemove',function(e) {
             let coords = getMapCoords(e.clientX, e.clientY);
             /*curosrPoint.x = e.clientX;
             curosrPoint.y = e.clientY;
             let loc = curosrPoint.matrixTransform(svgMap.getScreenCTM().inverse());
-            // Use loc.x and loc.y here */
+            // Use loc.x and loc.y here 
             let el = document.getElementById('mouseCoords');
             el.innerHTML = "X: " + coords.x.toFixed(1) + ", Y: " + coords.y.toFixed(1);
-        },false);
+        },false); */
         
 }
 
