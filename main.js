@@ -259,9 +259,11 @@ function prepareLocations() {
 
 function prepareEventListeners() {
     //Mouse
-        //Zoom map
+        //Zoom map 
+        /*
         $('.viewport').on('wheel', function(e) {
             //Get mouse coords
+            console.log("test")
             let mouseCoords = getMapCoords(e.clientX, e.clientY)
             let transformOriginString = Math.min(Math.max((mouseCoords.x/2048*100).toFixed(0), 0),100) + '% ' + Math.min(Math.max((mouseCoords.y/2048*100).toFixed(0), 0),100) + '%'
             
@@ -318,7 +320,7 @@ function prepareEventListeners() {
         $('.viewport').on('contextmenu', function () {
             return false;
         });
-
+        */
         //Mouse coordinates
         svgMap.addEventListener('mousemove',function(e) {
             let coords = getMapCoords(e.clientX, e.clientY);
@@ -357,7 +359,8 @@ function setZoom(el, scale, transformOrigin) {
     console.log(transformOrigin)
     //el.style.transform = `scale(${scale/10})`;
     //el.style.transformOrigin = transformOrigin;
-    el.style.transform = `scale(${scale/10}) translate(2000px, 0px)`
+    el.style.transform = `scale(${scale/10})`
+    el.style.transformOrigin = transformOrigin
     document.getElementById("zoomLevelDisplay").innerHTML = (scale/3).toFixed(1);
     scaleIconAndText(scale);
 } 
@@ -387,11 +390,14 @@ function resetMap() {
 }
 
 function getMapCoords(x ,y) {
+    let cursorPoint = svgMap.createSVGPoint();
     cursorPoint.x = x;
     cursorPoint.y = y;
     let loc = cursorPoint.matrixTransform(svgMap.getScreenCTM().inverse());
     return {x: loc.x, y: loc.y}
 }
+
+var panZoomTiger = svgPanZoom('#svgMap');
 
 main();
 
