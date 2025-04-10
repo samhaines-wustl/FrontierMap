@@ -172,7 +172,7 @@ class TravelLine {
         while (select1.options.length > 0) {
             select1.remove(0);
             select2.remove(0);
-        }
+            }
     
         //Prep new selects
         select1.add(new Option("Nothing Selected"));
@@ -239,7 +239,7 @@ function main() {
     prepareSettings();
     prepareLocations();
     prepareEventListeners();
-    
+
     //Drawing
     TravelLine.refreshDistSelection();
     Location.makeAllLocations();
@@ -319,7 +319,7 @@ function prepareEventListeners() {
         $('.viewport').on('contextmenu', function () {
             return false;
         });
-
+         
         //Mouse coordinates
         svgMap.addEventListener('mousemove',function(e) {
             curosrPoint.x = e.clientX;
