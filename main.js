@@ -16,9 +16,8 @@ let travelLines = [];
 let settings = [];
 let locations = [];
 
-let currentZoom = 3
-let svgMap = document.querySelector('#svgMap');
-let zoomMap = document.querySelector('#zoom');
+
+
 let allIconG = document.createElementNS(SVGNS, 'g');
 allIconG.setAttribute('id', 'allIconGroup') ;
 
@@ -34,106 +33,127 @@ let delta = {
     y: 0
 };
 
+class SVGCanvas {
+    static DEFAULT_VIEWBOX = {x:0, y: 50, w: 6000, h: 6000}
+    static DEFAULT_SCALE = .33
+
+    constructor(image, container) {
+        this.image = image;
+        this.container = container;
+        this.size = {w: this.image.clientWidth, h: this.image.clientHeight}
+
+        this.isPanning = false;
+        this.viewBox = SVGCanvas.DEFAULT_VIEWBOX;
+        this.scale = SVGCanvas.DEFAULT_SCALE;
+        this.startPoint = {x:0,y:0};
+
+        this.resetView();
+        console.log("constructed")
+    }
+
+    addZoomEvents() {
+        let that = this;
+        this.container.onmousewheel = function(e) {
+            e.preventDefault();
+            var w = that.viewBox.w;
+            var h = that.viewBox.h;
+            var mx = e.offsetX;//mouse x  
+            var my = e.offsetY;    
+            var dw = -1*w*Math.sign(e.deltaY)*0.05;
+            var dh = -1*h*Math.sign(e.deltaY)*0.05;
+            var dx = dw*mx/that.size.w;
+            var dy = dh*my/that.size.h;
+            that.viewBox = { 
+                x:that.viewBox.x+dx,
+                y:that.viewBox.y+dy,
+                w:that.viewBox.w-dw,
+                h:that.viewBox.h-dh
+            };
+            that.scale = that.size.w/that.viewBox.w;
+            that.image.setAttribute('viewBox', `${that.viewBox.x} ${that.viewBox.y} ${that.viewBox.w} ${that.viewBox.h}`);
+        }
+    }
+
+    addPanEvents() {
+        let that = this;
+        that.container.onmousedown = function(e){
+            that.isPanning = true;
+            that.startPoint = {x:e.x,y:e.y};   
+        }
+         
+        that.container.onmousemove = function(e){
+            if (that.isPanning) {
+                var endPoint = {x:e.x,y:e.y};
+                var dx = (that.startPoint.x - endPoint.x)/that.scale;
+                var dy = (that.startPoint.y - endPoint.y)/that.scale;
+                var movedViewBox = {
+                    x:that.viewBox.x+dx,
+                    y:that.viewBox.y+dy,
+                    w:that.viewBox.w,
+                    h:that.viewBox.h
+                };
+                that.image.setAttribute('viewBox', `${movedViewBox.x} ${movedViewBox.y} ${movedViewBox.w} ${movedViewBox.h}`);
+            }
+        }
+         
+        that.container.onmouseup = function(e){
+            if (that.isPanning){ 
+                var endPoint = {x:e.x,y:e.y};
+                var dx = (that.startPoint.x - endPoint.x)/that.scale;
+                var dy = (that.startPoint.y - endPoint.y)/that.scale;
+                that.viewBox = {
+                    x:that.viewBox.x+dx,
+                    y:that.viewBox.y+dy,
+                    w:that.viewBox.w,
+                    h:that.viewBox.h
+                };
+                that.image.setAttribute('viewBox', `${that.viewBox.x} ${that.viewBox.y} ${that.viewBox.w} ${that.viewBox.h}`);
+                that.isPanning = false;
+            }
+        }
+         
+        that.container.onmouseleave = function(e){
+            that.isPanning = false;
+        }
+    }
+
+    resetView() {
+        this.viewbox = SVGCanvas.DEFAULT_VIEWBOX
+        this.scale = SVGCanvas.DEFAULT_SCALE
+        this.image.setAttribute('viewBox', `${this.viewbox.x} ${this.viewbox.y} ${this.viewbox.w} ${this.viewbox.h}`); 
+    }
+}
+
 
 function main() {
+    let svgCanvas = new SVGCanvas(document.getElementById("svgMap"), document.getElementById("svgContainer"))
+    svgCanvas.addZoomEvents();
+    svgCanvas.addPanEvents();
+
     //Preparing data
-    
+    prepareEventListeners()
+
+    console.log("Preparation Complete");
     //Drawing
     console.log("Done all icons");
-    //Set up default map view
     console.log("Finished in main");
-    //var panZoomTiger = svgPanZoom('#svgMap', {zoomScaleSensitivity: 0.2});
 }
 
 
 function prepareEventListeners() {
-    //Mouse
-        //Zoom map 
-        
-        /*$('.viewport').on('wheel', function(e) {
-            //Get mouse coords
-            let mouseCoords = getMapCoords(e.clientX, e.clientY)
-            let transformOriginString = Math.min(Math.max((mouseCoords.x/2048*100).toFixed(0), 0),100) + '% ' + Math.min(Math.max((mouseCoords.y/2048*100).toFixed(0), 0),100) + '%'
-            
-            if (e.originalEvent.deltaY < 0)  {
-                //Zoom in
-                let newZoom = currentZoom*ZOOM_SCALE
-                if (newZoom <= MAX_ZOOM) {
-                    currentZoom = newZoom
-                    newZoomFunction(e.clientX, e.clientY, currentZoom)
-                    //setZoom(document.querySelector('#container'), currentZoom, transformOriginString)
-                }
-            }
-            else {
-                //Zoom out
-                let newZoom = currentZoom/ZOOM_SCALE
-                if (newZoom >= .2) {
-                    currentZoom = newZoom
-                    newZoomFunction(e.clientX, e.clientY, currentZoom)
-                    //setZoom(document.querySelector('#container'), currentZoom, transformOriginString)
-                }
-            }
-        }) */
-        
-        //Dragging map
-        $('#svgMap').mousedown(function(e) {
-            if (!drag.state && e.which == 1) {
-                drag.elem = $('#container');
-                drag.x = e.pageX;
-                drag.y = e.pageY;
-                drag.state = true;
-            }
-            return false;
-        });
-        $('#svgMap').mousemove(function(e) {
-            
-            if (drag.state) {
-                delta.x = e.pageX - drag.x;
-                delta.y = e.pageY - drag.y;
-            
-                var cur_offset = $(drag.elem).offset();
 
-                $(drag.elem).offset({
-                    left: (cur_offset.left + delta.x),
-                    top: (cur_offset.top + delta.y)
-                });
-
-                drag.x = e.pageX;
-                drag.y = e.pageY;
-            }
-        });
-        $('#svgMap').mouseup(function() {
-            if (drag.state) {
-                drag.state = false;
-            }
-        });
-        $('#svgMap').on('contextmenu', function () {
-            return false;
-        });
-        
         //Mouse coordinates
-        svgMap.addEventListener('mousemove',function(e) {
+        SVG_IMAGE.addEventListener('mousemove',function(e) {
             let coords = getMapCoords(e.clientX, e.clientY);
             /*curosrPoint.x = e.clientX;
             curosrPoint.y = e.clientY;
             let loc = curosrPoint.matrixTransform(svgMap.getScreenCTM().inverse());
-            // Use loc.x and loc.y here*/
+            // Use loc.x and loc.y here */
             let el = document.getElementById('mouseCoords');
             el.innerHTML = "X: " + coords.x.toFixed(1) + ", Y: " + coords.y.toFixed(1);
         },false);
-
-    //Buttons
-    document.getElementById('recenterButton').addEventListener("click", function() {resetMap();})
-    document.getElementById('distButton').addEventListener('click', function() {makeTravelLine();});
-
-
+        
 }
-
-
-function notYetImplement() {
-    console.log("Not yet implement");
-    //console.log(settings);
-} 
 
 function getMapCoords(x ,y) {
     let cursorPoint = svgMap.createSVGPoint();
@@ -142,88 +162,5 @@ function getMapCoords(x ,y) {
     let loc = cursorPoint.matrixTransform(svgMap.getScreenCTM().inverse());
     return {x: loc.x, y: loc.y}
 }
-
-function zoomAtPoint(zoomScale, point, zoomAbsolute) {
-    var originalState = this.viewport.getOriginalState();
-  
-    if (!zoomAbsolute) {
-      // Fit zoomScale in set bounds
-      if (
-        this.getZoom() * zoomScale <
-        this.options.minZoom * originalState.zoom
-      ) {
-        zoomScale = (this.options.minZoom * originalState.zoom) / this.getZoom();
-      } else if (
-        this.getZoom() * zoomScale >
-        this.options.maxZoom * originalState.zoom
-      ) {
-        zoomScale = (this.options.maxZoom * originalState.zoom) / this.getZoom();
-      }
-    } else {
-      // Fit zoomScale in set bounds
-      zoomScale = Math.max(
-        this.options.minZoom * originalState.zoom,
-        Math.min(this.options.maxZoom * originalState.zoom, zoomScale)
-      );
-      // Find relative scale to achieve desired scale
-      zoomScale = zoomScale / this.getZoom();
-    }
-    //^Getting zoomScale value
-    //Viewport is svg object
-    //point is mousepoint
-  
-    var oldCTM = this.viewport.getCTM(),
-      relativePoint = point.matrixTransform(oldCTM.inverse()),
-      modifier = this.svg
-        .createSVGMatrix()
-        .translate(relativePoint.x, relativePoint.y)
-        .scale(zoomScale)
-        .translate(-relativePoint.x, -relativePoint.y),
-      newCTM = oldCTM.multiply(modifier);
-  
-    if (newCTM.a !== oldCTM.a) {
-      this.viewport.setCTM(newCTM);
-    }
-}
-
-function setCTM(element, matrix) {
-    var m = matrix;
-    var s = "matrix(" + m.a + "," + m.b + "," + m.c + "," + m.d + "," + m.e + "," + m.f + ")";
-    
-    element.setAttributeNS(null, "transform", s);
-}
-
-var svgEl = document.getElementById('svgMap');
-var zoomEl = document.getElementById('zoom');
-var zoomScale = 1;
-
-svgEl.addEventListener('wheel', function(e) {
-    var delta = e.wheelDeltaY;
-    zoomScale = Math.pow(1.1, delta/360);
-    
-    var p = svgEl.createSVGPoint();
-    p.x = e.clientX;
-    p.y = e.clientY;
-    
-    p = p.matrixTransform( svgEl.getCTM().inverse() );
-    
-    var zoomMat = svgEl.createSVGMatrix()
-            .translate(p.x, p.y)
-            .scale(zoomScale)
-            .translate(-p.x, -p.y);
-    
-    setCTM(zoomEl, zoomEl.getCTM().multiply(zoomMat));
-    return false
-});
-
-//var elementHere = document.querySelector('#svgMap');
-////panzoom(elementHere);
-
-$('#svgMap').hover(function (){
-    $('body').css('overflow','hidden');
-}, function (){
-    $('body').css('overflow','auto');
-})
-
 
 main();
