@@ -1,37 +1,22 @@
 
 import rawLocations from './json/locationsData.json' with {type: 'json'};
-import rawFountains from './json/fountainsData.json' with {type: 'json'};
-
 
 //Constants
 const ICON_SIZE = 32;
 const FONT_SIZE = ICON_SIZE/2;
 const PIXEL_TO_MILES = 8/192*2; //This is 8mi for 196px on a 4096px, Am using size 2048 so multiple by 2
 const SVGNS = "http://www.w3.org/2000/svg";
-const MAX_ZOOM = 15
-const MIN_ZOOM = 3
-const ZOOM_SCALE = 1.1
 
 let travelLines = [];
 let settings = [];
 let locations = [];
 
+let textDisplaySetting = "hover";
 
 
 let allIconG = document.createElementNS(SVGNS, 'g');
 allIconG.setAttribute('id', 'allIconGroup') ;
-
-//Dragging for map
-let drag = {
-    elem: null,
-    x: 0,
-    y: 0,
-    state: false
-};
-let delta = {
-    x: 0,
-    y: 0
-};
+let svgCanvas;
 
 class SVGCanvas {
     static DEFAULT_VIEWBOX = {x:0, y: 50, w: 6000, h: 6000}
@@ -48,7 +33,7 @@ class SVGCanvas {
         this.startPoint = {x:0,y:0};
 
         this.resetView();
-        console.log("constructed")
+        console.log("SVGCanvas constructed")
     }
 
     addZoomEvents() {
@@ -118,9 +103,10 @@ class SVGCanvas {
     }
 
     resetView() {
-        this.viewbox = SVGCanvas.DEFAULT_VIEWBOX
+        this.viewBox = SVGCanvas.DEFAULT_VIEWBOX
         this.scale = SVGCanvas.DEFAULT_SCALE
-        this.image.setAttribute('viewBox', `${this.viewbox.x} ${this.viewbox.y} ${this.viewbox.w} ${this.viewbox.h}`); 
+        this.startPoint = {x:0,y:0};
+        this.image.setAttribute('viewBox', `${this.viewBox.x} ${this.viewBox.y} ${this.viewBox.w} ${this.viewBox.h}`); 
     }
 }
 
@@ -198,10 +184,6 @@ class Location {
         this.y = y;
     }
 
-    static fountainConstructor(x, y) {
-        return new Location("TRF", "fountain", "Fountain_1", x, y);
-    }
-
     static makeAllLocations() {
         locations.forEach((loc) => loc.makeElement());
         svgMap.appendChild(allIconG);
@@ -218,6 +200,7 @@ class Location {
         el.setAttributeNS(null, 'x', this.x-ICON_SIZE/2);
         el.setAttributeNS(null, 'y', this.y-ICON_SIZE/2);
         el.setAttributeNS(null, 'href', this.src);
+        el.setAttributeNS(null, 'onerror', "this.setAttribute('href', 'images/icons/image_not_found.png')")
         el.setAttributeNS(null, 'originalX', this.x);
         el.setAttributeNS(null, 'originalY', this.y);
         el.classList.add("icon");
@@ -227,6 +210,7 @@ class Location {
         txt.setAttributeNS(null, 'x', this.x);
         txt.setAttributeNS(null, 'y', this.y-ICON_SIZE);
         txt.classList.add("icon-text");
+        txt.classList.add("text-display-hover");
         txt.textContent = this.name;
         //Apending
         g.appendChild(el);
@@ -322,9 +306,8 @@ class TravelLine {
 }
 
 function main() {
-    let svgCanvas = new SVGCanvas(document.getElementById("svgMap"), document.getElementById("svgContainer"))
-    svgCanvas.addZoomEvents();
-    svgCanvas.addPanEvents();
+    svgCanvas = new SVGCanvas(document.getElementById("svgMap"), document.getElementById("svgContainer"));
+    
 
     //Preparing data
     //prepareSettings();
@@ -341,22 +324,31 @@ function prepareLocations() {
     rawLocations.forEach((loc) => {
         locations.push(new Location(loc.name, loc.type, loc.icon_src, loc.x, loc.y, loc.permission_level));
     });
-    rawFountains.forEach((loc) => {
-        locations.push(Location.fountainConstructor(loc.x, loc.y, loc.permission_level));
-    });
 }
 
 function prepareEventListeners() {
-        /* Mouse coordinates 
-        SVG_IMAGE.addEventListener('mousemove',function(e) {
-            let coords = getMapCoords(e.clientX, e.clientY);
-            /*curosrPoint.x = e.clientX;
-            curosrPoint.y = e.clientY;
-            let loc = curosrPoint.matrixTransform(svgMap.getScreenCTM().inverse());
-            // Use loc.x and loc.y here 
-            let el = document.getElementById('mouseCoords');
-            el.innerHTML = "X: " + coords.x.toFixed(1) + ", Y: " + coords.y.toFixed(1);
-        },false); */
+    svgCanvas.addZoomEvents();
+    svgCanvas.addPanEvents();
+
+    document.getElementById("resetView").addEventListener("click", function(e) {
+        svgCanvas.resetView();
+    });
+
+    document.getElementById("toggleText").addEventListener("click", function(e) {
+        if (textDisplaySetting.localeCompare("hover") == 0) {
+            textDisplaySetting = "shown"
+            Array.prototype.forEach.call(document.getElementsByClassName("icon-text"), function(t) {
+                t.classList.remove("text-display-hover");
+            })
+        }
+        else {
+            textDisplaySetting = "hover"
+            Array.prototype.forEach.call(document.getElementsByClassName("icon-text"), function(t) {
+                t.classList.add("text-display-hover");
+            })
+        }
+        
+    });
         
 }
 
@@ -367,5 +359,7 @@ function getMapCoords(x ,y) {
     let loc = cursorPoint.matrixTransform(svgMap.getScreenCTM().inverse());
     return {x: loc.x, y: loc.y}
 }
+
+
 
 main();

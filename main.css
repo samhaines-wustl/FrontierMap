@@ -60,7 +60,7 @@ SVG Map
 /*
 SVG text display
 */
-svg text {
+svg .text-display-hover {
   display: none;
 }
 svg g g:hover text {
