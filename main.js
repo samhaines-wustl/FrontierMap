@@ -3,7 +3,7 @@ import rawLocations from './json/locationsData.json' with {type: 'json'};
 
 //Constants
 const ICON_SIZE = 32;
-const FONT_SIZE = ICON_SIZE/2;
+const ICON_TEXT_FONT_SIZE = 16;
 const PIXEL_TO_MILES = 8/192*2; //This is 8mi for 196px on a 4096px, Am using size 2048 so multiple by 2
 const SVGNS = "http://www.w3.org/2000/svg";
 
@@ -332,33 +332,46 @@ function prepareEventListeners() {
 
     document.getElementById("resetView").addEventListener("click", function(e) {
         svgCanvas.resetView();
+        resetFontSize();
     });
 
     document.getElementById("toggleText").addEventListener("click", function(e) {
         if (textDisplaySetting.localeCompare("hover") == 0) {
             textDisplaySetting = "shown"
+            this.textContent = "Hide All Text"
             Array.prototype.forEach.call(document.getElementsByClassName("icon-text"), function(t) {
                 t.classList.remove("text-display-hover");
             })
         }
         else {
             textDisplaySetting = "hover"
+            this.textContent = "Show All Text"
             Array.prototype.forEach.call(document.getElementsByClassName("icon-text"), function(t) {
                 t.classList.add("text-display-hover");
             })
         }
         
     });
+
+    document.getElementById("fontSizeSlider").oninput = function(e) {
+        let newFontSize = this.value;
+        document.getElementById("fontSizeDisplay").textContent = newFontSize;
+        Array.prototype.forEach.call(document.getElementsByClassName("icon-text"), function (t) {
+            t.style.fontSize = newFontSize + "px";
+        })
+    };
         
 }
 
-function getMapCoords(x ,y) {
-    let cursorPoint = svgMap.createSVGPoint();
-    cursorPoint.x = x;
-    cursorPoint.y = y;
-    let loc = cursorPoint.matrixTransform(svgMap.getScreenCTM().inverse());
-    return {x: loc.x, y: loc.y}
+function resetFontSize() {
+    let newFontSize = ICON_TEXT_FONT_SIZE;
+    document.getElementById("fontSizeDisplay").textContent = newFontSize;
+    document.getElementById("fontSizeSlider").value = newFontSize
+    Array.prototype.forEach.call(document.getElementsByClassName("icon-text"), function (t) {
+        t.style.fontSize = newFontSize + "px";
+    })
 }
+
 
 
 
