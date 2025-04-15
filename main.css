@@ -38,6 +38,10 @@ SVG Map
   width: 32px;
 }
 
+.search-result-highlight {
+  outline: 12px double #add8e6;
+}
+
 .icon-text {
   text-anchor: middle;
   dominant-baseline: middle;

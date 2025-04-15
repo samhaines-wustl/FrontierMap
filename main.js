@@ -203,6 +203,7 @@ class Location {
         el.setAttributeNS(null, 'onerror', "this.setAttribute('href', 'images/icons/image_not_found.png')")
         el.setAttributeNS(null, 'originalX', this.x);
         el.setAttributeNS(null, 'originalY', this.y);
+        el.setAttribute("searchName", this.name.toLowerCase());
         el.classList.add("icon");
         el.classList.add("icon-" + this.type);
         //text
@@ -359,6 +360,28 @@ function prepareEventListeners() {
         Array.prototype.forEach.call(document.getElementsByClassName("icon-text"), function (t) {
             t.style.fontSize = newFontSize + "px";
         })
+    };
+
+    document.getElementById("startSearch").onclick = function(e) {
+        let searchText = document.getElementById("searchTextInput").value.toLowerCase().trim();
+        //update search bar w/ trimmed value
+        document.getElementById("searchTextInput").value = document.getElementById("searchTextInput").value.trim();
+        if (!searchText) //Empty/Invalid string
+            return true;
+        Array.prototype.forEach.call(document.getElementsByClassName("icon"), function (i) {
+            //First clears previous result
+            i.classList.remove("search-result-highlight");
+            //If text matches highlight
+            if (i.getAttribute("searchName").indexOf(searchText) > -1)
+                i.classList.add("search-result-highlight");
+        })
+    };
+
+    document.getElementById("clearSearch").onclick = function(e) {
+        Array.prototype.forEach.call(document.getElementsByClassName("icon"), function (i) {
+            i.classList.remove("search-result-highlight");
+        });
+        document.getElementById("searchTextInput").value = "";
     };
         
 }
