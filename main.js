@@ -201,8 +201,8 @@ class Location {
         el.setAttributeNS(null, 'y', this.y-ICON_SIZE/2);
         el.setAttributeNS(null, 'href', this.src);
         el.setAttributeNS(null, 'onerror', "this.setAttribute('href', 'images/icons/image_not_found.png')")
-        el.setAttributeNS(null, 'originalX', this.x);
-        el.setAttributeNS(null, 'originalY', this.y);
+        el.setAttribute('originalX', this.x);
+        el.setAttribute('originalY', this.y);
         el.setAttribute("searchName", this.name.toLowerCase());
         el.classList.add("icon");
         el.classList.add("icon-" + this.type);
@@ -333,7 +333,8 @@ function prepareEventListeners() {
 
     document.getElementById("resetView").addEventListener("click", function(e) {
         svgCanvas.resetView();
-        resetFontSize();
+        setFontSize(ICON_TEXT_FONT_SIZE, ICON_SIZE);
+        setIconSize(ICON_SIZE);
     });
 
     document.getElementById("toggleText").addEventListener("click", function(e) {
@@ -355,11 +356,11 @@ function prepareEventListeners() {
     });
 
     document.getElementById("fontSizeSlider").oninput = function(e) {
-        let newFontSize = this.value;
-        document.getElementById("fontSizeDisplay").textContent = newFontSize;
-        Array.prototype.forEach.call(document.getElementsByClassName("icon-text"), function (t) {
-            t.style.fontSize = newFontSize + "px";
-        })
+        setFontSize(this.value);
+    };
+
+    document.getElementById("iconSizeSlider").oninput = function(e) {
+        setIconSize(this.value);
     };
 
     document.getElementById("startSearch").onclick = function(e) {
@@ -377,6 +378,12 @@ function prepareEventListeners() {
         })
     };
 
+    document.getElementById("searchTextInput").onkeyup = function (e) {
+        if (e.key === 'Enter') {
+            console.log("enter");
+        }
+    };
+
     document.getElementById("clearSearch").onclick = function(e) {
         Array.prototype.forEach.call(document.getElementsByClassName("icon"), function (i) {
             i.classList.remove("search-result-highlight");
@@ -386,13 +393,22 @@ function prepareEventListeners() {
         
 }
 
-function resetFontSize() {
-    let newFontSize = ICON_TEXT_FONT_SIZE;
-    document.getElementById("fontSizeDisplay").textContent = newFontSize;
-    document.getElementById("fontSizeSlider").value = newFontSize
+function setFontSize(fontSize) {
+    document.getElementById("fontSizeDisplay").textContent = fontSize;
+    document.getElementById("fontSizeSlider").value = fontSize
     Array.prototype.forEach.call(document.getElementsByClassName("icon-text"), function (t) {
-        t.style.fontSize = newFontSize + "px";
-    })
+        t.style.fontSize = fontSize + "px";
+    });
+}
+
+function setIconSize(iconSize) {
+    document.getElementById("iconSizeDisplay").textContent = iconSize;
+    document.getElementById("iconSizeSlider").value = iconSize
+    Array.prototype.forEach.call(document.getElementsByClassName("icon"), function (t) {
+        t.style.width = iconSize + "px";
+        t.setAttributeNS(null, 'x', t.getAttribute('originalX') - iconSize/2)
+        t.setAttributeNS(null, 'y', t.getAttribute('originalY') - iconSize/2)
+    });
 }
 
 
