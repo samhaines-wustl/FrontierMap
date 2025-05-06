@@ -45,9 +45,10 @@ SVG Map
 .icon-text {
   text-anchor: middle;
   dominant-baseline: middle;
-  filter: url(#rounded-corners);
   font-weight: bold;
   font-size: 16px;
+  fill:black;
+  font-family: Garamond, serif;
 }
 
 .travel-line {
