@@ -4,18 +4,24 @@ import rawLocations from './json/locationsData.json' with {type: 'json'};
 //Constants
 const ICON_SIZE = 32;
 const ICON_TEXT_FONT_SIZE = 16;
-const PIXEL_TO_MILES = 8/192*2; //This is 8mi for 196px on a 4096px, Am using size 2048 so multiple by 2
+const PIXEL_TO_MILES = 8/192*2; //This is 8mi for 196px on a 4096px, I'm using size 2048 so multiple by 2
 const SVGNS = "http://www.w3.org/2000/svg";
 
 let travelLines = [];
 let settings = [];
 let locations = [];
+let biomes = [];
 
-let textDisplaySetting = "hover";
+let toggleTextDisplay = "hover";
+let toggleBiomeDisplay = "hidden";
 
 
 let allIconG = document.createElementNS(SVGNS, 'g');
-allIconG.setAttribute('id', 'allIconGroup') ;
+allIconG.setAttribute('id', 'allIconGroup');
+
+let allBiomesG = document.createElementNS(SVGNS, 'g');
+allBiomesG.setAttribute('id', 'allBiomesGroup');
+
 let svgCanvas;
 
 class SVGCanvas {
@@ -184,8 +190,8 @@ class Location {
         this.y = y;
     }
 
-    static makeAllLocations() {
-        locations.forEach((loc) => loc.makeElement());
+    static makeAllLocations(locs) {
+        locs.forEach((loc) => loc.makeElement());
         svgMap.appendChild(allIconG);
     }
 
@@ -306,25 +312,53 @@ class TravelLine {
     }
 }
 
+class Biome {
+
+    constructor(name, src) {
+        this.name = name;
+        this.src = "images/biomes/" + src;
+    }
+
+    static makeAllBiomes(biomes, width, height) {
+        biomes.forEach((b) => b.makeElement());
+        //document.getElementById("zoom").appendChild(allBiomesG);
+        svgMap.appendChild(allBiomesG);
+    }
+
+    makeElement() {
+        let el = document.createElementNS(SVGNS, 'image');
+        el.setAttributeNS(null, 'href', this.src);
+        el.setAttributeNS(null, 'onerror', "this.setAttribute('href', 'images/icons/image_not_found.png')")
+        el.classList.add("biome-area");
+        el.classList.add("hidden");
+        allBiomesG.appendChild(el);
+    }
+}
+
 function main() {
     svgCanvas = new SVGCanvas(document.getElementById("svgMap"), document.getElementById("svgContainer"));
     
 
     //Preparing data
     //prepareSettings();
-    prepareLocations();
+    locations = prepareLocations(rawLocations);
+    biomes = prepareBiomes();
     prepareEventListeners();
 
     //Drawing
-    Location.makeAllLocations();
+    Biome.makeAllBiomes(biomes, 2048, 2048);
+    console.log("Done all biomes");
+    Location.makeAllLocations(locations);
     console.log("Done all icons");
     console.log("Finished in main");
 }
 
-function prepareLocations() {
-    rawLocations.forEach((loc) => {
-        locations.push(new Location(loc.name, loc.type, loc.icon_src, loc.x, loc.y, loc.permission_level));
+function prepareLocations(rawLocs) {
+    let processedLocs = []
+    rawLocs.forEach((loc) => {
+        processedLocs.push(new Location(loc.name, loc.type, loc.icon_src, loc.x, loc.y, loc.permission_level));
     });
+    return processedLocs
 }
 
 function prepareEventListeners() {
@@ -338,15 +372,15 @@ function prepareEventListeners() {
     });
 
     document.getElementById("toggleText").addEventListener("click", function(e) {
-        if (textDisplaySetting.localeCompare("hover") == 0) {
-            textDisplaySetting = "shown"
+        if (toggleTextDisplay.localeCompare("hover") == 0) {
+            toggleTextDisplay = "shown"
             this.textContent = "Hide All Text"
             Array.prototype.forEach.call(document.getElementsByClassName("icon-text"), function(t) {
                 t.classList.remove("text-display-hover");
             })
         }
         else {
-            textDisplaySetting = "hover"
+            toggleTextDisplay = "hover"
             this.textContent = "Show All Text"
             Array.prototype.forEach.call(document.getElementsByClassName("icon-text"), function(t) {
                 t.classList.add("text-display-hover");
@@ -390,7 +424,36 @@ function prepareEventListeners() {
         });
         document.getElementById("searchTextInput").value = "";
     };
+
+    document.getElementById("toggleBiomes").onclick = function(e) {
+        if (toggleBiomeDisplay.localeCompare("hidden") == 0) {
+            toggleBiomeDisplay = "shown"
+            this.textContent = "Hide Biomes"
+            Array.prototype.forEach.call(document.getElementsByClassName("biome-area"), function(t) {
+                t.classList.remove("hidden");
+            })
+        }
+        else {
+            toggleBiomeDisplay = "hidden"
+            this.textContent = "Show Biomes"
+            Array.prototype.forEach.call(document.getElementsByClassName("biome-area"), function(t) {
+                t.classList.add("hidden");
+            })
+        }
+    }
         
+}
+
+function prepareBiomes() {
+    return [
+        new Biome("Death Basin", "Death_Basin.webp"),
+        new Biome("Desert", "Desert.webp"),
+        new Biome("Flooded Valley", "Flooded_Valley.webp"),
+        new Biome("Mesa", "Mesa.webp"),
+        new Biome("Mountains", "Mountains.webp"),
+        new Biome("Nokomont Midlands", "Nokomont_Midlands.webp"),
+        new Biome("West Badlands", "West_Badlands.webp")
+    ]
 }
 
 function setFontSize(fontSize) {
@@ -410,6 +473,7 @@ function setIconSize(iconSize) {
         t.setAttributeNS(null, 'y', t.getAttribute('originalY') - iconSize/2)
     });
 }
+
 
 
 

@@ -72,6 +72,14 @@ svg g g:hover text {
   display: block;
 }
 
+/*
+Biomes
+*/
+.biome-area {
+  width: 2048px;
+  opacity: 0.3;
+}
+
 
 /*
 Styling for Table
