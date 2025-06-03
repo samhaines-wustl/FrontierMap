@@ -17,18 +17,9 @@ html, body
 /*
 SVG Map
 */
-#svgContainer {
-  position: absolute;
-  left: 0px;
-  top: 0px;
-  border: 20px solid #ff6550;
-
-}
 
 #svgContainer {
     position: relative;
-    width: 700px;
-    height: 700px;
     overflow: hidden;
     border: 11px outset #a0cfd3;
     background: #4c4c59; 
@@ -116,31 +107,6 @@ table.distTableStyling thead th:first-child {
 }
 
 /*
-Styling for grid
-*/
-
-.container {  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
-  gap: 0px 0px;
-  grid-auto-flow: row;
-  grid-template-areas:
-    "canvas canvas canvas canvas public_settings"
-    "canvas canvas canvas canvas public_settings"
-    "canvas canvas canvas canvas admin_settings"
-    "canvas canvas canvas canvas admin_settings"
-    "distance_calculator distance_calculator distance_calculator distance_calculator distance_calculator";
-  width: 1000px; 
-  height: 1000px; 
-}
-
-.public_settings { grid-area: public_settings; border: 4px dashed #a3cfb1;}
-
-.admin_settings { grid-area: admin_settings; border: 4px dashed #a3cfb1;}
-
-.distance_calculator { grid-area: distance_calculator; border: 4px dashed #a3cfb1;}
-
-/*
 Styling for toggles
 */
 .switch {
@@ -202,5 +168,35 @@ input:checked + .slider:before {
 
 .slider.round:before {
   border-radius: 50%;
+}
+
+.container {  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "map map map information information"
+    "map map map information information"
+    "map map map information information"
+    "distance-calc distance-calc distance-calc information information";
+  width: 1000px;
+  height: 1000px;
+}
+
+.information { grid-area: information; border-style: dotted dashed solid double;}
+
+.map {
+  justify-self: center;
+  align-self: center;
+  grid-area: map;
+  width: 700px;
+  height: 700px;
+  border-style: dotted dashed solid double;
+}
+
+.distance-calc {
+  grid-area: distance-calc;
+  border-style: dotted dashed solid double;
 }
 

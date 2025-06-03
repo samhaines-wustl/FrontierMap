@@ -12,8 +12,8 @@ let settings = [];
 let locations = [];
 let biomes = [];
 
-let toggleTextDisplay = "hover";
-let toggleBiomeDisplay = "hidden";
+let toggleTextDisplay = "off";
+let toggleBiomeDisplay = "off";
 
 
 let allIconG = document.createElementNS(SVGNS, 'g');
@@ -21,6 +21,9 @@ allIconG.setAttribute('id', 'allIconGroup');
 
 let allBiomesG = document.createElementNS(SVGNS, 'g');
 allBiomesG.setAttribute('id', 'allBiomesGroup');
+
+let gridG = document.createElementNS(SVGNS, 'g');
+gridG.setAttribute('id', 'gridGroup');
 
 let svgCanvas;
 
@@ -369,24 +372,11 @@ function prepareEventListeners() {
         svgCanvas.resetView();
         setFontSize(ICON_TEXT_FONT_SIZE, ICON_SIZE);
         setIconSize(ICON_SIZE);
+        setOpacity(.3);
     });
 
     document.getElementById("toggleText").addEventListener("click", function(e) {
-        if (toggleTextDisplay.localeCompare("hover") == 0) {
-            toggleTextDisplay = "shown"
-            this.textContent = "Hide All Text"
-            Array.prototype.forEach.call(document.getElementsByClassName("icon-text"), function(t) {
-                t.classList.remove("text-display-hover");
-            })
-        }
-        else {
-            toggleTextDisplay = "hover"
-            this.textContent = "Show All Text"
-            Array.prototype.forEach.call(document.getElementsByClassName("icon-text"), function(t) {
-                t.classList.add("text-display-hover");
-            })
-        }
-        
+        toggleTextDisplay = toggleDisplaySwitch(toggleTextDisplay, "Hide All Text", "Show All Text", "text-display-hover", "icon-text", this);
     });
 
     document.getElementById("fontSizeSlider").oninput = function(e) {
@@ -396,6 +386,10 @@ function prepareEventListeners() {
     document.getElementById("iconSizeSlider").oninput = function(e) {
         setIconSize(this.value);
     };
+
+    document.getElementById('opacitySlider').oninput = function(e) {
+        setOpacity(this.value);
+    }
 
     document.getElementById("startSearch").onclick = function(e) {
         let searchText = document.getElementById("searchTextInput").value.toLowerCase().trim();
@@ -426,20 +420,7 @@ function prepareEventListeners() {
     };
 
     document.getElementById("toggleBiomes").onclick = function(e) {
-        if (toggleBiomeDisplay.localeCompare("hidden") == 0) {
-            toggleBiomeDisplay = "shown"
-            this.textContent = "Hide Biomes"
-            Array.prototype.forEach.call(document.getElementsByClassName("biome-area"), function(t) {
-                t.classList.remove("hidden");
-            })
-        }
-        else {
-            toggleBiomeDisplay = "hidden"
-            this.textContent = "Show Biomes"
-            Array.prototype.forEach.call(document.getElementsByClassName("biome-area"), function(t) {
-                t.classList.add("hidden");
-            })
-        }
+        toggleBiomeDisplay = toggleDisplaySwitch(toggleBiomeDisplay, "Hide Biomes", "Show Biomes", "hidden", "biome-area", this);
     }
         
 }
@@ -474,6 +455,41 @@ function setIconSize(iconSize) {
     });
 }
 
+function setOpacity(opacity) {
+    document.getElementById("opacityDisplay").textContent = opacity
+    document.getElementById("opacitySlider").value = opacity
+    Array.prototype.forEach.call(document.getElementsByClassName("biome-area"), function (t) {
+        t.style.opacity = opacity
+    })
+}
+
+function toggleDisplaySwitch(setting, onText, offText, className, elementsClass, element) {
+    
+    /*
+        setting :: global variable for toggle
+        onText :: button text display when on
+        offText :: button text display when off
+        className :: class that gets added/removed for toggle functionality
+        elementsClass :: class name for elements to add className to
+        element :: button element
+
+    */
+
+    if (setting.localeCompare("off") == 0) {
+        element.textContent = onText;
+        Array.prototype.forEach.call(document.getElementsByClassName(elementsClass), function(t) {
+                t.classList.remove(className);
+        });
+        return "on"
+    }
+    else {
+        element.textContent = offText
+        Array.prototype.forEach.call(document.getElementsByClassName(elementsClass), function(t) {
+                t.classList.add(className);
+        });
+        return "off"
+    }
+}
 
 
 
