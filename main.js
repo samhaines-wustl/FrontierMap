@@ -14,6 +14,7 @@ let biomes = [];
 
 let toggleTextDisplay = "off";
 let toggleBiomeDisplay = "off";
+let toggleGridDisplay = "off";
 
 
 let allIconG = document.createElementNS(SVGNS, 'g');
@@ -353,7 +354,10 @@ function main() {
     console.log("Done all biomes");
     Location.makeAllLocations(locations);
     console.log("Done all icons");
+    makeGrid(128, 5, "red");
     console.log("Finished in main");
+
+    console.log(document.getElementById("svgMap").clientWidth)
 }
 
 function prepareLocations(rawLocs) {
@@ -422,6 +426,10 @@ function prepareEventListeners() {
     document.getElementById("toggleBiomes").onclick = function(e) {
         toggleBiomeDisplay = toggleDisplaySwitch(toggleBiomeDisplay, "Hide Biomes", "Show Biomes", "hidden", "biome-area", this);
     }
+
+    document.getElementById("toggleGrid").onclick = function(e) {
+        toggleGridDisplay = toggleDisplaySwitch(toggleGridDisplay, "Hide Grid", "Show Grid", "hidden", "coordinate-grid", this); 
+    }
         
 }
 
@@ -435,6 +443,37 @@ function prepareBiomes() {
         new Biome("Nokomont Midlands", "Nokomont_Midlands.webp"),
         new Biome("West Badlands", "West_Badlands.webp")
     ]
+}
+
+function makeGrid(increment, radius, color) {
+    /*
+        increment :: x and y step for how often a dot is placed
+            should be power of 2 b/c map is 2048/2048
+        radius :: radius of cirlce
+        color :: color of circle and text
+    */
+
+    for (let x = 0; x <= 2048; x += increment) { 
+        for (let y = 0; y <= 2048; y += increment) {
+            let el = document.createElementNS(SVGNS, 'circle');
+            el.setAttributeNS(null, 'cx', x);
+            el.setAttributeNS(null, 'cy', y);
+            el.setAttributeNS(null, 'r', radius);
+            el.setAttributeNS(null, 'fill', color);
+            el.classList.add("coordinate-grid");
+            el.classList.add("hidden");
+            gridG.appendChild(el);
+
+            let txt = document.createElementNS(SVGNS, "text");
+            txt.setAttributeNS(null, 'x', x);
+            txt.setAttributeNS(null, 'y', y);
+            txt.classList.add("coordinate-grid");
+            txt.classList.add("hidden");
+            txt.textContent = "(" + x + "," + y + ")";
+            gridG.appendChild(txt);
+        }
+    }
+    svgMap.appendChild(gridG);
 }
 
 function setFontSize(fontSize) {
