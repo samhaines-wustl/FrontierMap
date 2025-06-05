@@ -1,8 +1,8 @@
 [
     {
-        "name": "Zero Zero",
+        "name": "Seamstress Cavern",
         "type": "town",
-        "icon_src": "asdasd12",
+        "icon_src": "Money_3",
         "permission_level": "public",
         "x": 1024,
         "y": 1024
@@ -162,9 +162,65 @@
     {
         "name": "Scorpion Catacombs",
         "type": "envSite",
-        "icon_src": "Mountain_1",
+        "icon_src": "Cryptid_2",
         "permission_level": "public",
         "x": 1445,
         "y": 1181
+    },
+    {
+        "name": "True World",
+        "type": "town",
+        "icon_src": "City_1",
+        "permission_level": "public",
+        "x": 1225,
+        "y": 1810
+    },
+    {
+        "name": "True World",
+        "type": "town",
+        "icon_src": "City_1",
+        "permission_level": "public",
+        "x": 1225,
+        "y": 1810
+    },
+    {
+        "name": "Eloise's Iron Sun Inn",
+        "type": "locale",
+        "icon_src": "Saloon_1",
+        "permission_level": "public",
+        "x": 1405,
+        "y": 1100 
+    },
+    {
+        "name": "Eloise's Iron Sun Inn",
+        "type": "locale",
+        "icon_src": "Saloon_1",
+        "permission_level": "public",
+        "x": 1405,
+        "y": 1100 
+    },
+    {
+        "name": "Rochdale",
+        "type": "town",
+        "icon_src": "Mine_1",
+        "permission_level": "public",
+        "x": 1430,
+        "y": 1330 
+    },
+    {
+        "name": "The Bison who Bleeds Pearls",
+        "type": "cryptid",
+        "icon_src": "Cryptid_1",
+        "permission_level": "public",
+        "x": 1450,
+        "y": 1350 
+    },
+    {
+        "name": "Eloise's Iron Sun Inn",
+        "type": "locale",
+        "icon_src": "Saloon_1",
+        "permission_level": "public",
+        "x": 1405,
+        "y": 1100 
     }
 ]

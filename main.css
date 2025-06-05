@@ -179,9 +179,9 @@ input:checked + .slider:before {
     "map map map information information"
     "map map map information information"
     "map map map information information"
-    "distance-calc distance-calc distance-calc information information";
+    "distance-calc distance-calc distance-calc settings settings";
   width: 1000px;
-  height: 1000px;
+  height: 100%;
 }
 
 .information { grid-area: information; border-style: dotted dashed solid double;}
@@ -197,6 +197,11 @@ input:checked + .slider:before {
 
 .distance-calc {
   grid-area: distance-calc;
+  border-style: dotted dashed solid double;
+}
+
+.settings {
+  grid-area: settings;
   border-style: dotted dashed solid double;
 }
 

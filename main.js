@@ -354,7 +354,7 @@ function main() {
     console.log("Done all biomes");
     Location.makeAllLocations(locations);
     console.log("Done all icons");
-    makeGrid(128, 5, "red");
+    makeGrid(100, 5, "red");
     console.log("Finished in main");
 
     console.log(document.getElementById("svgMap").clientWidth)

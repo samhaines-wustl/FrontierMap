@@ -28,18 +28,21 @@
     <div class="information">Information Here</div>
 
     <div class="distance-calc">Calculator Here</div>
+
+    <div class="settings">
+      <button id="resetView">Reset</button>
+      <button id="toggleText">Show All Text</button><br>
+      <input type="range" min="8" max="64" value="16" id = "fontSizeSlider">Font Size: <span id="fontSizeDisplay">16</span>px <br>
+      <input type="range" min="8" max="128" value="32" id = "iconSizeSlider">Icon Size: <span id="iconSizeDisplay">32</span>px <br>
+      <input type="range" min="0" max="1" value=".3" step=".01" id = "opacitySlider">Opacity: <span id="opacityDisplay">.3</span> <br>
+      <button id="startSearch">Search</button><input type="text" id="searchTextInput"><button id="clearSearch">Clear Search</button> <br>
+      <button id="toggleBiomes">Show Biomes</button>
+      <button id="toggleGrid">Show Grid</button>
+    </div>
   </div>
   
 
-  <button id="resetView">Reset</button>
-  <button id="toggleText">Show All Text</button><br>
-  <input type="range" min="8" max="64" value="16" id = "fontSizeSlider">Font Size: <span id="fontSizeDisplay">16</span>px <br>
-  <input type="range" min="8" max="128" value="32" id = "iconSizeSlider">Icon Size: <span id="iconSizeDisplay">32</span>px <br>
-  <input type="range" min="0" max="1" value=".3" step=".01" id = "opacitySlider">Opacity: <span id="opacityDisplay">.3</span> <br>
-  <button id="startSearch">Search</button><input type="text" id="searchTextInput"><button id="clearSearch">Clear Search</button> <br>
-  <button id="toggleBiomes">Show Biomes</button>
-  <button id="toggleGrid">Show Grid</button>
-
+  
   <script type="module" src="main.js"></script>
 </body>
 
