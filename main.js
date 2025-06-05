@@ -23,8 +23,12 @@ allIconG.setAttribute('id', 'allIconGroup');
 let allBiomesG = document.createElementNS(SVGNS, 'g');
 allBiomesG.setAttribute('id', 'allBiomesGroup');
 
+let allTLinesG = document.createElementNS(SVGNS, 'g');
+allTLinesG.setAttribute('id', 'allTLinesG');
+
 let gridG = document.createElementNS(SVGNS, 'g');
 gridG.setAttribute('id', 'gridGroup');
+
 
 let svgCanvas;
 
@@ -196,7 +200,6 @@ class Location {
 
     static makeAllLocations(locs) {
         locs.forEach((loc) => loc.makeElement());
-        svgMap.appendChild(allIconG);
     }
 
     makeElement() {
@@ -237,34 +240,14 @@ class TravelLine {
         this.distance = this.calcDistance();
         this.r = "5px";
 
-        this.addToTable();
-        this.makeElements();
+        let index = this.addToTable();
+        this.makeElements(index);
     }
 
     static removeTravelLine(index) {
-        document.getElementById('distTable').deleteRow(index);
+        document.getElementById('distanceTable').deleteRow(index);
+        document.getElementById('line'+index).remove();
         travelLines.splice(index-1, 1);
-    }
-
-    static refreshDistSelection() {
-        let select1 = document.getElementById('distLoc1');
-        let select2 = document.getElementById('distLoc2');
-        
-        //Clear out selects
-        while (select1.options.length > 0) {
-            select1.remove(0);
-            select2.remove(0);
-            }
-    
-        //Prep new selects
-        select1.add(new Option("Nothing Selected"));
-        select2.add(new Option("Nothing Selected"));
-        locations.forEach((icon) => {
-            if (icon.type != 'fountain') {
-                select1.add(new Option(icon.name));
-                select2.add(new Option(icon.name));
-            }
-        });
     }
 
     calcDistance() {
@@ -276,7 +259,7 @@ class TravelLine {
     }
 
     addToTable() {
-        let table = document.getElementById('distTable')
+        let table = document.getElementById('distanceTable')
         let row = table.insertRow(-1)
         let cells = [row.insertCell(0),row.insertCell(1),row.insertCell(2),row.insertCell(3)];
         cells[0].innerHTML = this.loc1.name;
@@ -284,11 +267,13 @@ class TravelLine {
         cells[2].innerHTML = this.distance;
         cells[3].innerHTML = '<button>X</button>';
         cells[3].addEventListener('click', function() {TravelLine.removeTravelLine(this.parentNode.rowIndex)});
+        return (cells[3].parentNode.rowIndex);
     }
 
-    makeElements() {
+    makeElements(indexID) {
         //group element
         let g = document.createElementNS(SVGNS, 'g');
+        g.setAttribute('id', 'line' + indexID);
         //first circle
         let c1 = document.createElementNS(SVGNS, 'circle')
         c1.setAttributeNS(null, 'cx', this.loc1.x);
@@ -312,7 +297,7 @@ class TravelLine {
         g.appendChild(c1);
         g.appendChild(c2);
         g.appendChild(line);
-        svgMap.appendChild(g);
+        allTLinesG.appendChild(g);
     }
 }
 
@@ -325,8 +310,6 @@ class Biome {
 
     static makeAllBiomes(biomes, width, height) {
         biomes.forEach((b) => b.makeElement());
-        //document.getElementById("zoom").appendChild(allBiomesG);
-        svgMap.appendChild(allBiomesG);
     }
 
     makeElement() {
@@ -355,15 +338,26 @@ function main() {
     Location.makeAllLocations(locations);
     console.log("Done all icons");
     makeGrid(100, 5, "red");
-    console.log("Finished in main");
+    console.log("Done with Grid");
+    appendGroupsToCanvas();
+    console.log("All groups appened");
 
-    console.log(document.getElementById("svgMap").clientWidth)
+    console.log("Finished in main");
 }
 
 function prepareLocations(rawLocs) {
     let processedLocs = []
     rawLocs.forEach((loc) => {
+        //Setting up objects
         processedLocs.push(new Location(loc.name, loc.type, loc.icon_src, loc.x, loc.y, loc.permission_level));
+
+        //Setting up select dropdown
+        Array.prototype.forEach.call(document.getElementsByClassName("distance-location-select"), function(element) {
+            let option = document.createElement("option")
+            option.value = loc.name;
+            option.innerHTML = loc.name;
+            element.appendChild(option);
+        });
     });
     return processedLocs
 }
@@ -430,6 +424,19 @@ function prepareEventListeners() {
     document.getElementById("toggleGrid").onclick = function(e) {
         toggleGridDisplay = toggleDisplaySwitch(toggleGridDisplay, "Hide Grid", "Show Grid", "hidden", "coordinate-grid", this); 
     }
+
+    document.getElementById("distanceCalculate").onclick = function(e) {
+        let startLocName = document.getElementById("distanceCalculationStart").value;
+        let endLocName = document.getElementById("distanceCalculationEnd").value;
+
+        // Calculation portion
+        if (startLocName == "Nothing Selected" || endLocName == "Nothing Selected" ) {
+            console.log("At least one end point is invalid");
+        }
+        else {
+            travelLines.push(new TravelLine(locations.find((element) => element.name == startLocName), locations.find((element) => element.name == endLocName)))
+        }
+    }
         
 }
 
@@ -473,7 +480,6 @@ function makeGrid(increment, radius, color) {
             gridG.appendChild(txt);
         }
     }
-    svgMap.appendChild(gridG);
 }
 
 function setFontSize(fontSize) {
@@ -528,6 +534,13 @@ function toggleDisplaySwitch(setting, onText, offText, className, elementsClass,
         });
         return "off"
     }
+}
+
+function appendGroupsToCanvas() {
+    svgMap.appendChild(allIconG);
+    svgMap.appendChild(allBiomesG);
+    svgMap.appendChild(allTLinesG);
+    svgMap.appendChild(gridG);
 }
 
 

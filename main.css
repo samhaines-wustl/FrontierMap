@@ -79,7 +79,7 @@ Styling for Table
 table.distTableStyling {
   border: 6px solid #948473;
   background-color: #FFE3C6;
-  width: 50%;
+  width: 100%;
   text-align: center;
 }
 table.distTableStyling td, table.distTableStyling th {

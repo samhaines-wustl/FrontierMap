@@ -192,14 +192,6 @@
         "y": 1100 
     },
     {
-        "name": "Eloise's Iron Sun Inn",
-        "type": "locale",
-        "icon_src": "Saloon_1",
-        "permission_level": "public",
-        "x": 1405,
-        "y": 1100 
-    },
-    {
         "name": "Rochdale",
         "type": "town",
         "icon_src": "Mine_1",
@@ -214,13 +206,5 @@
         "permission_level": "public",
         "x": 1450,
         "y": 1350 
-    },
-    {
-        "name": "Eloise's Iron Sun Inn",
-        "type": "locale",
-        "icon_src": "Saloon_1",
-        "permission_level": "public",
-        "x": 1405,
-        "y": 1100 
     }
 ]

@@ -25,9 +25,37 @@
       </svg>
     </div>
 
-    <div class="information">Information Here</div>
+    <div class="information">Information Here
 
-    <div class="distance-calc">Calculator Here</div>
+    </div>
+
+    <div class="distance-calc">
+
+      Start:<select id="distanceCalculationStart" class="distance-location-select">
+        <option value="Nothing Selected">Nothing Selected</option>
+      </select>
+      End:<select id="distanceCalculationEnd" class="distance-location-select">
+        <option value="Nothing Selected">Nothing Selected</option>
+      </select>
+      <button id="distanceCalculate">Calculate Distance</button>
+
+      <br>
+
+      <table class="distTableStyling" id="distanceTable">
+        <thead>
+          <tr>
+            <th>Starting</th>
+            <th>Ending</th>
+            <th>Miles</th>
+            <th>Remove</th>
+          </tr>
+        </thead>
+        <tbody id = "distanceTableBody">
+
+        </tbody>
+      </table>
+
+    </div>
 
     <div class="settings">
       <button id="resetView">Reset</button>
