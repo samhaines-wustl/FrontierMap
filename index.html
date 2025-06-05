@@ -15,6 +15,26 @@
   <div class = "container">
     <div id="svgContainer" class="map">
       <svg id="svgMap" height="2048" width="2048">
+        <defs>
+          <filter id="rounded-corners" x="-5%" width="110%" y="0%" height="100%">
+            <feFlood flood-color="#FFAA55"/>
+            <feGaussianBlur stdDeviation="2"/>
+            <feComponentTransfer>
+              <feFuncA type="table"tableValues="0 0 0 1"/>
+            </feComponentTransfer>
+
+            <feComponentTransfer>
+              <feFuncA type="table"tableValues="0 1 1 1 1 1 1 1"/>
+            </feComponentTransfer>
+            <feComposite operator="over" in="SourceGraphic"/>
+          </filter>
+          
+          <filter id="rounded-corners-2" primitiveUnits="objectBoundingBox">
+            <feImage preserveAspectRatio="none" width="110%" height="110%" x="-5%" y="0%"  xlink:href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' x='0px' y='0px' viewBox='0 0 400 40' height='40' width='400'%3E%3Crect fill='lightsteelblue' x='0' y='0' rx='10' ry='10' width='400' height='40'/%3E%3C/svg%3E"/>
+            <feComposite operator="over" in="SourceGraphic"/>
+          </filter> 
+
+        </defs>
         <g id="zoom">
           <image
             height="2048"
@@ -67,6 +87,22 @@
       <button id="toggleBiomes">Show Biomes</button>
       <button id="toggleGrid">Show Grid</button>
     </div>
+
+    
+
+    <div class="extra" style="font-size: 20px">
+      <details style="font-size: 20;">
+          <summary>Biome Key</summary>
+          <span style="color:#FFE97C" class="biome-key-color">&#9632</span>: Desert </br>
+          <span style="color:#886BFF" class="biome-key-color">&#9632</span>: Flooded Valley </br>
+          <span style="color:#FF3F4C" class="biome-key-color">&#9632</span>: Death Basin </br>
+          <span style="color:#C3FF9E" class="biome-key-color">&#9632</span>: Nokomont Midlands </br>
+          <span style="color:#FF96CC" class="biome-key-color">&#9632</span>: Mesa </br>
+          <span style="color:#2DDFFF" class="biome-key-color">&#9632</span>: West Badlands </br>
+          <span style="color:#FFFFFF" class="biome-key-color">&#9632</span>: Mountains </br>
+        </details>
+    </div>
+
   </div>
   
 

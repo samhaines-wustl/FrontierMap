@@ -2,8 +2,8 @@
 import rawLocations from './json/locationsData.json' with {type: 'json'};
 
 //Constants
-const ICON_SIZE = 32;
-const ICON_TEXT_FONT_SIZE = 16;
+const ICON_SIZE = 48;
+const ICON_TEXT_FONT_SIZE = 32;
 const PIXEL_TO_MILES = 8/192*2; //This is 8mi for 196px on a 4096px, I'm using size 2048 so multiple by 2
 const SVGNS = "http://www.w3.org/2000/svg";
 
@@ -33,7 +33,7 @@ gridG.setAttribute('id', 'gridGroup');
 let svgCanvas;
 
 class SVGCanvas {
-    static DEFAULT_VIEWBOX = {x:0, y: 50, w: 6000, h: 6000}
+    static DEFAULT_VIEWBOX = {x:1000, y: 900, w: 3000, h: 3000}
     static DEFAULT_SCALE = .33
 
     constructor(image, container) {
@@ -221,6 +221,7 @@ class Location {
         el.classList.add("icon-" + this.type);
         //text
         let txt = document.createElementNS(SVGNS, "text");
+        txt.setAttributeNS(null, 'filter', "url(#rounded-corners-2)")
         txt.setAttributeNS(null, 'x', this.x);
         txt.setAttributeNS(null, 'y', this.y-ICON_SIZE);
         txt.classList.add("icon-text");
@@ -342,6 +343,8 @@ function main() {
     appendGroupsToCanvas();
     console.log("All groups appened");
 
+    resetView();
+
     console.log("Finished in main");
 }
 
@@ -367,10 +370,7 @@ function prepareEventListeners() {
     svgCanvas.addPanEvents();
 
     document.getElementById("resetView").addEventListener("click", function(e) {
-        svgCanvas.resetView();
-        setFontSize(ICON_TEXT_FONT_SIZE, ICON_SIZE);
-        setIconSize(ICON_SIZE);
-        setOpacity(.3);
+        resetView();
     });
 
     document.getElementById("toggleText").addEventListener("click", function(e) {
@@ -537,10 +537,17 @@ function toggleDisplaySwitch(setting, onText, offText, className, elementsClass,
 }
 
 function appendGroupsToCanvas() {
-    svgMap.appendChild(allIconG);
     svgMap.appendChild(allBiomesG);
+    svgMap.appendChild(allIconG);
     svgMap.appendChild(allTLinesG);
     svgMap.appendChild(gridG);
+}
+
+function resetView() {
+    svgCanvas.resetView();
+    setFontSize(ICON_TEXT_FONT_SIZE, ICON_SIZE);
+    setIconSize(ICON_SIZE);
+    setOpacity(.3);
 }
 
 
