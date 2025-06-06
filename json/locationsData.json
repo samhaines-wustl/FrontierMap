@@ -120,14 +120,6 @@
         "y": 1422
     },
     {
-        "name": "Crescent Canyon Ranch",
-        "type": "locale",
-        "icon_src": "Horse_1",
-        "permission_level": "admin",
-        "x": 1893,
-        "y": 1360
-    },
-    {
         "name": "Coppervale",
         "type": "town",
         "icon_src": "Town_1",
