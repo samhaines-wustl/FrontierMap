@@ -50,7 +50,7 @@
     {
         "name": "Pale Oak Geyser",
         "type": "envSite",
-        "icon_src": "Mountain_4",
+        "icon_src": "Volcano_1",
         "permission_level": "public",
         "x": 859,
         "y": 1447
@@ -82,7 +82,7 @@
     {
         "name": "Slowspring",
         "type": "town",
-        "icon_src": "Saloon_1",
+        "icon_src": "Town_1",
         "permission_level": "public",
         "x": 1639,
         "y": 1325
@@ -116,8 +116,8 @@
         "type": "envSite",
         "icon_src": "Mountain_5",
         "permission_level": "admin",
-        "x": 1877,
-        "y": 1422
+        "x": 1917,
+        "y": 1322
     },
     {
         "name": "Coppervale",
@@ -162,15 +162,7 @@
     {
         "name": "True World",
         "type": "town",
-        "icon_src": "City_1",
-        "permission_level": "public",
-        "x": 1225,
-        "y": 1810
-    },
-    {
-        "name": "True World",
-        "type": "town",
-        "icon_src": "City_1",
+        "icon_src": "Peace_1",
         "permission_level": "public",
         "x": 1225,
         "y": 1810
@@ -198,5 +190,37 @@
         "permission_level": "public",
         "x": 1450,
         "y": 1350 
+    },
+    {
+        "name": "Incandescent",
+        "type": "town",
+        "icon_src": "Lantern_1",
+        "permission_level": "public",
+        "x": 1740,
+        "y": 870 
+    },
+    {
+        "name": "Southern Candelabra",
+        "type": "town",
+        "icon_src": "Candle_1",
+        "permission_level": "public",
+        "x": 1820,
+        "y": 1390 
+    },
+    {
+        "name": "Chest of Hobb",
+        "type": "locale",
+        "icon_src": "Statue_1",
+        "permission_level": "public",
+        "x": 1930,
+        "y": 1410 
+    },
+    {
+        "name": "Hidden Plum Grotto",
+        "type": "locale",
+        "icon_src": "Fruit_1",
+        "permission_level": "public",
+        "x": 1565,
+        "y": 1410 
     }
 ]
