@@ -34,7 +34,7 @@ let svgCanvas;
 
 class SVGCanvas {
     static DEFAULT_VIEWBOX = {x:1000, y: 900, w: 3000, h: 3000}
-    static DEFAULT_SCALE = .33
+    static DEFAULT_SCALE = .75 //Set for the drag speed
 
     constructor(image, container) {
         this.image = image;
