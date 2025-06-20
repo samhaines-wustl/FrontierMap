@@ -390,31 +390,13 @@ function prepareEventListeners() {
     }
 
     document.getElementById("startSearch").onclick = function(e) {
-        let searchText = document.getElementById("searchTextInput").value.toLowerCase().trim();
-        //update search bar w/ trimmed value
-        document.getElementById("searchTextInput").value = document.getElementById("searchTextInput").value.trim();
-        if (!searchText) //Empty/Invalid string
-            return true;
-        Array.prototype.forEach.call(document.getElementsByClassName("icon"), function (i) {
-            //First clears previous result
-            i.classList.remove("search-result-highlight");
-            //If text matches highlight
-            if (i.getAttribute("searchName").indexOf(searchText) > -1)
-                i.classList.add("search-result-highlight");
-        })
+        searchLocations();
     };
 
     document.getElementById("searchTextInput").onkeyup = function (e) {
         if (e.key === 'Enter') {
-            console.log("enter");
+            searchLocations();
         }
-    };
-
-    document.getElementById("clearSearch").onclick = function(e) {
-        Array.prototype.forEach.call(document.getElementsByClassName("icon"), function (i) {
-            i.classList.remove("search-result-highlight");
-        });
-        document.getElementById("searchTextInput").value = "";
     };
 
     document.getElementById("toggleBiomes").onclick = function(e) {
@@ -550,7 +532,26 @@ function resetView() {
     setOpacity(.3);
 }
 
+function searchLocations() {
+    //Clear Past Search
+    Array.prototype.forEach.call(document.getElementsByClassName("icon"), function (i) {
+        i.classList.remove("search-result-highlight");
+    });
 
+    //Search
+    let searchText = document.getElementById("searchTextInput").value.toLowerCase().trim();
+    //update search bar w/ trimmed value
+    document.getElementById("searchTextInput").value = document.getElementById("searchTextInput").value.trim();
+    if (!searchText) //Empty/Invalid string
+        return true;
+    Array.prototype.forEach.call(document.getElementsByClassName("icon"), function (i) {
+        //First clears previous result
+        i.classList.remove("search-result-highlight");
+        //If text matches highlight
+        if (i.getAttribute("searchName").indexOf(searchText) > -1)
+            i.classList.add("search-result-highlight");
+    })
+}
 
 
 main();

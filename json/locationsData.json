@@ -26,7 +26,7 @@
     {
         "name": "Cactus Pass",
         "type": "envSite",
-        "icon_src": "Cactus_2",
+        "icon_src": "Cactus_1",
         "permission_level": "public",
         "x": 1795,
         "y": 1137
@@ -222,5 +222,29 @@
         "permission_level": "public",
         "x": 1565,
         "y": 1410 
+    },
+    {
+        "name": "Chestnut Peaks",
+        "type": "envSite",
+        "icon_src": "Mountain_1",
+        "permission_level": "public",
+        "x": 1375,
+        "y": 850 
+    },
+    {
+        "name": "Tesoro Tar Pits",
+        "type": "locale",
+        "icon_src": "Temple_1",
+        "permission_level": "public",
+        "x": 1910,
+        "y": 1590 
+    },
+    {
+        "name": "Cactus Will",
+        "type": "cryptid",
+        "icon_src": "Cactus_2",
+        "permission_level": "public",
+        "x": 1874,
+        "y": 1480 
     }
 ]
