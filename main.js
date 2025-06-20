@@ -1,5 +1,6 @@
 
 import rawLocations from './json/locationsData.json' with {type: 'json'};
+import rawLocationsInformation from './json/locationsInformation.json' with {type: 'json'};
 
 //Constants
 const ICON_SIZE = 48;
@@ -11,6 +12,7 @@ let travelLines = [];
 let settings = [];
 let locations = [];
 let biomes = [];
+let locationsInformation = {};
 
 let toggleTextDisplay = "off";
 let toggleBiomeDisplay = "off";
@@ -207,7 +209,11 @@ class Location {
         let g = document.createElementNS(SVGNS, 'g');
         g.addEventListener('mouseover', (e) => { //Reappends node so that it is drawn first (nothing covers text)
             allIconG.appendChild(e.target.parentNode);
-        })
+        });
+        let that = this;
+        g.addEventListener('click', function(e) {
+            populateInformation(that.name);
+        });
         //image
         let el = document.createElementNS(SVGNS, 'image');
         el.setAttributeNS(null, 'x', this.x-ICON_SIZE/2);
@@ -330,6 +336,7 @@ function main() {
     //Preparing data
     //prepareSettings();
     locations = prepareLocations(rawLocations);
+    prepareLocationsInformation(rawLocationsInformation);
     biomes = prepareBiomes();
     prepareEventListeners();
 
@@ -432,6 +439,12 @@ function prepareBiomes() {
         new Biome("Nokomont Midlands", "Nokomont_Midlands.webp"),
         new Biome("West Badlands", "West_Badlands.webp")
     ]
+}
+
+function prepareLocationsInformation(rawLocsInfo) {
+    rawLocsInfo.forEach((locInfo) => {
+        locationsInformation[locInfo.name.toLowerCase()] = locInfo.info
+    });
 }
 
 function makeGrid(increment, radius, color) {
@@ -551,6 +564,12 @@ function searchLocations() {
         if (i.getAttribute("searchName").indexOf(searchText) > -1)
             i.classList.add("search-result-highlight");
     })
+}
+
+function populateInformation(name) {
+    console.log(name.toLowerCase() + " information being populated")
+    let informationContent = (name.toLowerCase() in locationsInformation) ? locationsInformation[name.toLowerCase()] : "No info"
+    document.getElementById("informationTextBox").innerHTML = informationContent
 }
 
 
