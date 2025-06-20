@@ -568,7 +568,7 @@ function searchLocations() {
 
 function populateInformation(name) {
     console.log(name.toLowerCase() + " information being populated")
-    let informationContent = (name.toLowerCase() in locationsInformation) ? locationsInformation[name.toLowerCase()] : "No info"
+    let informationContent = (name.toLowerCase() in locationsInformation) ? locationsInformation[name.toLowerCase()] : "No information for:</br>" + name 
     document.getElementById("informationTextBox").innerHTML = informationContent
 }
 
