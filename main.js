@@ -336,7 +336,7 @@ function main() {
     //Preparing data
     //prepareSettings();
     locations = prepareLocations(rawLocations);
-    prepareLocationsInformation(rawLocationsInformation);
+    parseLocationsInformation(rawLocationsInformation);
     biomes = prepareBiomes();
     prepareEventListeners();
 
@@ -441,9 +441,41 @@ function prepareBiomes() {
     ]
 }
 
-function prepareLocationsInformation(rawLocsInfo) {
+function parseLocationsInformation(rawLocsInfo) {
     rawLocsInfo.forEach((locInfo) => {
-        locationsInformation[locInfo.name.toLowerCase()] = locInfo.info
+        let header, blurb, places, people, other = "";
+        header = blurb = places = people = other = "";
+
+        header = "<h2>" + locInfo.name + "</h2>";
+        blurb = "<p>" + locInfo.blurb + "</p>";
+
+        //Places
+        if (locInfo.places && locInfo.places != "-b") { //Checks if not empty
+            places = "<div> Places <ul>";
+            locInfo.places.split("-b").forEach( (place) => {
+                places += "<li>";
+                places += place;
+                places += "</li>";
+            })
+            places += "</ul></div></br>";
+        }
+
+        //People
+        if (locInfo.people && locInfo.people != "-b") { //Checks if not empty
+            people = "<div> People <ul>";
+            locInfo.people.split("-b").forEach( (person) => {
+                people += "<li>";
+                people += person;
+                people += "</li>";
+            })
+            people += "</ul></div></br>";
+        }
+
+        other = locInfo.misc;
+
+        let parsedInfo = header + blurb + places + people + other;
+        
+        locationsInformation[locInfo.name.toLowerCase()] = parsedInfo;
     });
 }
 
@@ -568,6 +600,7 @@ function searchLocations() {
 
 function populateInformation(name) {
     console.log(name.toLowerCase() + " information being populated")
+    console.log(locationsInformation)
     let informationContent = (name.toLowerCase() in locationsInformation) ? locationsInformation[name.toLowerCase()] : "No information for:</br>" + name 
     document.getElementById("informationTextBox").innerHTML = informationContent
 }

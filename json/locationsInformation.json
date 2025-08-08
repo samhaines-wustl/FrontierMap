@@ -1,6 +1,79 @@
 [
     {
+        "name": "template",
+        "blurb": "",
+        "places": "-b",
+        "people": "-b",
+        "misc": ""
+    },
+    {
         "name": "Big Stone Gulch",
-        "info": "<h2>Big Stone Gulch</h2> Home Base"
-    }
+        "blurb": "The settlement for MacArthur Park's newest caravan and your home",
+        "places": "",
+        "people": "<b>Constable P. J. Wright</b>: Retired military general and capable leader of the town -b<b>Professor Plummage</b>: A nervous professor of the occult. Though he's quite knowledgable, he's more at home in the library than a dig site.   -b<b>Jacob of the Setting Sun</b>: Illuminator of the Lantern King. He's taken a liking to the town's grit and determination.",
+        "misc": "It seems the crops are growing at a supernatural rate...MacArthur truly knows how to pick a location!"
+    },
+    {
+        "name": "Seamstress Cavern",
+        "blurb": "A great mining colony that travels to the center of the world",
+        "places": "-b",
+        "people": "-b",
+        "misc": "Rumor has it that at the bottom of the cavern is a seamestress sewing a grand tapestry and the first to lay their fingers on it is granted a wish."
+    },
+    {
+        "name": "Purity Snag",
+        "blurb": "A now destroyed salt mining town. Jackie's Wacko Boys got to them before you arrived.",
+        "places": "-b",
+        "people": "-b",
+        "misc": ""
+    },
+    {
+        "name": "Cactus Pass",
+        "blurb": "A dense labyrinth of interlocking saguaro and cholla cacti",
+        "places": "-b",
+        "people": "<b>Emily 'Wild Hog' Chandler</b>: An old woman living deep in the Cactus Pass",
+        "misc": "Keep track of where you've been. The Cinderheart Marauder knows these paths better than you."
+    },
+    {
+        "name": "Sonora Ranch",
+        "blurb": "A small livestock ranch",
+        "places": "-b",
+        "people": "-b",
+        "misc": ""
+    },
+    {
+        "name": "Porcupine Kids",
+        "blurb": "The Living Dead walk. The arrows littering their bodies do little to slow them down",
+        "places": "-b",
+        "people": "-b",
+        "misc": "They seem to have a peculiar fascination with the Pale Oak Geyser, never travelling too far from it."
+    },
+    {
+        "name": "Pale Oak Geyser",
+        "blurb": "Hot springs surround this geyser",
+        "places": "-b",
+        "people": "-b",
+        "misc": ""
+    },
+    {
+        "name": "The Long Goodbye",
+        "blurb": "Richest Casino in the Frontier",
+        "places": "-b",
+        "people": "-b<b>Fabian H.T. Sampson</b>: Halfling owner of the Long Goodbye.",
+        "misc": "Many enter, few leave..."
+    },
+    {
+        "name": "Cinderheart Marauder",
+        "blurb": "A massive beast whose paws are so hot it turns sand into glass.",
+        "places": "-b",
+        "people": "-b",
+        "misc": ""
+    },
+    {
+        "name": "Rattlebank",
+        "blurb": "",
+        "places": "-b",
+        "people": "-b",
+        "misc": ""
+    },
 ]
