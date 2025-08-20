@@ -1,6 +1,7 @@
-
+// These imports are static and therefore cannot be in a try-catch. Switch to dynamic
 import rawLocations from './json/locationsData.json' with {type: 'json'};
 import rawLocationsInformation from './json/locationsInformation.json' with {type: 'json'};
+
 
 //Constants
 const ICON_SIZE = 48;
