@@ -246,5 +246,29 @@
         "permission_level": "public",
         "x": 1874,
         "y": 1480 
+    },
+    {
+        "name": "Captain Bradford",
+        "type": "cryptid",
+        "icon_src": "UFO_1",
+        "permission_level": "public",
+        "x": 1130,
+        "y": 1420 
+    },
+    {
+        "name": "Barrel & Bridle Park",
+        "type": "locale",
+        "icon_src": "Turtle_1",
+        "permission_level": "public",
+        "x": 1735,
+        "y": 1780 
+    },
+    {
+        "name": "Nautilus Wharf",
+        "type": "town",
+        "icon_src": "Squid_1",
+        "permission_level": "public",
+        "x": 790,
+        "y": 1780 
     }
 ]
