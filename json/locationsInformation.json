@@ -2,78 +2,151 @@
     {
         "name": "template",
         "blurb": "",
-        "places": "-b",
-        "people": "-b",
+        "places": "",
+        "people": "",
         "misc": ""
     },
     {
         "name": "Big Stone Gulch",
         "blurb": "The settlement for MacArthur Park's newest caravan and your home",
-        "places": "",
-        "people": "<b>Constable P. J. Wright</b>: Retired military general and capable leader of the town -b<b>Professor Plummage</b>: A nervous professor of the occult. Though he's quite knowledgable, he's more at home in the library than a dig site.   -b<b>Jacob of the Setting Sun</b>: Illuminator of the Lantern King. He's taken a liking to the town's grit and determination.",
+        "places": [],
+        "people": [
+            "Constable P.J. Wright: Retired military general and capable leader of the town",
+            "Professor Plummage: A nervous professor of the occult. Though he's quite knowledgeable, he's more at home in a library than a dig site",
+            "Jacob of the Setting Sun: Illuminator of the Lantern King. He's taken a liking to the town's grit and determination"
+        ],
         "misc": "It seems the crops are growing at a supernatural rate...MacArthur truly knows how to pick a location!"
     },
     {
         "name": "Seamstress Cavern",
         "blurb": "A great mining colony that travels to the center of the world",
-        "places": "-b",
-        "people": "-b",
+        "places": "",
+        "people": "",
         "misc": "Rumor has it that at the bottom of the cavern is a seamestress sewing a grand tapestry and the first to lay their fingers on it is granted a wish."
     },
     {
         "name": "Purity Snag",
         "blurb": "A now destroyed salt mining town. Jackie's Wacko Boys got to them before you arrived.",
-        "places": "-b",
-        "people": "-b",
+        "places": "",
+        "people": "",
         "misc": ""
     },
     {
         "name": "Cactus Pass",
         "blurb": "A dense labyrinth of interlocking saguaro and cholla cacti",
-        "places": "-b",
-        "people": "<b>Emily 'Wild Hog' Chandler</b>: An old woman living deep in the Cactus Pass",
+        "places": "",
+        "people": [
+            "Emily 'Wild Hog' Chandler: An old woman living deep in the Cactus Pass"
+        ],
         "misc": "Keep track of where you've been. The Cinderheart Marauder knows these paths better than you."
     },
     {
         "name": "Sonora Ranch",
         "blurb": "A small livestock ranch",
-        "places": "-b",
-        "people": "-b",
+        "places": "",
+        "people": "",
         "misc": ""
     },
     {
         "name": "Porcupine Kids",
         "blurb": "The Living Dead walk. The arrows littering their bodies do little to slow them down",
-        "places": "-b",
-        "people": "-b",
+        "places": "",
+        "people": "",
         "misc": "They seem to have a peculiar fascination with the Pale Oak Geyser, never travelling too far from it."
     },
     {
         "name": "Pale Oak Geyser",
         "blurb": "Hot springs surround this geyser",
-        "places": "-b",
-        "people": "-b",
+        "places": "",
+        "people": "",
         "misc": ""
     },
     {
         "name": "The Long Goodbye",
         "blurb": "Richest Casino in the Frontier",
-        "places": "-b",
-        "people": "-b<b>Fabian H.T. Sampson</b>: Halfling owner of the Long Goodbye.",
+        "places": "",
+        "people": [
+            "Fabian H.T. Sampson: Halfling owner of the Long Goodbye."
+        ],
         "misc": "Many enter, few leave..."
     },
     {
         "name": "Cinderheart Marauder",
         "blurb": "A massive beast whose paws are so hot it turns sand into glass.",
-        "places": "-b",
-        "people": "-b",
+        "places": "",
+        "people": "",
         "misc": ""
     },
     {
         "name": "Rattlebank",
-        "blurb": "",
-        "places": "-b",
-        "people": "-b",
+        "blurb": "A small gold panning town that has been ravaged by the Wacko Boys",
+        "places": "",
+        "people": [
+            "Loose-Eye Maddie: A crazed elven leader of the Wacko Boy. She's unpredictable, crazy, and damn near explosive."
+        ],
+        "misc": "The town is in ruins. People hang from tree branches, others are tortured for joy, and some luck few are simply tied up."
+    },
+    {
+        "name": "Slowspring",
+        "blurb": "The biggest trade town to the East of the Frontier",
+        "places": [
+            "Unwritten Wolf Tavern: The main tavern of the town, where everyone comes to drink, eat, and laugh.",
+            "Mayor's Office: Small shabby office building home to Mayor Carson and his receptionist. The door is alwas open!"
+        ],
+        "people": [
+            "Mayor Sven Carson: A reasonable halfling trying to keep Slowspring safe and the market flowing. He's always got odd jobs availble to ensure the success of the town.",
+            "Oilwoman Florence Bass: A shady oil saleswoman who's got a remedy for any ailment (curses not included). Though her medication is peculiar, she has quite the customer bass across the Frontier.",
+            "Illuminator Ashely of the Spring: An Illuminator of the Lantern King whose partner Rufus went crazy during travels proselytizing."
+        ],
+        "misc": "No doctors to be found. Unless you're unlucky and become a patient of the dreaded Slowspring Doctor."
+    },
+    {
+        "name": "Casey Alexander's Abode",
+        "blurb": "A dilapidated wizard tower that's been retrofitted with silver jewlery, weapons, cutlery, and more",
+        "places": "",
+        "people": [
+            "Doctor Casey Alexander: A retired human doctor stricked with paranoid about a supposed werewolf, even though no one else in the area believes in such a thing. She wears layers of silver jewlery and continues to spread anything made of silver among the grounds of the tower."
+        ],
+        "misc": ""
+    },
+    {
+        "name": "Heiferwall's Mirror",
+        "blurb": "Deep in a cave lies a mirror, wh seems to have a will of its own.",
+        "places": "",
+        "people": "",
+        "misc": ""
+    },
+    {
+        "name": "Old Winds Court",
+        "blurb": "Buried underdeath decades of sand, now only ghosts roam this land",
+        "places": "",
+        "people": "",
+        "misc": "People have mentioned floating crowns and golden chalice. Though their sleep-deprived sight may have tainted their memory."
+    },
+    {
+        "name": "Crescent Canyon",
+        "blurb": "Inside of the moon shaped canyon are a peaceful people, just trying to live day by day",
+        "places": [
+            "Depth Charge: Myrtle's Tavern which she keeps stocked with all the mead one could drink. The food on the other hand leaves a lot to be desired.",
+            "The Central Bank: This old bank is the centerpiece of the canyon, containing possibly the most sophisticated safe in the Frontier."
+        ],
+        "people": [
+            "Myrtle Hodges: The old elven tavern keep, Myrtle has seen it all. All she wants do is kick her feet up and smoke her pipe. Oh, and also serve her clients.",
+            "Sheriff Nina Palmer: Half-orc sheriff who was just arrived from the Old World. She's eager to keep her new town safe and isn't afraid to reach out for help.",
+            "The Grandson of the Wind: No one knows when he arrived, he's just always been here."
+        ],
+        "misc": "Being lowered into the canyon at sunset is a sight every frontiersmen must see"
+    },
+    {
+        "name": "Coppervale",
+        "blurb": "At the base of the Chestnut Peaks, this copper mining town is pinned between the deadly Remorhaz and the mountain",
+        "places": [
+            "Eloise's Iron Sun Inn:"
+        ],
+        "people": [
+            
+        ],
         "misc": ""
     }
+
 ]

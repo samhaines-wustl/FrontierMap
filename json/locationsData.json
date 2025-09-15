@@ -105,7 +105,7 @@
     },
     {
         "name": "Old Winds Court",
-        "type": "locale",
+        "type": "treasure",
         "icon_src": "Cryptid_2",
         "permission_level": "admin",
         "x": 1344,
@@ -209,7 +209,7 @@
     },
     {
         "name": "Chest of Hobb",
-        "type": "locale",
+        "type": "treasure",
         "icon_src": "Statue_1",
         "permission_level": "public",
         "x": 1930,
@@ -233,7 +233,7 @@
     },
     {
         "name": "Tesoro Tar Pits",
-        "type": "locale",
+        "type": "treasure",
         "icon_src": "Temple_1",
         "permission_level": "public",
         "x": 1910,

@@ -332,7 +332,6 @@ class Biome {
 
 function main() {
     svgCanvas = new SVGCanvas(document.getElementById("svgMap"), document.getElementById("svgContainer"));
-    
 
     //Preparing data
     //prepareSettings();
@@ -451,28 +450,30 @@ function parseLocationsInformation(rawLocsInfo) {
         blurb = "<p>" + locInfo.blurb + "</p>";
 
         //Places
-        if (locInfo.places && locInfo.places != "-b") { //Checks if not empty
+        if (locInfo.places && locInfo.places != "") { //Checks if not empty
             places = "<div> Places <ul>";
-            locInfo.places.split("-b").forEach( (place) => {
+            locInfo.places.forEach( (place) => {
+                let [name, info] = place.split(':')
                 places += "<li>";
-                places += place;
+                places +=  `<b>${name}</b>: ${info}`;
                 places += "</li>";
             })
             places += "</ul></div></br>";
         }
 
         //People
-        if (locInfo.people && locInfo.people != "-b") { //Checks if not empty
+        if (locInfo.people && locInfo.people != "") { //Checks if not empty
             people = "<div> People <ul>";
-            locInfo.people.split("-b").forEach( (person) => {
+            locInfo.people.forEach( (person) => {
+                let [name, info] = person.split(':')
                 people += "<li>";
-                people += person;
+                people +=  `<b>${name}</b>: ${info}`;
                 people += "</li>";
             })
             people += "</ul></div></br>";
         }
 
-        other = locInfo.misc;
+        other = "<i>" + locInfo.misc + "</i>";
 
         let parsedInfo = header + blurb + places + people + other;
         
@@ -601,7 +602,6 @@ function searchLocations() {
 
 function populateInformation(name) {
     console.log(name.toLowerCase() + " information being populated")
-    console.log(locationsInformation)
     let informationContent = (name.toLowerCase() in locationsInformation) ? locationsInformation[name.toLowerCase()] : "No information for:</br>" + name 
     document.getElementById("informationTextBox").innerHTML = informationContent
 }
