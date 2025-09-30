@@ -2,8 +2,8 @@
     {
         "name": "template",
         "blurb": "",
-        "places": "",
-        "people": "",
+        "places": [],
+        "people": [],
         "misc": ""
     },
     {
@@ -26,7 +26,7 @@
     },
     {
         "name": "Purity Snag",
-        "blurb": "A now destroyed salt mining town. Jackie's Wacko Boys got to them before you arrived.",
+        "blurb": "A now destroyed salt mining town, Jackie's Wacko Boys got to them before you arrived",
         "places": "",
         "people": "",
         "misc": ""
@@ -49,7 +49,7 @@
     },
     {
         "name": "Porcupine Kids",
-        "blurb": "The Living Dead walk. The arrows littering their bodies do little to slow them down",
+        "blurb": "The Living Dead walk, arrows littering their bodies do little to slow them down",
         "places": "",
         "people": "",
         "misc": "They seem to have a peculiar fascination with the Pale Oak Geyser, never travelling too far from it."
@@ -63,7 +63,7 @@
     },
     {
         "name": "The Long Goodbye",
-        "blurb": "Richest Casino in the Frontier",
+        "blurb": "Richest casino in the Frontier",
         "places": "",
         "people": [
             "Fabian H.T. Sampson: Halfling owner of the Long Goodbye."
@@ -72,7 +72,7 @@
     },
     {
         "name": "Cinderheart Marauder",
-        "blurb": "A massive beast whose paws are so hot it turns sand into glass.",
+        "blurb": "A massive beast whose paws are so hot it turns sand into glass",
         "places": "",
         "people": "",
         "misc": ""
@@ -111,7 +111,7 @@
     },
     {
         "name": "Heiferwall's Mirror",
-        "blurb": "Deep in a cave lies a mirror, wh seems to have a will of its own.",
+        "blurb": "Deep in a cave lies a mirror, which seems to have a will of its own.",
         "places": "",
         "people": "",
         "misc": ""
@@ -141,11 +141,63 @@
         "name": "Coppervale",
         "blurb": "At the base of the Chestnut Peaks, this copper mining town is pinned between the deadly Remorhaz and the mountain",
         "places": [
-            "Eloise's Iron Sun Inn:"
+            "Eloise's Iron Sun Inn: The local inn, serving fresh food, drink, and information"
         ],
         "people": [
-            
+            "Rufus the Highborn: Ex-Illuminator Half-Orc who thought he was the chosen one. He brought terror down on these people like a hammer to a nail",
+            "Lover Thuldrus: As Representitive from the True World, he trades his wares and spreads the word of his people.",
+            "Bacho Goodwillow: Gruff retired human theif who runs the bar at Eloise's Iron Sun. He may not be the most courteous, but he'll know anything about anyone.",
+            "Ellie Goodwillow Jr: Halfling owner of the Inn, taking over after her mother retired. Make sure to check out her custom glass-blown steins, each one has a unique face!"
         ],
+        "misc": ""
+    },
+    {
+        "name": "Warmpass Quarry",
+        "blurb": "An old quarry that has been partially flooded",
+        "places": [],
+        "people": ["Convert Mammon: A missionary who ended up obsessed with the fortunes inside this quarry. He lead a group of followers down. Only zombies came out."],
+        "misc": "<b>Danger!</b> This Area is Off Limits!"
+    },
+    {
+        "name": "New Almondport",
+        "blurb": "One of the few port cities in the Frontier",
+        "places": [],
+        "people": [],
+        "misc": "Huh, these massive walls seem new. And lots of security, lots of it"
+    },
+    {
+        "name": "Domain of the Remorhaz",
+        "blurb": "A large fiery centipede roams these dunes",
+        "places": [],
+        "people": ["The Dastardly O'Donnel Siblings: A pair of graverobbing siblings who met their end to the fangs of the Remorhaz"],
+        "misc": " Be silent or be burnt"
+    },
+    {
+        "name": "Scorpion Catacombs",
+        "blurb": "The safer path to Coppervale",
+        "places": [],
+        "people": ["The Scorpion King: A defeated monk who has turned to the scorpions inside these caves for companionship. Hopefully your meeting will turn him right"],
+        "misc": "I guess scorpions are safer than the Remorhaz. I guess"
+    },
+    {
+        "name": "True World",
+        "blurb": "An isolated town full of peace, love, and harmony and more love",
+        "places": [],
+        "people": ["The Gaucho: An ethereal elf leader, possibly the most beautiful person you've ever seen. His followers will do anything for him."],
+        "misc": "Join now! Become a lover!"
+    },
+    {
+        "name": "Rochdale",
+        "blurb": "A run-down coal mining town",
+        "places": [],
+        "people": ["The Bison who Bleeds Pearls: Deep in the coal mine, lays a chained bison whose blood hardens into blood red pearls. The town collects them and flaunts them, while hiding the source"],
+        "misc": ""
+    },
+    {
+        "name": "Incandescent",
+        "blurb": "",
+        "places": [],
+        "people": [],
         "misc": ""
     }
 
