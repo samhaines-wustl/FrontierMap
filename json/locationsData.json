@@ -320,6 +320,14 @@
         "y": 1500 
     },
     {
+        "name": "Windy Crow's Peppers",
+        "type": "locale",
+        "icon_src": "Food_1",
+        "permission_level": "public",
+        "x": 1330,
+        "y": 1330 
+    },
+    {
         "name": "The Scorched",
         "type": "cryptid",
         "icon_src": "Sun_1",
