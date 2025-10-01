@@ -13,7 +13,7 @@
         "people": [
             "Constable P.J. Wright: Retired military general and capable leader of the town",
             "Professor Plummage: A nervous professor of the occult. Though he's quite knowledgeable, he's more at home in a library than a dig site",
-            "Jacob of the Setting Sun: Illuminator of the Lantern King. He's taken a liking to the town's grit and determination"
+            "Illuminator Jacob of the Setting Sun: Illuminator of the Lantern King. He's taken a liking to the town's grit and determination"
         ],
         "misc": "It seems the crops are growing at a supernatural rate...MacArthur truly knows how to pick a location!"
     },
@@ -190,12 +190,88 @@
         "name": "Rochdale",
         "blurb": "A run-down coal mining town",
         "places": [],
-        "people": ["The Bison who Bleeds Pearls: Deep in the coal mine, lays a chained bison whose blood hardens into blood red pearls. The town collects them and flaunts them, while hiding the source"],
+        "people": ["The Bison Who Bleeds Pearls: Deep in the coal mine, lays a chained bison whose blood hardens into blood red pearls. The town collects them and flaunts them, while hiding the source"],
         "misc": ""
     },
     {
         "name": "Incandescent",
-        "blurb": "",
+        "blurb": "Headquarters for the Communion of the Lantern King in the heart of the Death Basin",
+        "places": [],
+        "people": ["Solaris Leon van Daal: Dwarven Leader of the Communion of the Lantern King. Covered in scars that he wears with prides, he galvanizes his people with his cut-throat mentality and strong convictions. "],
+        "misc": "Bless the Lantern King and those he illuminates"
+    },
+    {
+        "name": "Southern Candelabra",
+        "blurb": "Southern Outpost for the Communion of the Lantern King",
+        "places": [],
+        "people": [],
+        "misc": ""
+    },
+    {
+        "name": "Chest of Hobb",
+        "blurb": "Buried treasure laid by a long-forgotten fey-devil duo",
+        "places": [],
+        "people": [],
+        "misc": "Many search, many fail, the cold iron still lays buried"
+    },
+    {
+        "name": "Hidden Plum Grotto",
+        "blurb": "A small farm of plum trees tucked away out of sight",
+        "places": [],
+        "people": [
+            "Virgil Brown Henson: An old elf woman, with nails for eyes. She practices future-telling by the patterns in the sand and bakes a mean plum pie.",
+            "Bettie Henson: A hardworking halfling and wife to Virgil. She tends the plum orchard and has recently picked up defensive arts due to the recent zombie occurrences."
+        ],
+        "misc": "These plum pies are foretelling, a premonition of the culinary arts"
+    },
+    {
+        "name": "Chestnut Peaks",
+        "blurb": "The main mountain range of the east, known mainly for its difficult terrain and its lack of ore deposits",
+        "places": [
+            "Rose Monastary: Pracctitioners of the Twisting Petal Stance. Their monastary stands at the top of the peaks, the limited air makes their training even harder."
+        ],
+        "people": [],
+        "misc": "Most never get to the top. Frankly, most don't get half way"
+    },
+    {
+        "name": "Tesoro Tar Pits",
+        "blurb": "A collection of thick toxic tar pits",
+        "places": [
+            "Delian Tomb: Underneath the pits, if one can get there, is an ancient tomb. Rumor has it that the Cylinder of Spite is buried here, or was it the Winchester Book?"
+        ],
+        "people": [
+            "Tentacles of the Pit: The monster that lurks beneath. It has the body of a cow, tentacles of a squid, and a gapping maw unlike any beast. It loves this sewage"
+        ],
+        "misc": "Rumor has it there is treasure beneath the pits, or at least there used to be"
+    },
+    {
+        "name": "Cactus Will",
+        "blurb": "A colossal cactus leshy",
+        "places": [],
+        "people": [
+            "Cactus Will: A simple giant cactus leshy that roams these grounds. Many cactus leshy in the surrounding area workship him like a god."
+        ],
+        "misc": "He is the sole thing responsible for how isolated the southeast of the Frontier is. No one dares cross his territory."
+    },
+    {
+        "name": "Captain Bradford",
+        "blurb": "An elvish looking fellow in peculiar dress who was riding a shooting star",
+        "places": [],
+        "people": [
+            "Captain Bradford: An unusual fellow, his metal house is damaged and he needs the weirdest things to fix it"
+        ],
+        "misc": ""
+    },
+    {
+        "name": "Barrel & Bridle Park",
+        "blurb": "A daeodon racing track popular with the Wacko Boys",
+        "places": [],
+        "people": [],
+        "misc": "You ain't gonna find racing better than right damn here!"
+    },
+    {
+        "name": "Nautilus Wharf",
+        "blurb": "A small fishing town built on top of the skeleton of a giant whale",
         "places": [],
         "people": [],
         "misc": ""
