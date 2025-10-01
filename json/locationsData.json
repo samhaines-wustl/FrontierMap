@@ -100,8 +100,8 @@
         "type": "cryptid",
         "icon_src": "Cryptid_3",
         "permission_level": "admin",
-        "x": 1253,
-        "y": 1340
+        "x": 1190,
+        "y": 1315
     },
     {
         "name": "Old Winds Court",
@@ -310,5 +310,21 @@
         "permission_level": "public",
         "x": 1315,
         "y": 1620 
+    },
+    {
+        "name": "Phoneix Ashes",
+        "type": "cryptid",
+        "icon_src": "Fire_2",
+        "permission_level": "public",
+        "x": 1210,
+        "y": 1500 
+    },
+    {
+        "name": "The Scorched",
+        "type": "cryptid",
+        "icon_src": "Sun_1",
+        "permission_level": "public",
+        "x": 1260,
+        "y": 1400 
     }
 ]
