@@ -1,7 +1,6 @@
 To-Do List
 
-- Add Faction toggle and range
 - Add icon adder
 - Add a moveable icon with editable location and icon for easier adding
-- Add information on towns
-- Add current quests
+- Add json file that has the privacy level of each location
+- Reformat json files (make each location their own json file?) <- High Priority

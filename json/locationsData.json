@@ -254,5 +254,61 @@
         "permission_level": "public",
         "x": 790,
         "y": 1780 
+    },
+    {
+        "name": "Lowwood Mining Colony",
+        "type": "town",
+        "icon_src": "Mine_1",
+        "permission_level": "public",
+        "x": 1150,
+        "y": 1680 
+    },
+    {
+        "name": "Black Mountains",
+        "type": "envSite",
+        "icon_src": "Mountain_1",
+        "permission_level": "public",
+        "x": 1010,
+        "y": 1550 
+    },
+    {
+        "name": "The Pyre",
+        "type": "town",
+        "icon_src": "Candle_1",
+        "permission_level": "public",
+        "x": 990,
+        "y": 1325
+    },
+    {
+        "name": "Western Candelabra",
+        "type": "town",
+        "icon_src": "Candle_1",
+        "permission_level": "public",
+        "x": 1190,
+        "y": 1095 
+    },
+    {
+        "name": "Winchester Book",
+        "type": "treasure",
+        "icon_src": "Book_1",
+        "permission_level": "public",
+        "x": 1100,
+        "y": 1460 
+    },
+    {
+        "name": "The Empty Room",
+        "type": "locale",
+        "icon_src": "Gambling_1",
+        "permission_level": "public",
+        "x": 1150,
+        "y": 1230 
+    },
+    {
+        "name": "Bluechapel",
+        "type": "town",
+        "icon_src": "Temple_2",
+        "permission_level": "public",
+        "x": 1315,
+        "y": 1620 
     }
 ]
