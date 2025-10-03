@@ -1,0 +1,12 @@
+{
+        "name": "Cinderheart Marauder",
+        "type": "cryptid",
+        "icon_src": "Cryptid_1",
+        "found": true,
+        "x": 1831,
+        "y": 1127,
+        "blurb": "A massive beast whose paws are so hot it turns sand into glass",
+        "places": [],
+        "people": [],
+        "misc": ""
+}

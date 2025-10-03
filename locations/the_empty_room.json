@@ -1,0 +1,12 @@
+{
+        "name": "The Empty Room",
+        "type": "locale",
+        "icon_src": "Gambling_1",
+        "found": false,
+        "x": 1150,
+        "y": 1230,
+        "blurb": "",
+        "places": [],
+        "people": [],
+        "misc": ""
+}

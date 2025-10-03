@@ -1,0 +1,12 @@
+{
+        "name": "Black Mountain",
+        "type": "envSite",
+        "icon_src": "Mountain_1",
+        "found": false,
+        "x": 1010,
+        "y": 1550 ,
+        "blurb": "",
+        "places": [],
+        "people": [],
+        "misc": ""
+}

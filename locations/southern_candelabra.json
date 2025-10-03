@@ -1,0 +1,11 @@
+{
+        "name": "Southern Candelabra",
+        "type": "town",
+        "icon_src": "Candle_1",
+        "found": true,
+        "x": 1820,
+        "y": 1390,
+        "blurb": "Southern Outpost for the Communion of the Lantern King",
+        "places": [],
+        "people": [],
+        "misc": ""}

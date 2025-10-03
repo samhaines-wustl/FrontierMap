@@ -1,0 +1,12 @@
+{
+        "name": "Chest of Hobb",
+        "type": "treasure",
+        "icon_src": "Statue_1",
+        "found": true,
+        "x": 1930,
+        "y": 1410,
+        "blurb": "Buried treasure laid by a long-forgotten fey-devil duo",
+        "places": [],
+        "people": [],
+        "misc": "Many search, many fail, the cold iron still lays buried"
+}

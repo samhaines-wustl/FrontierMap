@@ -1,0 +1,14 @@
+{
+         "name": "True World",
+        "type": "town",
+        "icon_src": "Peace_1",
+        "found": true,
+        "x": 1225,
+        "y": 1810,
+        "blurb": "An isolated town full of peace, love, and harmony and more love",
+        "places": [],
+        "people": [
+                "The Gaucho: An ethereal elf leader, possibly the most beautiful person you've ever seen. His followers will do anything for him."
+        ],
+        "misc": "Join now! Become a lover!"
+    }

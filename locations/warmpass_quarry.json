@@ -1,0 +1,14 @@
+{
+        "name": "Warmpass Quarry",
+        "type": "cryptid",
+        "icon_src": "Mine_1",
+        "found": false,
+        "x": 1446,
+        "y": 1476,
+        "blurb": "An old quarry that has been partially flooded",
+        "places": [],
+        "people": [
+                "Convert Mammon: A missionary who ended up obsessed with the fortunes inside this quarry. He lead a group of followers down. Only zombies came out."
+        ],
+        "misc": "<b>Danger!</b> This Area is Off Limits!"
+    }

@@ -3,7 +3,7 @@
         "name": "Seamstress Cavern",
         "type": "town",
         "icon_src": "Money_3",
-        "permission_level": true,
+        "found": true,
         "x": 1024,
         "y": 1024
     },
@@ -11,7 +11,7 @@
         "name": "Purity Snag",
         "type": "town",
         "icon_src": "Mine_1",
-        "permission_level": true,
+        "found": true,
         "x": 1754,
         "y": 1212
     },
@@ -19,7 +19,7 @@
         "name": "Big Stone Gulch",
         "type": "town",
         "icon_src": "Town_1",
-        "permission_level": true,
+        "found": true,
         "x": 1793,
         "y": 1178
     },
@@ -27,7 +27,7 @@
         "name": "Cactus Pass",
         "type": "envSite",
         "icon_src": "Cactus_1",
-        "permission_level": false,
+        "found": false,
         "x": 1795,
         "y": 1137
     },
@@ -35,7 +35,7 @@
         "name": "Sonora Ranch",
         "type": "locale",
         "icon_src": "Horse_2",
-        "permission_level": true,
+        "found": true,
         "x": 1790,
         "y": 1104
     },
@@ -43,7 +43,7 @@
         "name": "Porcupine Kids",
         "type": "cryptid",
         "icon_src": "Cryptid_4",
-        "permission_level": true,
+        "found": true,
         "x": 877,
         "y": 1435
     },
@@ -51,7 +51,7 @@
         "name": "Pale Oak Geyser",
         "type": "envSite",
         "icon_src": "Volcano_1",
-        "permission_level": true,
+        "found": true,
         "x": 859,
         "y": 1447
     },
@@ -59,7 +59,7 @@
         "name": "The Long Goodbye",
         "type": "locale",
         "icon_src": "Money_1",
-        "permission_level": true,
+        "found": true,
         "x": 1166,
         "y": 729
     },
@@ -67,7 +67,7 @@
         "name": "Cinderheart Marauder",
         "type": "cryptid",
         "icon_src": "Cryptid_1",
-        "permission_level": true,
+        "found": true,
         "x": 1831,
         "y": 1127
     },
@@ -75,7 +75,7 @@
         "name": "Rattlebank",
         "type": "town",
         "icon_src": "Town_2",
-        "permission_level": true,
+        "found": true,
         "x": 1652,
         "y": 1488
     },
@@ -83,7 +83,7 @@
         "name": "Slowspring",
         "type": "town",
         "icon_src": "Town_1",
-        "permission_level": true,
+        "found": true,
         "x": 1639,
         "y": 1325
     },
@@ -91,7 +91,7 @@
         "name": "Casey Alexander's Abode",
         "type": "locale",
         "icon_src": "Temple_1",
-        "permission_level": true,
+        "found": true,
         "x": 1691,
         "y": 1332
     },
@@ -99,7 +99,7 @@
         "name": "Heiferwall's Mirror",
         "type": "cryptid",
         "icon_src": "Cryptid_3",
-        "permission_level": false,
+        "found": false,
         "x": 1190,
         "y": 1315
     },
@@ -107,7 +107,7 @@
         "name": "Old Winds Court",
         "type": "treasure",
         "icon_src": "Cryptid_2",
-        "permission_level": false,
+        "found": false,
         "x": 1344,
         "y": 1460
     },
@@ -115,7 +115,7 @@
         "name": "Crescent Canyon",
         "type": "envSite",
         "icon_src": "Mountain_5",
-        "permission_level": false,
+        "found": false,
         "x": 1917,
         "y": 1322
     },
@@ -123,7 +123,7 @@
         "name": "Coppervale",
         "type": "town",
         "icon_src": "Town_1",
-        "permission_level": true,
+        "found": true,
         "x": 1396,
         "y": 1125
     },
@@ -131,7 +131,7 @@
         "name": "Warmpass Quarry",
         "type": "cryptid",
         "icon_src": "Mine_1",
-        "permission_level": false,
+        "found": false,
         "x": 1446,
         "y": 1476
     },
@@ -139,7 +139,7 @@
         "name": "New Almondport",
         "type": "town",
         "icon_src": "City_2",
-        "permission_level": false,
+        "found": false,
         "x": 1522,
         "y": 1633
     },
@@ -147,7 +147,7 @@
         "name": "Domain of the Remorhaz",
         "type": "cryptid",
         "icon_src": "Cryptid_1",
-        "permission_level": true,
+        "found": true,
         "x": 1473,
         "y": 1222
     },
@@ -155,7 +155,7 @@
         "name": "Scorpion Catacombs",
         "type": "envSite",
         "icon_src": "Cryptid_2",
-        "permission_level": true,
+        "found": true,
         "x": 1445,
         "y": 1181
     },
@@ -163,7 +163,7 @@
         "name": "True World",
         "type": "town",
         "icon_src": "Peace_1",
-        "permission_level": true,
+        "found": true,
         "x": 1225,
         "y": 1810
     },
@@ -171,7 +171,7 @@
         "name": "Rochdale",
         "type": "town",
         "icon_src": "Mine_1",
-        "permission_level": true,
+        "found": true,
         "x": 1430,
         "y": 1330 
     },
@@ -179,7 +179,7 @@
         "name": "Incandescent",
         "type": "town",
         "icon_src": "Lantern_1",
-        "permission_level": true,
+        "found": true,
         "x": 1740,
         "y": 870 
     },
@@ -187,7 +187,7 @@
         "name": "Southern Candelabra",
         "type": "town",
         "icon_src": "Candle_1",
-        "permission_level": true,
+        "found": true,
         "x": 1820,
         "y": 1390 
     },
@@ -195,7 +195,7 @@
         "name": "Chest of Hobb",
         "type": "treasure",
         "icon_src": "Statue_1",
-        "permission_level": true,
+        "found": true,
         "x": 1930,
         "y": 1410 
     },
@@ -203,7 +203,7 @@
         "name": "Hidden Plum Grotto",
         "type": "locale",
         "icon_src": "Fruit_1",
-        "permission_level": true,
+        "found": true,
         "x": 1565,
         "y": 1410 
     },
@@ -211,7 +211,7 @@
         "name": "Chestnut Peaks",
         "type": "envSite",
         "icon_src": "Mountain_1",
-        "permission_level": true,
+        "found": true,
         "x": 1375,
         "y": 850 
     },
@@ -219,7 +219,7 @@
         "name": "Tesoro Tar Pits",
         "type": "treasure",
         "icon_src": "Temple_1",
-        "permission_level": true,
+        "found": true,
         "x": 1910,
         "y": 1590 
     },
@@ -227,7 +227,7 @@
         "name": "Cactus Will",
         "type": "cryptid",
         "icon_src": "Cactus_2",
-        "permission_level": true,
+        "found": true,
         "x": 1874,
         "y": 1480 
     },
@@ -235,7 +235,7 @@
         "name": "Captain Bradford",
         "type": "cryptid",
         "icon_src": "UFO_1",
-        "permission_level": true,
+        "found": true,
         "x": 1130,
         "y": 1420 
     },
@@ -243,7 +243,7 @@
         "name": "Barrel & Bridle Park",
         "type": "locale",
         "icon_src": "Turtle_1",
-        "permission_level": true,
+        "found": true,
         "x": 1735,
         "y": 1780 
     },
@@ -251,7 +251,7 @@
         "name": "Nautilus Wharf",
         "type": "town",
         "icon_src": "Squid_1",
-        "permission_level": true,
+        "found": true,
         "x": 790,
         "y": 1780 
     },
@@ -259,7 +259,7 @@
         "name": "Lowwood Mining Colony",
         "type": "town",
         "icon_src": "Mine_1",
-        "permission_level": true,
+        "found": true,
         "x": 1150,
         "y": 1680 
     },
@@ -267,7 +267,7 @@
         "name": "Black Mountains",
         "type": "envSite",
         "icon_src": "Mountain_1",
-        "permission_level": true,
+        "found": true,
         "x": 1010,
         "y": 1550 
     },
@@ -275,7 +275,7 @@
         "name": "The Pyre",
         "type": "town",
         "icon_src": "Candle_1",
-        "permission_level": true,
+        "found": true,
         "x": 990,
         "y": 1325
     },
@@ -283,7 +283,7 @@
         "name": "Western Candelabra",
         "type": "town",
         "icon_src": "Candle_1",
-        "permission_level": true,
+        "found": true,
         "x": 1190,
         "y": 1095 
     },
@@ -291,7 +291,7 @@
         "name": "Winchester Book",
         "type": "treasure",
         "icon_src": "Book_1",
-        "permission_level": true,
+        "found": true,
         "x": 1100,
         "y": 1460 
     },
@@ -299,7 +299,7 @@
         "name": "The Empty Room",
         "type": "locale",
         "icon_src": "Gambling_1",
-        "permission_level": true,
+        "found": true,
         "x": 1150,
         "y": 1230 
     },
@@ -307,7 +307,7 @@
         "name": "Bluechapel",
         "type": "town",
         "icon_src": "Temple_2",
-        "permission_level": true,
+        "found": true,
         "x": 1315,
         "y": 1620 
     },
@@ -315,7 +315,7 @@
         "name": "Phoneix Ashes",
         "type": "cryptid",
         "icon_src": "Fire_2",
-        "permission_level": true,
+        "found": true,
         "x": 1210,
         "y": 1500 
     },
@@ -323,7 +323,7 @@
         "name": "Windy Crow's Peppers",
         "type": "locale",
         "icon_src": "Food_1",
-        "permission_level": true,
+        "found": true,
         "x": 1330,
         "y": 1330 
     },
@@ -331,7 +331,7 @@
         "name": "The Scorched",
         "type": "cryptid",
         "icon_src": "Sun_1",
-        "permission_level": true,
+        "found": true,
         "x": 1260,
         "y": 1400 
     }

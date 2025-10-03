@@ -1,0 +1,12 @@
+{
+         "name": "Pale Oak Geyser",
+        "type": "envSite",
+        "icon_src": "Volcano_1",
+        "found": false,
+        "x": 859,
+        "y": 1447,
+        "blurb": "Hot springs surround this geyser",
+        "places": [],
+        "people": [],
+        "misc": ""
+}

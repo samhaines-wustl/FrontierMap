@@ -1,0 +1,12 @@
+{
+        "name": "Old Winds Court",
+        "type": "locale",
+        "icon_src": "Cryptid_2",
+        "found": true,
+        "x": 1344,
+        "y": 1460,
+        "blurb": "Buried underdeath decades of sand, now only ghosts roam this land",
+        "places": [],
+        "people": [],
+        "misc": "People have mentioned floating crowns and golden chalice. Though their sleep-deprived sight may have tainted their memory."
+    }

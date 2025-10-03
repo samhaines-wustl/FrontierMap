@@ -1,0 +1,12 @@
+{
+        "name": "Bluechapel",
+        "type": "town",
+        "icon_src": "Temple_2",
+        "found": false,
+        "x": 1315,
+        "y": 1620,
+        "blurb": "",
+        "places": [],
+        "people": [],
+        "misc": ""
+}

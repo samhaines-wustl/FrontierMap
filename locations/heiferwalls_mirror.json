@@ -1,0 +1,12 @@
+{
+        "name": "Heiferwall's Mirror",
+        "type": "cryptid",
+        "icon_src": "Cryptid_3",
+        "found": false,
+        "x": 1190,
+        "y": 1315,
+        "blurb": "Deep in a cave lies a mirror, which seems to have a will of its own.",
+        "places": [],
+        "people": [],
+        "misc": ""
+    }

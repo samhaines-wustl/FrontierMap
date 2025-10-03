@@ -1,0 +1,12 @@
+{
+        "name": "Lowwood Mining Colony",
+        "type": "town",
+        "icon_src": "Mine_1",
+        "found": false,
+        "x": 1150,
+        "y": 1680,
+        "blurb": "",
+        "places": [],
+        "people": [],
+        "misc": ""
+}

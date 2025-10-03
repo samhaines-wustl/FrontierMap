@@ -1,0 +1,19 @@
+{
+        "name": "Coppervale",
+        "type": "town",
+        "icon_src": "Town_1",
+        "found": true,
+        "x": 1396,
+        "y": 1125,
+        "blurb": "At the base of the Chestnut Peaks, this copper mining town is pinned between the deadly Remorhaz and the mountain",
+        "places": [
+            "Eloise's Iron Sun Inn: The local inn, serving fresh food, drink, and information"
+        ],
+        "people": [
+            "Rufus the Highborn: Ex-Illuminator Half-Orc who thought he was the chosen one. He brought terror down on these people like a hammer to a nail",
+            "Lover Thuldrus: As Representitive from the True World, he trades his wares and spreads the word of his people.",
+            "Bacho Goodwillow: Gruff retired human theif who runs the bar at Eloise's Iron Sun. He may not be the most courteous, but he'll know anything about anyone.",
+            "Ellie Goodwillow Jr: Halfling owner of the Inn, taking over after her mother retired. Make sure to check out her custom glass-blown steins, each one has a unique face!"
+        ],
+        "misc": ""
+}

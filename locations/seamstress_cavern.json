@@ -1,0 +1,13 @@
+{
+        "name": "Seamstress Cavern",
+        "type": "town",
+        "icon_src": "Money_3",
+        "found": true,
+        "x": 1024,
+        "y": 1024,
+        "blurb": "A great mining colony that travels to the center of the world",
+        "places": [],
+        "people": [],
+        "misc": "Rumor has it that at the bottom of the cavern is a seamestress sewing a grand tapestry and the first to lay their fingers on it is granted a wish."
+    
+}

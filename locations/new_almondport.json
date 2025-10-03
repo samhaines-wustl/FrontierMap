@@ -1,0 +1,12 @@
+{
+        "name": "New Almondport",
+        "type": "town",
+        "icon_src": "City_2",
+        "found": true,
+        "x": 1522,
+        "y": 1633,
+        "blurb": "One of the few port cities in the Frontier",
+        "places": [],
+        "people": [],
+        "misc": "Huh, these massive walls seem new. And lots of security, lots of it"
+    }

@@ -1,0 +1,15 @@
+{
+        "name": "Hidden Plum Grotto",
+        "type": "locale",
+        "icon_src": "Fruit_1",
+        "found": true,
+        "x": 1565,
+        "y": 1410,
+        "blurb": "A small farm of plum trees tucked away out of sight",
+        "places": [],
+        "people": [
+            "Virgil Brown Henson: An old elf woman, with nails for eyes. She practices future-telling by the patterns in the sand and bakes a mean plum pie.",
+            "Bettie Henson: A hardworking halfling and wife to Virgil. She tends the plum orchard and has recently picked up defensive arts due to the recent zombie occurrences."
+        ],
+        "misc": "These plum pies are foretelling, a premonition of the culinary arts"
+}

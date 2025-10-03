@@ -1,0 +1,19 @@
+{
+        "name": "Slowspring",
+        "type": "town",
+        "icon_src": "Town_1",
+        "found": true,
+        "x": 1639,
+        "y": 1325,
+        "blurb": "The biggest trade town to the East of the Frontier",
+        "places": [
+            "Unwritten Wolf Tavern: The main tavern of the town, where everyone comes to drink, eat, and laugh.",
+            "Mayor's Office: Small shabby office building home to Mayor Carson and his receptionist. The door is alwas open!"
+        ],
+        "people": [
+            "Mayor Sven Carson: A reasonable halfling trying to keep Slowspring safe and the market flowing. He's always got odd jobs availble to ensure the success of the town.",
+            "Oilwoman Florence Bass: A shady oil saleswoman who's got a remedy for any ailment (curses not included). Though her medication is peculiar, she has quite the customer bass across the Frontier.",
+            "Illuminator Ashely of the Spring: An Illuminator of the Lantern King whose partner Rufus went crazy during travels proselytizing."
+        ],
+        "misc": "No doctors to be found. Unless you're unlucky and become a patient of the dreaded Slowspring Doctor."
+}

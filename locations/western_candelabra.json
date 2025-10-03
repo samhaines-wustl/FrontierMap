@@ -1,0 +1,12 @@
+{
+        "name": "Western Candelabra",
+        "type": "town",
+        "icon_src": "Candle_1",
+        "found": false,
+        "x": 1190,
+        "y": 1095,
+        "blurb": "",
+        "places": [],
+        "people": [],
+        "misc": ""
+}

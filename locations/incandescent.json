@@ -1,0 +1,14 @@
+{
+       "name": "Incandescent",
+        "type": "town",
+        "icon_src": "Lantern_1",
+        "found": true,
+        "x": 1740,
+        "y": 870,
+        "blurb": "Headquarters for the Communion of the Lantern King in the heart of the Death Basin",
+        "places": [],
+        "people": [
+                "Solaris Leon van Daal: Dwarven Leader of the Communion of the Lantern King. Covered in scars that he wears with prides, he galvanizes his people with his cut-throat mentality and strong convictions. "
+        ],
+        "misc": "Bless the Lantern King and those he illuminates"
+    }

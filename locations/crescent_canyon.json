@@ -1,0 +1,19 @@
+{
+        "name": "Crescent Canyon",
+        "type": "envSite",
+        "icon_src": "Mountain_5",
+        "found": true,
+        "x": 1917,
+        "y": 1322,
+        "blurb": "Inside of the moon shaped canyon are a peaceful people, just trying to live day by day",
+        "places": [
+            "Depth Charge: Myrtle's Tavern which she keeps stocked with all the mead one could drink. The food on the other hand leaves a lot to be desired.",
+            "The Central Bank: This old bank is the centerpiece of the canyon, containing possibly the most sophisticated safe in the Frontier."
+        ],
+        "people": [
+            "Myrtle Hodges: The old elven tavern keep, Myrtle has seen it all. All she wants do is kick her feet up and smoke her pipe. Oh, and also serve her clients.",
+            "Sheriff Nina Palmer: Half-orc sheriff who was just arrived from the Old World. She's eager to keep her new town safe and isn't afraid to reach out for help.",
+            "The Grandson of the Wind: No one knows when he arrived, he's just always been here."
+        ],
+        "misc": "Being lowered into the canyon at sunset is a sight every frontiersmen must see"
+}

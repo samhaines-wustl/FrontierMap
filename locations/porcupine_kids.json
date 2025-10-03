@@ -1,0 +1,13 @@
+{
+        "name": "Porcupine Kids",
+        "type": "cryptid",
+        "icon_src": "Cryptid_4",
+        "found": false,
+        "x": 877,
+        "y": 1435,
+        "blurb": "The Living Dead walk, arrows littering their bodies do little to slow them down",
+        "places": [],
+        "people": [],
+        "misc": "They seem to have a peculiar fascination with the Pale Oak Geyser, never travelling too far from it."
+    
+}

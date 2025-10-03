@@ -1,0 +1,14 @@
+{
+       "name": "Scorpion Catacombs",
+        "type": "envSite",
+        "icon_src": "Cryptid_2",
+        "found": true,
+        "x": 1445,
+        "y": 1181,
+        "blurb": "The safer path to Coppervale",
+        "places": [],
+        "people": [
+                "The Scorpion King: A defeated monk who has turned to the scorpions inside these caves for companionship. Hopefully your meeting will turn him right"
+        ],
+        "misc": "I guess scorpions are safer than the Remorhaz. I guess"
+}

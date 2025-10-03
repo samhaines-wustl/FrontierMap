@@ -1,0 +1,11 @@
+
+name: String
+type: String - envSite, locale, town, cryptid, treasure
+icon_src: String - location of icon, include .png but no directory
+found: Boolean
+x: String
+y: String
+blurb: String - one sentence no punctutaion
+places: Array[String] - Name: Description
+people: Array[String] - Name: Description
+misc: String - lore tidbit
