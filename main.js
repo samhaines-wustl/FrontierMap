@@ -3,6 +3,25 @@ import rawLocations from './json/locationsData.json' with {type: 'json'};
 import rawLocationsInformation from './json/locationsInformation.json' with {type: 'json'};
 
 
+fetch('./json/manifest.json')
+  .then(res => res.json())
+  .then(fileList => {
+    return Promise.allSettled(
+      fileList.map(file => {
+        return fetch(`./locations/${file}`).then(res => {
+            if (!res.ok) {
+                return `Couldn't find ${file}`;
+            }
+            return res.json()
+        })
+    })
+    );
+  })
+  .then(jsonDataArray => {
+    console.log(jsonDataArray); // Array of all the JSON contents
+  })
+  //.catch(err => console.error('Error loading files:', err));
+
 //Constants
 const ICON_SIZE = 48;
 const ICON_TEXT_FONT_SIZE = 32;
@@ -18,6 +37,7 @@ let locationsInformation = {};
 let toggleTextDisplay = "off";
 let toggleBiomeDisplay = "off";
 let toggleGridDisplay = "off";
+let toggleHiddenDisplay = "off";
 
 
 let allIconG = document.createElementNS(SVGNS, 'g');
@@ -193,12 +213,13 @@ class Setting {
 }
 
 class Location {
-    constructor(name, type, src, x, y) {
+    constructor(name, type, src, x, y, found) {
         this.name = name;
         this.type = type;
         this.src = "images/icons/" + src + ".png";
         this.x = x;
         this.y = y;
+        this.found = found;
     }
 
     static makeAllLocations(locs) {
@@ -237,6 +258,11 @@ class Location {
         //Apending
         g.appendChild(el);
         g.appendChild(txt);
+        if (!this.found) {
+            g.classList.add("location-hidden");
+            g.classList.add("hidden");
+        }
+        g.classList.add("location-marker")
         allIconG.appendChild(g);
     }
 }
@@ -412,6 +438,10 @@ function prepareEventListeners() {
 
     document.getElementById("toggleGrid").onclick = function(e) {
         toggleGridDisplay = toggleDisplaySwitch(toggleGridDisplay, "Hide Grid", "Show Grid", "hidden", "coordinate-grid", this); 
+    }
+
+    document.getElementById("toggleHidden").onclick = function(e) {
+        toggleHiddenDisplay = toggleDisplaySwitch(toggleHiddenDisplay, "Show Only Found Locations", "Show All Locations", "hidden", "location-hidden", this);
     }
 
     document.getElementById("distanceCalculate").onclick = function(e) {
@@ -605,6 +635,5 @@ function populateInformation(name) {
     let informationContent = (name.toLowerCase() in locationsInformation) ? locationsInformation[name.toLowerCase()] : "No information for:</br>" + name 
     document.getElementById("informationTextBox").innerHTML = informationContent
 }
-
 
 main();
