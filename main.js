@@ -1,6 +1,6 @@
 // These imports are static and therefore cannot be in a try-catch. Switch to dynamic
-import rawLocations from './json/locationsData.json' with {type: 'json'};
-import rawLocationsInformation from './json/locationsInformation.json' with {type: 'json'};
+//import rawLocations from './json/locationsData.json' with {type: 'json'};
+//import rawLocationsInformation from './json/locationsInformation.json' with {type: 'json'};
 
 
 fetch('./json/manifest.json')
@@ -18,9 +18,20 @@ fetch('./json/manifest.json')
     );
   })
   .then(jsonDataArray => {
-    console.log(jsonDataArray); // Array of all the JSON contents
+    console.log(`Raw Location Array:`, jsonDataArray);
+    let valueArray = jsonDataArray.map(obj => obj.value)
+    console.log(`Value-Only Array:`, valueArray)
+    locations = prepareLocations(valueArray);
+    parseLocationsInformation(valueArray);
+
+    
+    Location.makeAllLocations(locations);
+    console.log("Done all icons");
+
+    resetView();
+
+    console.log("Fetch")
   })
-  //.catch(err => console.error('Error loading files:', err));
 
 //Constants
 const ICON_SIZE = 48;
@@ -361,16 +372,20 @@ function main() {
 
     //Preparing data
     //prepareSettings();
+    /*
     locations = prepareLocations(rawLocations);
     parseLocationsInformation(rawLocationsInformation);
+    */
     biomes = prepareBiomes();
     prepareEventListeners();
 
     //Drawing
     Biome.makeAllBiomes(biomes, 2048, 2048);
     console.log("Done all biomes");
+    /*
     Location.makeAllLocations(locations);
     console.log("Done all icons");
+    */
     makeGrid(100, 5, "red");
     console.log("Done with Grid");
     appendGroupsToCanvas();
@@ -385,7 +400,7 @@ function prepareLocations(rawLocs) {
     let processedLocs = []
     rawLocs.forEach((loc) => {
         //Setting up objects
-        processedLocs.push(new Location(loc.name, loc.type, loc.icon_src, loc.x, loc.y, loc.permission_level));
+        processedLocs.push(new Location(loc.name, loc.type, loc.icon_src, loc.x, loc.y, loc.found));
 
         //Setting up select dropdown
         Array.prototype.forEach.call(document.getElementsByClassName("distance-location-select"), function(element) {

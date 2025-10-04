@@ -1,7 +1,7 @@
 {
         "name": "Big Stone Gulch",
         "type": "town",
-        "icon_src": "Town_1.png",
+        "icon_src": "Town_1",
         "found": true,
         "x": 1793,
         "y": 1178,
