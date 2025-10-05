@@ -18,9 +18,7 @@ fetch('./json/manifest.json')
     );
   })
   .then(jsonDataArray => {
-    console.log(`Raw Location Array:`, jsonDataArray);
     let valueArray = jsonDataArray.map(obj => obj.value)
-    console.log(`Value-Only Array:`, valueArray)
     locations = prepareLocations(valueArray);
     parseLocationsInformation(valueArray);
 
@@ -390,7 +388,7 @@ function main() {
     makeGrid(100, 5, "red");
     console.log("Done with Grid");
     appendGroupsToCanvas();
-    console.log("All groups appened");
+    console.log("All groups appended");
 
     
 
@@ -485,6 +483,7 @@ function prepareEventListeners() {
 
     document.getElementById("toggleBiomes").addEventListener("click", function(e) {
         toggleBiomeDisplay = toggleDisplaySwitch(toggleBiomeDisplay, "hidden", "biome-area");
+        document.getElementById("biomeKeyDetail").open = toggleBiomeDisplay;
     });
 
     document.getElementById("toggleGrid").addEventListener("click", function(e) {
@@ -508,7 +507,6 @@ function prepareEventListeners() {
             travelLines.push(new TravelLine(locations.find((element) => element.name == startLocName), locations.find((element) => element.name == endLocName)))
         }
     });
-        
 }
 
 function prepareBiomes() {
