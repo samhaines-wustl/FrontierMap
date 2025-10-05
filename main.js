@@ -392,7 +392,15 @@ function main() {
     appendGroupsToCanvas();
     console.log("All groups appened");
 
+    
+
     resetView();
+
+    //Gets rid of lag when first displaying biomes
+    toggleBiomeDisplay = toggleDisplaySwitch(toggleBiomeDisplay,  "hidden", "biome-area");
+    setTimeout(function() {
+        toggleBiomeDisplay = toggleDisplaySwitch(toggleBiomeDisplay,  "hidden", "biome-area")
+    }, 5);
 
     console.log("Finished in main");
 }
@@ -472,19 +480,19 @@ function prepareEventListeners() {
     
 
     document.getElementById("toggleText").addEventListener("click", function(e) {
-        toggleTextDisplay = toggleDisplaySwitch(toggleTextDisplay, "Hide All Text", "Show All Text", "text-display-hover", "icon-text", this);
+        toggleTextDisplay = toggleDisplaySwitch(toggleTextDisplay, "text-display-hover", "icon-text");
     });
 
     document.getElementById("toggleBiomes").addEventListener("click", function(e) {
-        toggleBiomeDisplay = toggleDisplaySwitch(toggleBiomeDisplay, "Hide Biomes", "Show Biomes", "hidden", "biome-area", this);
+        toggleBiomeDisplay = toggleDisplaySwitch(toggleBiomeDisplay, "hidden", "biome-area");
     });
 
     document.getElementById("toggleGrid").addEventListener("click", function(e) {
-        toggleGridDisplay = toggleDisplaySwitch(toggleGridDisplay, "Hide Grid", "Show Grid", "hidden", "coordinate-grid", this); 
+        toggleGridDisplay = toggleDisplaySwitch(toggleGridDisplay, "hidden", "coordinate-grid"); 
     });
 
     document.getElementById("toggleHidden").addEventListener("click", function(e) {
-        toggleAllLocDisplay = toggleDisplaySwitch(toggleAllLocDisplay, "Show Only Found Locations", "Show All Locations", "hidden", "location-hidden", this);
+        toggleAllLocDisplay = toggleDisplaySwitch(toggleAllLocDisplay, "hidden", "location-hidden");
         prepareSelectDropdown();
     });
 
@@ -611,7 +619,7 @@ function setOpacity(opacity) {
     })
 }
 
-function toggleDisplaySwitch(setting, onText, offText, className, elementsClass, element) {
+function toggleDisplaySwitch(setting, className, elementsClass) {
     
     /*
         setting :: global variable for toggle
@@ -624,14 +632,12 @@ function toggleDisplaySwitch(setting, onText, offText, className, elementsClass,
     */
 
     if (!setting) { //Setting is off -> on
-        element.textContent = onText;
         Array.prototype.forEach.call(document.getElementsByClassName(elementsClass), function(t) {
                 t.classList.remove(className);
         });
         return true
     }
     else { //Setting is on -> off
-        element.textContent = offText
         Array.prototype.forEach.call(document.getElementsByClassName(elementsClass), function(t) {
                 t.classList.add(className);
         });
