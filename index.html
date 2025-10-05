@@ -78,18 +78,40 @@
     </div>
 
     <div class="settings">
-      <button id="resetView">Reset</button>
-      <button id="toggleText">Show All Text</button><br>
+      <button id="resetView">Reset View</button><br>
       <input type="range" min="8" max="64" value="16" id = "fontSizeSlider">Font Size: <span id="fontSizeDisplay">16</span>px <br>
       <input type="range" min="8" max="128" value="32" id = "iconSizeSlider">Icon Size: <span id="iconSizeDisplay">32</span>px <br>
       <input type="range" min="0" max="1" value=".3" step=".01" id = "opacitySlider">Opacity: <span id="opacityDisplay">.3</span> <br>
-      <button id="startSearch">Search</button><input type="text" id="searchTextInput"> <br>
-      <button id="toggleBiomes">Show Biomes</button>
-      <button id="toggleGrid">Show Grid</button>
-      <button id="toggleHidden">Show All Locations</button>
+      <button id="startSearch">Search Location</button><input type="text" id="searchTextInput"> <br><br>
+      <div>
+        <label class="switch">
+          <input type="checkbox" id="toggleBiomes">
+          <span class="slider"></span>
+        </label>
+        Show Biomes
+      </div>
+      <div>
+        <label class="switch">
+          <input type="checkbox" id="toggleText">
+          <span class="slider"></span>
+        </label>
+        Show Text
+      </div>
+      <div>
+        <label class="switch">
+          <input type="checkbox" id="toggleGrid">
+          <span class="slider"></span>
+        </label>
+        Show Grid
+      </div>
+      <div>
+        <label class="switch">
+          <input type="checkbox" id="toggleHidden">
+          <span class="slider"></span>
+        </label>
+        Show All Locations
+      </div>
     </div>
-
-    
 
     <div class="extra" style="font-size: 20px">
       <details style="font-size: 20;">
