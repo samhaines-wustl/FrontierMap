@@ -398,7 +398,7 @@ function main() {
     toggleBiomeDisplay = toggleDisplaySwitch(toggleBiomeDisplay,  "hidden", "biome-area");
     setTimeout(function() {
         toggleBiomeDisplay = toggleDisplaySwitch(toggleBiomeDisplay,  "hidden", "biome-area")
-    }, 5);
+    }, 50);
 
     console.log("Finished in main");
 }
