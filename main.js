@@ -27,10 +27,11 @@ fetch('./json/manifest.json')
     
     Location.makeAllLocations(locations);
     console.log("Done all icons");
-
+    
+    prepareSelectDropdown();
     resetView();
 
-    console.log("Fetch")
+    console.log("Fetch Complete")
   })
 
 //Constants
@@ -45,10 +46,10 @@ let locations = [];
 let biomes = [];
 let locationsInformation = {};
 
-let toggleTextDisplay = "off";
-let toggleBiomeDisplay = "off";
-let toggleGridDisplay = "off";
-let toggleHiddenDisplay = "off";
+let toggleTextDisplay = false;
+let toggleBiomeDisplay = false;
+let toggleGridDisplay = false;
+let toggleAllLocDisplay = false;
 
 
 let allIconG = document.createElementNS(SVGNS, 'g');
@@ -403,14 +404,40 @@ function prepareLocations(rawLocs) {
         processedLocs.push(new Location(loc.name, loc.type, loc.icon_src, loc.x, loc.y, loc.found));
 
         //Setting up select dropdown
+        /*
         Array.prototype.forEach.call(document.getElementsByClassName("distance-location-select"), function(element) {
-            let option = document.createElement("option")
-            option.value = loc.name;
-            option.innerHTML = loc.name;
-            element.appendChild(option);
-        });
+            if (loc.found || toggleAllLocDisplay) {
+                let option = document.createElement("option")
+                option.value = loc.name;
+                option.innerHTML = loc.name;
+                element.appendChild(option);
+            }
+        });*/
     });
     return processedLocs
+}
+
+function prepareSelectDropdown() {
+    Array.prototype.forEach.call(document.getElementsByClassName("distance-location-select"), function(element) {
+        //Clear out previous options
+        while (element.firstChild) {
+            element.removeChild(element.lastChild);
+        }
+        // Add Nothing Selected option
+        let option = document.createElement("option")
+        option.value = "Nothing Selected";
+        option.innerHTML = "Nothing Selected";
+        element.appendChild(option);
+
+        locations.forEach((loc) => {
+            if (loc.found || toggleAllLocDisplay) {
+                let option = document.createElement("option")
+                option.value = loc.name;
+                option.innerHTML = loc.name;
+                element.appendChild(option);
+            }
+        })
+    });
 }
 
 function prepareEventListeners() {
@@ -419,10 +446,6 @@ function prepareEventListeners() {
 
     document.getElementById("resetView").addEventListener("click", function(e) {
         resetView();
-    });
-
-    document.getElementById("toggleText").addEventListener("click", function(e) {
-        toggleTextDisplay = toggleDisplaySwitch(toggleTextDisplay, "Hide All Text", "Show All Text", "text-display-hover", "icon-text", this);
     });
 
     document.getElementById("fontSizeSlider").oninput = function(e) {
@@ -437,29 +460,35 @@ function prepareEventListeners() {
         setOpacity(this.value);
     }
 
-    document.getElementById("startSearch").onclick = function(e) {
+    document.getElementById("startSearch").addEventListener("click", function(e) {
         searchLocations();
-    };
+    });
 
     document.getElementById("searchTextInput").onkeyup = function (e) {
         if (e.key === 'Enter') {
             searchLocations();
         }
     };
+    
 
-    document.getElementById("toggleBiomes").onclick = function(e) {
+    document.getElementById("toggleText").addEventListener("click", function(e) {
+        toggleTextDisplay = toggleDisplaySwitch(toggleTextDisplay, "Hide All Text", "Show All Text", "text-display-hover", "icon-text", this);
+    });
+
+    document.getElementById("toggleBiomes").addEventListener("click", function(e) {
         toggleBiomeDisplay = toggleDisplaySwitch(toggleBiomeDisplay, "Hide Biomes", "Show Biomes", "hidden", "biome-area", this);
-    }
+    });
 
-    document.getElementById("toggleGrid").onclick = function(e) {
+    document.getElementById("toggleGrid").addEventListener("click", function(e) {
         toggleGridDisplay = toggleDisplaySwitch(toggleGridDisplay, "Hide Grid", "Show Grid", "hidden", "coordinate-grid", this); 
-    }
+    });
 
-    document.getElementById("toggleHidden").onclick = function(e) {
-        toggleHiddenDisplay = toggleDisplaySwitch(toggleHiddenDisplay, "Show Only Found Locations", "Show All Locations", "hidden", "location-hidden", this);
-    }
+    document.getElementById("toggleHidden").addEventListener("click", function(e) {
+        toggleAllLocDisplay = toggleDisplaySwitch(toggleAllLocDisplay, "Show Only Found Locations", "Show All Locations", "hidden", "location-hidden", this);
+        prepareSelectDropdown();
+    });
 
-    document.getElementById("distanceCalculate").onclick = function(e) {
+    document.getElementById("distanceCalculate").addEventListener("click", function(e) {
         let startLocName = document.getElementById("distanceCalculationStart").value;
         let endLocName = document.getElementById("distanceCalculationEnd").value;
 
@@ -470,7 +499,7 @@ function prepareEventListeners() {
         else {
             travelLines.push(new TravelLine(locations.find((element) => element.name == startLocName), locations.find((element) => element.name == endLocName)))
         }
-    }
+    });
         
 }
 
@@ -594,19 +623,19 @@ function toggleDisplaySwitch(setting, onText, offText, className, elementsClass,
 
     */
 
-    if (setting.localeCompare("off") == 0) {
+    if (!setting) { //Setting is off -> on
         element.textContent = onText;
         Array.prototype.forEach.call(document.getElementsByClassName(elementsClass), function(t) {
                 t.classList.remove(className);
         });
-        return "on"
+        return true
     }
-    else {
+    else { //Setting is on -> off
         element.textContent = offText
         Array.prototype.forEach.call(document.getElementsByClassName(elementsClass), function(t) {
                 t.classList.add(className);
         });
-        return "off"
+        return false
     }
 }
 
