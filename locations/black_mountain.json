@@ -2,7 +2,7 @@
         "name": "Black Mountain",
         "type": "envSite",
         "icon_src": "Mountain_1",
-        "found": false,
+        "found": true,
         "x": 1010,
         "y": 1550 ,
         "blurb": "",

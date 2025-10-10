@@ -41,13 +41,14 @@ const SVGNS = "http://www.w3.org/2000/svg";
 let travelLines = [];
 let settings = [];
 let locations = [];
-let biomes = [];
 let locationsInformation = {};
+let biomes = [];
 
 let toggleTextDisplay = false;
 let toggleBiomeDisplay = false;
 let toggleGridDisplay = false;
 let toggleAllLocDisplay = false;
+let toggleCustomIconDisplay = false;
 
 
 let allIconG = document.createElementNS(SVGNS, 'g');
@@ -62,9 +63,8 @@ allTLinesG.setAttribute('id', 'allTLinesG');
 let gridG = document.createElementNS(SVGNS, 'g');
 gridG.setAttribute('id', 'gridGroup');
 
-
 let svgCanvas;
-
+let customIcon;
 class SVGCanvas {
     static DEFAULT_VIEWBOX = {x:1000, y: 900, w: 3000, h: 3000}
     static DEFAULT_SCALE = .75 //Set for the drag speed
@@ -408,18 +408,13 @@ function prepareLocations(rawLocs) {
     rawLocs.forEach((loc) => {
         //Setting up objects
         processedLocs.push(new Location(loc.name, loc.type, loc.icon_src, loc.x, loc.y, loc.found));
-
-        //Setting up select dropdown
-        /*
-        Array.prototype.forEach.call(document.getElementsByClassName("distance-location-select"), function(element) {
-            if (loc.found || toggleAllLocDisplay) {
-                let option = document.createElement("option")
-                option.value = loc.name;
-                option.innerHTML = loc.name;
-                element.appendChild(option);
-            }
-        });*/
     });
+
+    //Setting up custom icon
+    customIcon = new Location("Custom Location", "custom", "Star_1", 1000, 1000, true);
+    customIcon.makeElement();
+    document.getElementsByClassName("icon-custom")[0].classList.add("hidden");
+
     return processedLocs
 }
 
@@ -447,36 +442,39 @@ function prepareSelectDropdown() {
 }
 
 function prepareEventListeners() {
+    //Canvas event listeners
+
     svgCanvas.addZoomEvents();
     svgCanvas.addPanEvents();
+
+    //Setting event listeners
 
     document.getElementById("resetView").addEventListener("click", function(e) {
         resetView();
     });
 
-    document.getElementById("fontSizeSlider").oninput = function(e) {
+    document.getElementById("fontSizeSlider").addEventListener("input", function(e) {
         setFontSize(this.value);
-    };
+    });
 
-    document.getElementById("iconSizeSlider").oninput = function(e) {
+    document.getElementById("iconSizeSlider").addEventListener("input", function(e) {
         setIconSize(this.value);
-    };
+    });
 
-    document.getElementById('opacitySlider').oninput = function(e) {
+    document.getElementById('opacitySlider').addEventListener("input",function(e) {
         setOpacity(this.value);
-    }
+    });
 
     document.getElementById("startSearch").addEventListener("click", function(e) {
         searchLocations();
     });
 
-    document.getElementById("searchTextInput").onkeyup = function (e) {
+    document.getElementById("searchTextInput").addEventListener("keyup", function (e) {
         if (e.key === 'Enter') {
             searchLocations();
         }
-    };
+    });
     
-
     document.getElementById("toggleText").addEventListener("click", function(e) {
         toggleTextDisplay = toggleDisplaySwitch(toggleTextDisplay, "text-display-hover", "icon-text");
     });
@@ -495,6 +493,8 @@ function prepareEventListeners() {
         prepareSelectDropdown();
     });
 
+    //Distance event listeners
+
     document.getElementById("distanceCalculate").addEventListener("click", function(e) {
         let startLocName = document.getElementById("distanceCalculationStart").value;
         let endLocName = document.getElementById("distanceCalculationEnd").value;
@@ -507,6 +507,23 @@ function prepareEventListeners() {
             travelLines.push(new TravelLine(locations.find((element) => element.name == startLocName), locations.find((element) => element.name == endLocName)))
         }
     });
+
+    //Custom Icon Listeners
+
+    document.getElementById("customIconXSlider").addEventListener("input", function(e) {
+        document.getElementById("customIconXDisplay").textContent = this.value;
+        document.getElementsByClassName("icon-custom")[0].setAttributeNS(null, 'x', this.value-ICON_SIZE/2);
+    });
+
+    document.getElementById("customIconYSlider").addEventListener("input", function(e) {
+        document.getElementById("customIconYDisplay").textContent = this.value;
+        document.getElementsByClassName("icon-custom")[0].setAttributeNS(null, 'y', this.value-ICON_SIZE/2);
+
+    });
+
+    document.getElementById("toggleCustomIcon").addEventListener("click", function(e) {
+        toggleCustomIconDisplay = toggleDisplaySwitch(toggleCustomIconDisplay, "hidden", "icon-custom"); 
+    })
 }
 
 function prepareBiomes() {
