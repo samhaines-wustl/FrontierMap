@@ -1,0 +1,12 @@
+{
+        "name": "Southwestern Candelabra",
+        "type": "town",
+        "icon_src": "Candle_1",
+        "found": false,
+        "x": 1375,
+        "y": 1591,
+        "blurb": "",
+        "places": [],
+        "people": [],
+        "misc": ""
+}

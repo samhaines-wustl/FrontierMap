@@ -5,6 +5,9 @@
   "bluechapel.json",
   "cactus_pass.json",
   "cactus_will.json",
+  "candelabra_south.json",
+  "candelabra_southwest.json",
+  "candelabra_west.json",
   "captain_bradford.json",
   "casey_alexanders_abode.json",
   "chestnut_peaks.json",
@@ -30,7 +33,6 @@
   "seamstress_cavern.json",
   "slowspring.json",
   "sonora_ranch.json",
-  "southern_candelabra.json",
   "tesoro_tar_pits.json",
   "the_empty_room.json",
   "the_long_goodbye.json",
@@ -38,7 +40,6 @@
   "the_scorched.json",
   "true_world.json",
   "warmpass_quarry.json",
-  "western_candelabra.json",
   "winchester_book.json",
   "windy_crows_peppers.json"
 ]

@@ -8,3 +8,5 @@ To-Do List
 - Fix hover of custom-icon
 - Add text input for custom-icon?
 - Reorganize code (~700 lines)
+- Add faction tab
+- Add option for info section to be filled in via option areas
