@@ -2,13 +2,14 @@
         "name": "Warmpass Quarry",
         "type": "cryptid",
         "icon_src": "Mine_1",
-        "found": false,
-        "x": 1534,
-        "y": 1500,
+        "found": true,
+        "x": 1708,
+        "y": 1595,
         "blurb": "An old quarry that has been partially flooded",
         "places": [],
         "people": [
-                "Convert Mammon: A missionary who ended up obsessed with the fortunes inside this quarry. He lead a group of followers down. Only zombies came out."
+                "Convert Mammon: A missionary who ended up obsessed with the fortunes inside this quarry. He lead a group of followers down. Only zombies came out.",
+                "Illuminator Everett of the Garden: A young human illuminator tasked with guarding the Warmpass Quarry due to his inexperience. He'd much rather be hunting the Scorched or searching for the Winchester Book in the name of the Lantern King."
         ],
         "misc": "<b>Danger!</b> This Area is Off Limits!"
     }

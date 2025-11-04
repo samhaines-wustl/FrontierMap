@@ -5,7 +5,9 @@
         "found": true,
         "x": 1820,
         "y": 1390,
-        "blurb": "Southern Outpost for the Communion of the Lantern King",
+        "blurb": "Brand new Southern Outpost for the Communion of the Lantern King",
         "places": [],
-        "people": [],
+        "people": [
+                "Baldr Ray Moore: An old man, recently elevated to Baldr of the Southern Candelabra, who tends to play fast and loose with the Lantern King's traditions."
+        ],
         "misc": ""}

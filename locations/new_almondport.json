@@ -5,8 +5,10 @@
         "found": true,
         "x": 1522,
         "y": 1633,
-        "blurb": "One of the few port cities in the Frontier",
+        "blurb": "One of the few port cities in the Frontier; recently commandeered by the Communion of the Lantern King",
         "places": [],
-        "people": [],
+        "people": [
+            "Baldr Mikalya Monmouth: Young for a Baldr, Mikalya is a half-elf prodigy. She abides strictly to what the Communion stands for, and has even memorized every oath, ritual, cermony, formailty, and tradition of the Lantern King."
+        ],
         "misc": "Huh, these massive walls seem new. And lots of security, lots of it"
     }

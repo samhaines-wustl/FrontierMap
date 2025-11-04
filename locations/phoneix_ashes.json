@@ -2,10 +2,10 @@
         "name": "Phoneix Ashes",
         "type": "cryptid",
         "icon_src": "Fire_2",
-        "found": false,
+        "found": true,
         "x": 1676,
         "y": 1676,
-        "blurb": "",
+        "blurb": "In Wacko Boys territory, this is a sacred relic the Communion of the Lantern King wishes to retrieve",
         "places": [],
         "people": [],
         "misc": ""
