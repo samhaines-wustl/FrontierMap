@@ -2,7 +2,7 @@
 import os
 import json
 # Get the list of all files and directories
-path = "./locations"
+path = "./json/locations"
 dir_list = os.listdir(path)
 print("Files and directories in '", path, "' :")
 # prints all files

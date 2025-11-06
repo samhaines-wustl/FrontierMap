@@ -8,7 +8,7 @@ fetch('./json/manifest.json')
   .then(fileList => {
     return Promise.allSettled(
       fileList.map(file => {
-        return fetch(`./locations/${file}`).then(res => {
+        return fetch(`./json/locations/${file}`).then(res => {
             if (!res.ok) {
                 return `Couldn't find ${file}`;
             }
