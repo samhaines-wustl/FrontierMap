@@ -25,10 +25,9 @@ class Location {
         this.iconSize = 48;
         this.fontSize = 32;
         this.json = json;
+        this.parsedInformation = this.parseInformation(this.json);
         
         this.makeElement();
-
-        this.parsedInformation = this.parseInformation(this.json);
     }
 
     static prepareLocations(rawLocs) {
@@ -77,7 +76,7 @@ class Location {
             document.getElementById('allIconGroup').appendChild(e.target.parentNode);
         });
         let that = this;
-        g.addEventListener('click', function(e) {
+        g.addEventListener('click', function(e) { //Populates parsed information
             console.log(that.name + " information being populated");
             document.getElementById("informationTextBox").innerHTML = that.parsedInformation;
         });
