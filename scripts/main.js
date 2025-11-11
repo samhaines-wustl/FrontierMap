@@ -261,12 +261,12 @@ function prepareEventListeners() {
     });
 
     document.getElementById("startSearch").addEventListener("click", function(e) {
-        searchLocations();
+        Location.searchLocations();
     });
 
     document.getElementById("searchTextInput").addEventListener("keyup", function (e) {
         if (e.key === 'Enter') {
-            searchLocations();
+            Location.searchLocations();
         }
     });
     
@@ -417,22 +417,6 @@ function resetView() {
     setFontSize(ICON_TEXT_FONT_SIZE);
     setIconSize(ICON_SIZE);
     setOpacity(.3);
-}
-
-function searchLocations() {
-    //Search
-    let searchText = document.getElementById("searchTextInput").value.toLowerCase().trim();
-    //update search bar w/ trimmed value
-    document.getElementById("searchTextInput").value = document.getElementById("searchTextInput").value.trim();
-    if (!searchText) //Empty/Invalid string
-        return true;
-    Array.prototype.forEach.call(document.getElementsByClassName("icon"), function (i) {
-        //First clears previous result
-        i.classList.remove("search-result-highlight");
-        //If text matches highlight
-        if (i.getAttribute("searchName").indexOf(searchText) > -1)
-            i.classList.add("search-result-highlight");
-    })
 }
 
 main();

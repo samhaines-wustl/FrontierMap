@@ -37,12 +37,6 @@ class Location {
             processedLocs.push(new Location(loc.name, loc.id, loc.type, loc.icon_src, loc.x, loc.y, loc.found, loc));
         });
 
-        //Setting up custom icon
-        //processedLocs.push(new Location("Custom Location", "customLoc", "custom", "Star_1", 1000, 1000, true));
-        //document.getElementById("customLoc-icon").classList.add("hidden");
-
-        //Setting up Information
-
         return processedLocs
     };
 
@@ -67,7 +61,24 @@ class Location {
                 }
             })
         });
-    }
+    };
+
+    static searchLocations() {
+        //Search
+        let searchText = document.getElementById("searchTextInput").value.toLowerCase().trim();
+        //update search bar w/ trimmed value
+        document.getElementById("searchTextInput").value = document.getElementById("searchTextInput").value.trim();
+        if (!searchText) // Empty/Invalid string
+            return true;
+        locations.forEach((loc) => {
+            let el = document.getElementById(loc.id + 'Icon');
+            //First clears previous result
+            el.classList.remove("search-result-highlight");
+            //If text matches highlight
+            if (loc.name.toLowerCase().indexOf(searchText) > -1)
+                el.classList.add("search-result-highlight");
+        })
+    };
 
     makeElement() {
         //group element
@@ -91,7 +102,7 @@ class Location {
         el.setAttribute("searchName", this.name.toLowerCase());
         el.classList.add("icon");
         el.classList.add("icon-" + this.type);
-        el.id = this.id + '-icon';
+        el.id = this.id + 'Icon';
         //text
         let txt = document.createElementNS(SVGNS, "text");
         txt.setAttributeNS(null, 'filter', "url(#rounded-corners-2)")
@@ -99,7 +110,7 @@ class Location {
         txt.setAttributeNS(null, 'y', this.y-this.iconSize);
         txt.classList.add("icon-text");
         txt.classList.add("text-display-hover");
-        txt.id = this.id + '-text';
+        txt.id = this.id + 'Text';
         txt.textContent = this.name;
         //Apending
         g.appendChild(el);
@@ -110,23 +121,23 @@ class Location {
         }
         g.classList.add("location-marker")
         document.getElementById('allIconGroup').appendChild(g);
-    }
+    };
 
     changeIconSize(newSize) {
         this.iconSize = newSize;
 
-        let iconElement = document.getElementById(this.id + '-icon');
+        let iconElement = document.getElementById(this.id + 'Icon');
         iconElement.style.width = this.iconSize + 'px';
         iconElement.setAttributeNS(null, 'x', this.x-this.iconSize/2);
         iconElement.setAttributeNS(null, 'y', this.y-this.iconSize/2);
-    }
+    };
 
     changeFontSize(newSize) {
         this.fontSize = newSize;
 
-        let textElement = document.getElementById(this.id + '-text');
+        let textElement = document.getElementById(this.id + 'Text');
         textElement.style.fontSize = this.fontSize + 'px';
-    }
+    };
 
     parseInformation(locInfo) {
         let header, blurb, places, people, other = "";
