@@ -28,6 +28,9 @@ class Location {
         this.parsedInformation = this.parseInformation(this.json);
         
         this.makeElement();
+
+        if (this.id == 'customLocation')
+            document.getElementById(this.id + 'Icon').classList.add('hidden');
     }
 
     static prepareLocations(rawLocs) {
