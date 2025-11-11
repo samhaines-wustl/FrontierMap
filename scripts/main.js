@@ -1,7 +1,3 @@
-// These imports are static and therefore cannot be in a try-catch. Switch to dynamic
-//import rawLocations from './json/locationsData.json' with {type: 'json'};
-//import rawLocationsInformation from './json/locationsInformation.json' with {type: 'json'};
-
 
 import {locations} from './locations.js';
 import {Location} from './locations.js'
@@ -225,8 +221,6 @@ function main() {
     console.log("Done all biomes");
     makeGrid(100, 5, "red");
     console.log("Done with Grid");
-    //appendGroupsToCanvas();
-    console.log("All groups appended");
 
 
     resetView();
@@ -426,11 +420,6 @@ function resetView() {
 }
 
 function searchLocations() {
-    //Clear Past Search
-    Array.prototype.forEach.call(document.getElementsByClassName("icon"), function (i) {
-        i.classList.remove("search-result-highlight");
-    });
-
     //Search
     let searchText = document.getElementById("searchTextInput").value.toLowerCase().trim();
     //update search bar w/ trimmed value
