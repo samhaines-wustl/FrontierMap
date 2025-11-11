@@ -1,5 +1,6 @@
 {
         "name": "Porcupine Kids",
+        "id": "porcupineKids",
         "type": "cryptid",
         "icon_src": "Cryptid_4",
         "found": false,

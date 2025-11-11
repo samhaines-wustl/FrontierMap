@@ -1,5 +1,6 @@
 {
         "name": "Chest of Hobb",
+        "id": "chestOfHobb",
         "type": "treasure",
         "icon_src": "Statue_1",
         "found": true,

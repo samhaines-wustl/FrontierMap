@@ -1,5 +1,6 @@
 {
         "name": "Slowspring",
+        "id": "slowspring",
         "type": "town",
         "icon_src": "Town_1",
         "found": true,

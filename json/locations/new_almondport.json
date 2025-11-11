@@ -1,5 +1,6 @@
 {
         "name": "New Almondport",
+        "id": "newAlmondport",
         "type": "town",
         "icon_src": "City_2",
         "found": true,

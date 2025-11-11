@@ -1,5 +1,6 @@
 {
          "name": "True World",
+         "id": "trueWorld",
         "type": "town",
         "icon_src": "Peace_1",
         "found": true,

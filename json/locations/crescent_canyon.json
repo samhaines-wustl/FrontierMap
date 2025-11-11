@@ -1,5 +1,6 @@
 {
         "name": "Crescent Canyon",
+        "id": "crescentCanyon",
         "type": "envSite",
         "icon_src": "Mountain_5",
         "found": true,

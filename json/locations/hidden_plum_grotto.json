@@ -1,5 +1,6 @@
 {
         "name": "Hidden Plum Grotto",
+        "id": "hiddenPlumGrotto",
         "type": "locale",
         "icon_src": "Fruit_1",
         "found": true,

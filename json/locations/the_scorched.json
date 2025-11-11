@@ -1,5 +1,6 @@
 {
         "name": "The Scorched",
+        "id": "scorched",
         "type": "cryptid",
         "icon_src": "Sun_1",
         "found": false,

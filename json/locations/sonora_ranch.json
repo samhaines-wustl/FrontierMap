@@ -1,5 +1,6 @@
 {
         "name": "Sonora Ranch",
+        "id": "sonoraRanch",
         "type": "locale",
         "icon_src": "Horse_2",
         "found": true,

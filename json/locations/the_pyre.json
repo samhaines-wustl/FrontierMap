@@ -1,5 +1,6 @@
 {
         "name": "The Pyre",
+        "id": "pyre",
         "type": "town",
         "icon_src": "Candle_1",
         "found": false,

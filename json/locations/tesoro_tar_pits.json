@@ -1,5 +1,6 @@
 {
         "name": "Tesoro Tar Pits",
+        "id": "tesoroTarPits",
         "type": "treasure",
         "icon_src": "Temple_1",
         "found": true,

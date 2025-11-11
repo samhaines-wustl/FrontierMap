@@ -1,5 +1,6 @@
 {
         "name": "Lowwood Mining Colony",
+        "id": "lowwoodMiningColony",
         "type": "town",
         "icon_src": "Mine_1",
         "found": false,

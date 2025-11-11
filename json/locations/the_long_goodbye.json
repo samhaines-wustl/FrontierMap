@@ -1,5 +1,6 @@
 {
         "name": "The Long Goodbye",
+        "id": "longGoodbye",
         "type": "locale",
         "icon_src": "Money_1",
         "found": true,

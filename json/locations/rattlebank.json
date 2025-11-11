@@ -1,5 +1,6 @@
 {
         "name": "Rattlebank",
+        "id": "rattlebank",
         "type": "town",
         "icon_src": "Town_2",
         "found": true,

@@ -1,5 +1,6 @@
 {
         "name": "Bluechapel",
+        "id":"blueChapel",
         "type": "town",
         "icon_src": "Temple_2",
         "found": false,

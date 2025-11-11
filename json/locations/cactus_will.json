@@ -1,5 +1,6 @@
 {
         "name": "Cactus Will",
+        "id": "cactusWill",
         "type": "cryptid",
         "icon_src": "Cactus_2",
         "found": true,

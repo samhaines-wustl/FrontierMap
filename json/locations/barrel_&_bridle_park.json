@@ -1,5 +1,6 @@
 {
         "name": "Barrel & Bridle Park",
+        "id": "barrelAndBridlePark",
         "type": "locale",
         "icon_src": "Turtle_1",
         "found": false,

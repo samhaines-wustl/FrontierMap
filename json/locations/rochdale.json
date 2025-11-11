@@ -1,5 +1,6 @@
 {
         "name": "Rochdale",
+        "id": "rochdale",
         "type": "town",
         "icon_src": "Mine_1",
         "found": true,

@@ -1,5 +1,6 @@
 {
         "name": "Heiferwall's Mirror",
+        "id": "heiferwallMirror",
         "type": "cryptid",
         "icon_src": "Cryptid_3",
         "found": false,

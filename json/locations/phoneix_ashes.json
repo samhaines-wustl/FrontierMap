@@ -1,5 +1,6 @@
 {
         "name": "Phoneix Ashes",
+        "id": "phoneixAshes",
         "type": "cryptid",
         "icon_src": "Fire_2",
         "found": true,

@@ -1,5 +1,6 @@
 {
         "name": "Nautilus Wharf",
+        "id": "nautilusWharf",
         "type": "town",
         "icon_src": "Squid_1",
         "found": false,

@@ -1,5 +1,6 @@
 {
         "name": "Big Stone Gulch",
+        "id":"bigStoneGulch",
         "type": "town",
         "icon_src": "Town_1",
         "found": true,

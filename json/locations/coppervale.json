@@ -1,5 +1,6 @@
 {
         "name": "Coppervale",
+        "id": "coppervale",
         "type": "town",
         "icon_src": "Town_1",
         "found": true,

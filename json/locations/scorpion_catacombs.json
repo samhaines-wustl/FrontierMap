@@ -1,5 +1,6 @@
 {
        "name": "Scorpion Catacombs",
+       "id": "scorpionCatacombs",
         "type": "envSite",
         "icon_src": "Cryptid_2",
         "found": true,

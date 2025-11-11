@@ -1,5 +1,6 @@
 {
-         "name": "Pale Oak Geyser",
+        "name": "Pale Oak Geyser",
+        "id": "paleOakGeyser",
         "type": "envSite",
         "icon_src": "Volcano_1",
         "found": false,

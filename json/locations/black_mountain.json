@@ -1,5 +1,6 @@
 {
         "name": "Black Mountain",
+        "id":"blackMountain",
         "type": "envSite",
         "icon_src": "Mountain_1",
         "found": true,

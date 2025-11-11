@@ -1,5 +1,6 @@
 {
-       "name": "Incandescent",
+        "name": "Incandescent",
+        "id": "incandescent",
         "type": "town",
         "icon_src": "Lantern_1",
         "found": true,

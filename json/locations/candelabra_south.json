@@ -1,5 +1,6 @@
 {
         "name": "Southern Candelabra",
+        "id": "southernCandelabra",
         "type": "town",
         "icon_src": "Candle_1",
         "found": true,

@@ -1,5 +1,6 @@
 {
         "name": "Captain Bradford",
+        "id": "captainBradford",
         "type": "cryptid",
         "icon_src": "UFO_1",
         "found": false,

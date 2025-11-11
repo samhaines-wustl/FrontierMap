@@ -1,5 +1,6 @@
 {
         "name": "Seamstress Cavern",
+        "id": "seamstressCavern",
         "type": "town",
         "icon_src": "Money_3",
         "found": true,
