@@ -3,34 +3,8 @@
 //import rawLocationsInformation from './json/locationsInformation.json' with {type: 'json'};
 
 
-fetch('./json/manifest.json')
-  .then(res => res.json())
-  .then(fileList => {
-    return Promise.allSettled(
-      fileList.map(file => {
-        return fetch(`./json/locations/${file}`).then(res => {
-            if (!res.ok) {
-                return `Couldn't find ${file}`;
-            }
-            return res.json()
-        })
-    })
-    );
-  })
-  .then(jsonDataArray => {
-    let valueArray = jsonDataArray.map(obj => obj.value)
-    locations = prepareLocations(valueArray);
-    parseLocationsInformation(valueArray);
-
-    
-    Location.makeAllLocations(locations);
-    console.log("Done all icons");
-    
-    prepareSelectDropdown();
-    resetView();
-
-    console.log("Fetch Complete")
-  })
+import {locations} from './locations.js';
+import {Location} from './locations.js'
 
 //Constants
 const ICON_SIZE = 48;
@@ -40,8 +14,6 @@ const SVGNS = "http://www.w3.org/2000/svg";
 
 let travelLines = [];
 let settings = [];
-let locations = [];
-let locationsInformation = {};
 let biomes = [];
 
 let toggleTextDisplay = false;
@@ -51,20 +23,13 @@ let toggleAllLocDisplay = false;
 let toggleCustomIconDisplay = false;
 
 
-let allIconG = document.createElementNS(SVGNS, 'g');
-allIconG.setAttribute('id', 'allIconGroup');
+let allBiomesG = document.getElementById('allBiomesGroup');
 
-let allBiomesG = document.createElementNS(SVGNS, 'g');
-allBiomesG.setAttribute('id', 'allBiomesGroup');
+let allTravelLinesGroup = document.getElementById('allTravelLinesGroup');
 
-let allTLinesG = document.createElementNS(SVGNS, 'g');
-allTLinesG.setAttribute('id', 'allTLinesG');
-
-let gridG = document.createElementNS(SVGNS, 'g');
-gridG.setAttribute('id', 'gridGroup');
+let gridG = document.getElementById('gridGroup');
 
 let svgCanvas;
-let customIcon;
 
 class SVGCanvas {
     static DEFAULT_VIEWBOX = {x:1000, y: 900, w: 3000, h: 3000}
@@ -158,61 +123,6 @@ class SVGCanvas {
     }
 }
 
-class Location {
-    constructor(name, type, src, x, y, found) {
-        this.name = name;
-        this.type = type;
-        this.src = "images/icons/" + src + ".png";
-        this.x = x;
-        this.y = y;
-        this.found = found;
-    }
-
-    static makeAllLocations(locs) {
-        locs.forEach((loc) => loc.makeElement());
-    }
-
-    makeElement() {
-        //group element
-        let g = document.createElementNS(SVGNS, 'g');
-        g.addEventListener('mouseover', (e) => { //Reappends node so that it is drawn first (nothing covers text)
-            allIconG.appendChild(e.target.parentNode);
-        });
-        let that = this;
-        g.addEventListener('click', function(e) {
-            populateInformation(that.name);
-        });
-        //image
-        let el = document.createElementNS(SVGNS, 'image');
-        el.setAttributeNS(null, 'x', this.x-ICON_SIZE/2);
-        el.setAttributeNS(null, 'y', this.y-ICON_SIZE/2);
-        el.setAttributeNS(null, 'href', this.src);
-        el.setAttributeNS(null, 'onerror', "this.setAttribute('href', 'images/icons/image_not_found.png')")
-        el.setAttribute('originalX', this.x);
-        el.setAttribute('originalY', this.y);
-        el.setAttribute("searchName", this.name.toLowerCase());
-        el.classList.add("icon");
-        el.classList.add("icon-" + this.type);
-        //text
-        let txt = document.createElementNS(SVGNS, "text");
-        txt.setAttributeNS(null, 'filter', "url(#rounded-corners-2)")
-        txt.setAttributeNS(null, 'x', this.x);
-        txt.setAttributeNS(null, 'y', this.y-ICON_SIZE);
-        txt.classList.add("icon-text");
-        txt.classList.add("text-display-hover");
-        txt.textContent = this.name;
-        //Apending
-        g.appendChild(el);
-        g.appendChild(txt);
-        if (!this.found) {
-            g.classList.add("location-hidden");
-            g.classList.add("hidden");
-        }
-        g.classList.add("location-marker")
-        allIconG.appendChild(g);
-    }
-}
-
 class TravelLine {
     constructor(loc1, loc2) {
         this.loc1 = loc1;
@@ -277,7 +187,7 @@ class TravelLine {
         g.appendChild(c1);
         g.appendChild(c2);
         g.appendChild(line);
-        allTLinesG.appendChild(g);
+        allTravelLinesGroup.appendChild(g);
     }
 }
 
@@ -307,23 +217,15 @@ function main() {
 
     //Preparing data
     //prepareSettings();
-    /*
-    locations = prepareLocations(rawLocations);
-    parseLocationsInformation(rawLocationsInformation);
-    */
     biomes = prepareBiomes();
     prepareEventListeners();
 
     //Drawing
     Biome.makeAllBiomes(biomes, 2048, 2048);
     console.log("Done all biomes");
-    /*
-    Location.makeAllLocations(locations);
-    console.log("Done all icons");
-    */
     makeGrid(100, 5, "red");
     console.log("Done with Grid");
-    appendGroupsToCanvas();
+    //appendGroupsToCanvas();
     console.log("All groups appended");
 
     
@@ -337,44 +239,8 @@ function main() {
     }, 50);
 
     console.log("Finished in main");
-}
 
-function prepareLocations(rawLocs) {
-    let processedLocs = []
-    rawLocs.forEach((loc) => {
-        //Setting up objects
-        processedLocs.push(new Location(loc.name, loc.type, loc.icon_src, loc.x, loc.y, loc.found));
-    });
-
-    //Setting up custom icon
-    customIcon = new Location("Custom Location", "custom", "Star_1", 1000, 1000, true);
-    customIcon.makeElement();
-    document.getElementsByClassName("icon-custom")[0].classList.add("hidden");
-
-    return processedLocs
-}
-
-function prepareSelectDropdown() {
-    Array.prototype.forEach.call(document.getElementsByClassName("distance-location-select"), function(element) {
-        //Clear out previous options
-        while (element.firstChild) {
-            element.removeChild(element.lastChild);
-        }
-        // Add Nothing Selected option
-        let option = document.createElement("option")
-        option.value = "Nothing Selected";
-        option.innerHTML = "Nothing Selected";
-        element.appendChild(option);
-
-        locations.forEach((loc) => {
-            if (loc.found || toggleAllLocDisplay) {
-                let option = document.createElement("option")
-                option.value = loc.name;
-                option.innerHTML = loc.name;
-                element.appendChild(option);
-            }
-        })
-    });
+    resetView();
 }
 
 function prepareEventListeners() {
@@ -426,7 +292,7 @@ function prepareEventListeners() {
 
     document.getElementById("toggleHidden").addEventListener("click", function(e) {
         toggleAllLocDisplay = toggleDisplaySwitch(toggleAllLocDisplay, "hidden", "location-hidden");
-        prepareSelectDropdown();
+        Location.prepareLocationDropdown(locations, toggleAllLocDisplay);
     });
 
     //Distance event listeners
@@ -474,46 +340,6 @@ function prepareBiomes() {
     ]
 }
 
-function parseLocationsInformation(rawLocsInfo) {
-    rawLocsInfo.forEach((locInfo) => {
-        let header, blurb, places, people, other = "";
-        header = blurb = places = people = other = "";
-
-        header = "<h2>" + locInfo.name + "</h2>";
-        blurb = "<p>" + locInfo.blurb + "</p>";
-
-        //Places
-        if (locInfo.places && locInfo.places != "") { //Checks if not empty
-            places = "<div> Places <ul>";
-            locInfo.places.forEach( (place) => {
-                let [name, info] = place.split(':')
-                places += "<li>";
-                places +=  `<b>${name}</b>: ${info}`;
-                places += "</li>";
-            })
-            places += "</ul></div></br>";
-        }
-
-        //People
-        if (locInfo.people && locInfo.people != "") { //Checks if not empty
-            people = "<div> People <ul>";
-            locInfo.people.forEach( (person) => {
-                let [name, info] = person.split(':')
-                people += "<li>";
-                people +=  `<b>${name}</b>: ${info}`;
-                people += "</li>";
-            })
-            people += "</ul></div></br>";
-        }
-
-        other = "<i>" + locInfo.misc + "</i>";
-
-        let parsedInfo = header + blurb + places + people + other;
-        
-        locationsInformation[locInfo.name.toLowerCase()] = parsedInfo;
-    });
-}
-
 function makeGrid(increment, radius, color) {
     /*
         increment :: x and y step for how often a dot is placed
@@ -547,18 +373,18 @@ function makeGrid(increment, radius, color) {
 function setFontSize(fontSize) {
     document.getElementById("fontSizeDisplay").textContent = fontSize;
     document.getElementById("fontSizeSlider").value = fontSize
-    Array.prototype.forEach.call(document.getElementsByClassName("icon-text"), function (t) {
-        t.style.fontSize = fontSize + "px";
+
+    Array.prototype.forEach.call(locations, function (l) {
+        l.changeFontSize(fontSize);
     });
 }
 
 function setIconSize(iconSize) {
     document.getElementById("iconSizeDisplay").textContent = iconSize;
     document.getElementById("iconSizeSlider").value = iconSize
-    Array.prototype.forEach.call(document.getElementsByClassName("icon"), function (t) {
-        t.style.width = iconSize + "px";
-        t.setAttributeNS(null, 'x', t.getAttribute('originalX') - iconSize/2)
-        t.setAttributeNS(null, 'y', t.getAttribute('originalY') - iconSize/2)
+
+    Array.prototype.forEach.call(locations, function (l) {
+        l.changeIconSize(iconSize);
     });
 }
 
@@ -574,11 +400,8 @@ function toggleDisplaySwitch(setting, className, elementsClass) {
     
     /*
         setting :: global variable for toggle
-        onText :: button text display when on
-        offText :: button text display when off
         className :: class that gets added/removed for toggle functionality
         elementsClass :: class name for elements to add className to
-        element :: button element
 
     */
 
@@ -596,16 +419,9 @@ function toggleDisplaySwitch(setting, className, elementsClass) {
     }
 }
 
-function appendGroupsToCanvas() {
-    svgMap.appendChild(allBiomesG);
-    svgMap.appendChild(allIconG);
-    svgMap.appendChild(allTLinesG);
-    svgMap.appendChild(gridG);
-}
-
 function resetView() {
     svgCanvas.resetView();
-    setFontSize(ICON_TEXT_FONT_SIZE, ICON_SIZE);
+    setFontSize(ICON_TEXT_FONT_SIZE);
     setIconSize(ICON_SIZE);
     setOpacity(.3);
 }
@@ -629,12 +445,6 @@ function searchLocations() {
         if (i.getAttribute("searchName").indexOf(searchText) > -1)
             i.classList.add("search-result-highlight");
     })
-}
-
-function populateInformation(name) {
-    console.log(name.toLowerCase() + " information being populated")
-    let informationContent = (name.toLowerCase() in locationsInformation) ? locationsInformation[name.toLowerCase()] : "No information for:</br>" + name 
-    document.getElementById("informationTextBox").innerHTML = informationContent
 }
 
 main();
