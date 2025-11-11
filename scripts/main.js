@@ -228,7 +228,6 @@ function main() {
     //appendGroupsToCanvas();
     console.log("All groups appended");
 
-    
 
     resetView();
 
