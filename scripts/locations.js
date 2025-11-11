@@ -102,7 +102,6 @@ class Location {
         el.setAttributeNS(null, 'onerror', "this.setAttribute('href', 'images/icons/image_not_found.png')")
         el.setAttribute('originalX', this.x);
         el.setAttribute('originalY', this.y);
-        el.setAttribute("searchName", this.name.toLowerCase());
         el.classList.add("icon");
         el.classList.add("icon-" + this.type);
         el.id = this.id + 'Icon';
