@@ -3,7 +3,7 @@
         "id": "southwesternCandelabra",
         "type": "town",
         "icon_src": "Candle_1",
-        "found": false,
+        "found": true,
         "x": 1375,
         "y": 1591,
         "blurb": "",

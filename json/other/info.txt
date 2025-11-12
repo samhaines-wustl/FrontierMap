@@ -1,5 +1,6 @@
 
 name: String
+id: String - used for identification in background processes (camelCase one word)
 type: String - envSite, locale, town, cryptid, treasure
 icon_src: String - location of icon, include .png but no directory
 found: Boolean
