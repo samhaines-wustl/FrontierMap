@@ -16,7 +16,6 @@ let toggleTextDisplay = false;
 let toggleBiomeDisplay = false;
 let toggleGridDisplay = false;
 let toggleAllLocDisplay = false;
-let toggleCustomIconDisplay = false;
 
 
 let allBiomesG = document.getElementById('allBiomesGroup');
@@ -235,23 +234,6 @@ function prepareEventListeners() {
             new TravelLine(locations.find((element) => element.name == startLocName), locations.find((element) => element.name == endLocName));
         }
     });
-
-    //Custom Icon Listeners
-
-    document.getElementById("customIconXSlider").addEventListener("input", function(e) {
-        document.getElementById("customIconXDisplay").textContent = this.value;
-        document.getElementsByClassName("icon-custom")[0].setAttributeNS(null, 'x', this.value-ICON_SIZE/2);
-    });
-
-    document.getElementById("customIconYSlider").addEventListener("input", function(e) {
-        document.getElementById("customIconYDisplay").textContent = this.value;
-        document.getElementsByClassName("icon-custom")[0].setAttributeNS(null, 'y', this.value-ICON_SIZE/2);
-
-    });
-
-    document.getElementById("toggleCustomIcon").addEventListener("click", function(e) {
-        toggleCustomIconDisplay = toggleDisplaySwitch(toggleCustomIconDisplay, "hidden", "icon-custom"); 
-    })
 }
 
 function prepareBiomes() {

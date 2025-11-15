@@ -4,8 +4,6 @@ To-Do List
 - Separate work into async groups
 - Have travel line clean up when switching between found and all locations (get rid of lines that contain a non-found location when it can't be seen)
 - Add load screen while map boots in
-- Fix hover of custom-icon
-- Add text input for custom-icon?
 - Reorganize code (~700 lines)
     - Add more separate javascript files for each class/clean up main js files
 - Add option for info section to be filled in via option areas
