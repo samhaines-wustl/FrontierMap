@@ -1,14 +1,14 @@
 
-import {locations} from './locations.js';
-import {Location} from './locations.js'
+import {locations} from './Locations.js';
+import {Location} from './Locations.js';
+
+import {TravelLine} from './TravelLines.js';
 
 //Constants
 const ICON_SIZE = 48;
 const ICON_TEXT_FONT_SIZE = 32;
-const PIXEL_TO_MILES = 8/192*2; //This is 8mi for 196px on a 4096px, I'm using size 2048 so multiple by 2
 const SVGNS = "http://www.w3.org/2000/svg";
 
-let travelLines = [];
 let settings = [];
 let biomes = [];
 
@@ -20,8 +20,6 @@ let toggleCustomIconDisplay = false;
 
 
 let allBiomesG = document.getElementById('allBiomesGroup');
-
-let allTravelLinesGroup = document.getElementById('allTravelLinesGroup');
 
 let gridG = document.getElementById('gridGroup');
 
@@ -116,74 +114,6 @@ class SVGCanvas {
         this.scale = SVGCanvas.DEFAULT_SCALE
         this.startPoint = {x:0,y:0};
         this.image.setAttribute('viewBox', `${this.viewBox.x} ${this.viewBox.y} ${this.viewBox.w} ${this.viewBox.h}`); 
-    }
-}
-
-class TravelLine {
-    constructor(loc1, loc2) {
-        this.loc1 = loc1;
-        this.loc2 = loc2;
-        this.distance = this.calcDistance();
-        this.r = "5px";
-
-        let index = this.addToTable();
-        this.makeElements(index);
-    }
-
-    static removeTravelLine(index) {
-        document.getElementById('distanceTable').deleteRow(index);
-        document.getElementById('line'+index).remove();
-        travelLines.splice(index-1, 1);
-    }
-
-    calcDistance() {
-        let xDif = this.loc1.x - this.loc2.x
-        let yDif = this.loc1.y - this.loc2.y
-
-        let distPixels = Math.sqrt(xDif**2 + yDif**2)
-        return (distPixels*PIXEL_TO_MILES).toFixed(1);
-    }
-
-    addToTable() {
-        let table = document.getElementById('distanceTable')
-        let row = table.insertRow(-1)
-        let cells = [row.insertCell(0),row.insertCell(1),row.insertCell(2),row.insertCell(3)];
-        cells[0].innerHTML = this.loc1.name;
-        cells[1].innerHTML = this.loc2.name;
-        cells[2].innerHTML = this.distance;
-        cells[3].innerHTML = '<button>X</button>';
-        cells[3].addEventListener('click', function() {TravelLine.removeTravelLine(this.parentNode.rowIndex)});
-        return (cells[3].parentNode.rowIndex);
-    }
-
-    makeElements(indexID) {
-        //group element
-        let g = document.createElementNS(SVGNS, 'g');
-        g.setAttribute('id', 'line' + indexID);
-        //first circle
-        let c1 = document.createElementNS(SVGNS, 'circle')
-        c1.setAttributeNS(null, 'cx', this.loc1.x);
-        c1.setAttributeNS(null, 'cy', this.loc1.y);
-        c1.setAttributeNS(null, 'r', this.r);
-        c1.classList.add("travel-dot");
-        //second circle
-        let c2 = document.createElementNS(SVGNS, 'circle')
-        c2.setAttributeNS(null, 'cx', this.loc2.x);
-        c2.setAttributeNS(null, 'cy', this.loc2.y);
-        c2.setAttributeNS(null, 'r', this.r);
-        c2.classList.add("travel-dot");
-        //dotted line
-        let line = document.createElementNS(SVGNS, 'line');
-        line.setAttributeNS(null, "x1", this.loc1.x);
-        line.setAttributeNS(null, 'y1', this.loc1.y);
-        line.setAttributeNS(null, "x2", this.loc2.x);
-        line.setAttributeNS(null, 'y2', this.loc2.y);
-        line.classList.add("travel-line");
-        //Append
-        g.appendChild(c1);
-        g.appendChild(c2);
-        g.appendChild(line);
-        allTravelLinesGroup.appendChild(g);
     }
 }
 
@@ -295,11 +225,14 @@ function prepareEventListeners() {
         let endLocName = document.getElementById("distanceCalculationEnd").value;
 
         // Calculation portion
-        if (startLocName == "Nothing Selected" || endLocName == "Nothing Selected" ) {
+        if (startLocName == "Nothing Selected" || endLocName == "Nothing Selected") {
             console.log("At least one end point is invalid");
         }
+        else if (startLocName == endLocName) {
+            console.log("Same location picked");
+        }
         else {
-            travelLines.push(new TravelLine(locations.find((element) => element.name == startLocName), locations.find((element) => element.name == endLocName)))
+            new TravelLine(locations.find((element) => element.name == startLocName), locations.find((element) => element.name == endLocName));
         }
     });
 
