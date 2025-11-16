@@ -3,6 +3,7 @@ import {locations} from './Locations.js';
 import {Location} from './Locations.js';
 
 import {TravelLine} from './TravelLines.js';
+import {travelLines} from './TravelLines.js';
 
 //Constants
 const ICON_SIZE = 48;
@@ -220,6 +221,7 @@ function prepareEventListeners() {
     //Distance event listeners
 
     document.getElementById("distanceCalculate").addEventListener("click", function(e) {
+        
         let startLocName = document.getElementById("distanceCalculationStart").value;
         let endLocName = document.getElementById("distanceCalculationEnd").value;
 
@@ -231,7 +233,7 @@ function prepareEventListeners() {
             console.log("Same location picked");
         }
         else {
-            new TravelLine(locations.find((element) => element.name == startLocName), locations.find((element) => element.name == endLocName));
+            travelLines.push(new TravelLine(locations.find((element) => element.name == startLocName), locations.find((element) => element.name == endLocName)));
         }
     });
 }

@@ -6,9 +6,11 @@ const PIXEL_TO_MILES = 8/192*2; //This is 8mi for 196px on a 4096px, I'm using s
 
 //exports
 export {TravelLine};
+export {travelLines};
 
 //varaibles
 let totalLines = 0;
+let travelLines = [];
 
 
 class TravelLine {
@@ -29,6 +31,9 @@ class TravelLine {
         let row = document.getElementById('tableLine' + index);
         row.parentNode.removeChild(row);
         document.getElementById('line'+index).remove();
+        // Index that needs to be removed
+        let pos = travelLines.map(e => e.index).indexOf(index); 
+        travelLines.splice(pos, 1);
     }
 
     calcDistance() {
