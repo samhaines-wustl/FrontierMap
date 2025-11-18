@@ -11,7 +11,6 @@ export {locations};
 
 //variables
 let locations;
-let locationsInformation = [];
 
 class Location {
     constructor(name, id, type, src, x, y, found, json) {
@@ -175,8 +174,6 @@ class Location {
         other = "<i>" + locInfo.misc + "</i>";
 
         let parsedInfo = header + blurb + places + people + other;
-        
-        locationsInformation[locInfo.id] = parsedInfo;
 
         return parsedInfo;
     };
@@ -200,7 +197,6 @@ await fetch('./json/manifest.json')
     let valueArray = jsonDataArray.map(obj => obj.value)
     locations = Location.prepareLocations(valueArray);
         console.log("Done all icons");
-    //parseLocationsInformation(valueArray);
     
     Location.prepareLocationDropdown(locations, false);
         console.log("Fetch Complete");

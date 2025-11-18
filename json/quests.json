@@ -1,0 +1,20 @@
+[
+    {
+        "name": "Bacho's Letters",
+        "nickname": "Bacho's Letters",
+        "id": "bachosLetters",
+        "color": "#4A7637",
+        "info": "Bacho, a man who deals in information, has tasked you with delivering some letters to the Seamstress Cavern",
+        "reward": "20gp and free information on anyone",
+        "completed": false
+    },
+    {
+        "name": "Oilwoman Florence Bass and Her Remedies",
+        "nickname": "Oilwoman's Remedies",
+        "id": "florenceBassMedicine",
+        "color": "#886BFF",
+        "info": "The best medicine woman in the Frontier has asked to deliver some medicine to her regulars. Distribute the medicines in Crescent Canyon and bring the payments back to Bass",
+        "reward": "30gp",
+        "completed": false
+    }
+]
