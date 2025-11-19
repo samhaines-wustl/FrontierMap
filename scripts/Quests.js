@@ -32,9 +32,11 @@ class Quest {
             console.log("Quest: " + that.id + " information being populated");
             document.getElementById("informationTextBox").innerHTML = that.parsedInformation;
         });
+        if (this.completed) 
+            bigSpan.style.textDecoration = "line-through"
         //Span for color box
         let boxSpan = document.createElement("span");
-        boxSpan.style = "color:" + this.color;
+        boxSpan.style.color = this.color;
         boxSpan.classList.add("biome-key-color");
         boxSpan.innerHTML = "&#9632";
         
@@ -53,7 +55,7 @@ class Quest {
         header = status = info = reward = "";
 
         header = "<h2>" + this.name + "</h2>";
-        status = "<p><i>" + (this.status ? "Completed!" : "Ongoing")+ "</i></p>";
+        status = "<p><i>" + (this.completed ? "Completed!" : "Ongoing")+ "</i></p>";
         info = "<p>" + this.info + "</p>";
         reward = "<p> <b>Reward: </b>" + this.reward + "</p>";
 

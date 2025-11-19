@@ -16,5 +16,95 @@
         "info": "The best medicine woman in the Frontier has asked to deliver some medicine to her regulars. Distribute the medicines in Crescent Canyon and bring the payments back to Bass",
         "reward": "30gp",
         "completed": false
+    },
+    {
+        "name": "Travel to the Incandescent to establish a Trade Route",
+        "nickname": "Lantern King Trade",
+        "id": "lanternKingTrade",
+        "color": "#FF3F4C",
+        "info": "After helping Slowspring, Mayor Carson wants you to start trading with them. Since they already have an established trade route with the Incandescent, they recommend meeting with them to travel together. Its safer and simpler.",
+        "reward": "N/A",
+        "completed": false
+    },
+    {
+        "name": "Take out Loose-Eye Maddie",
+        "nickname": "Loose-Eye Maddie",
+        "id": "wackoBoyLeader1",
+        "color": "#46464D",
+        "info": "Mayor Carson of Slowspring needs you to deal with the Wacko Boy leader Loose-Eye Maddie that has bunkered down in the nearby town of Rattlebank. He needs you to take the offensive, the Communion of the Lantern King have been silent to his requests.",
+        "reward": "15 gp and a head hunting contract with Slowspring for other Wacko Boy leaders",
+        "completed": true
+    },
+    {
+        "name": "Take out Delilah 'The Whip' Dixie",
+        "nickname": "Delilah 'The Whip' Dixie",
+        "id": "wackoBoyLeader2",
+        "color": "#46464D",
+        "info": "Down south, the next Wacko Boy threat is their leader Delilah 'The Whip' Dixie. Not only does Slowspring want you to deal with this, but so does Baldr Mikalya Monmouth. Rumor has it she runs the Silverbell Ranch, a slave planation that most of the Wacko Boys get their food from, besides raiding of course.",
+        "reward": "Contraband of your choice from Baldr Mikayla Monmouth and Slowpring contract reward of 30gp",
+        "completed": false
+    },
+    {
+        "name": "Cure Zombie Rot",
+        "nickname": "Zombie Rot",
+        "id": "disease1",
+        "color": "#2DDFFF",
+        "info": "Buck's Zombie Rot is getting worse, with no end in sight. Due to it being a curse, Oilwomen Bass was no help. Perhaps those Lantern King followers could be of assistance.",
+        "reward": "No Zombie Rot!",
+        "completed": true
+    },
+    {
+        "name": "Retrieve the Cylinder of Spite",
+        "nickname": "Get Cylinder of Spite",
+        "id": "treasure1",
+        "color": "#BF7B02",
+        "info": "Professor Plummage has heard tales of the Cylinder of Spite down in the Tesoro Tar Pits. What's worse is that Charles' rival, Baron Gustavo Cornelius Powell is on his way there. You cannot let it fall into his hands!",
+        "reward": "The Cylinder of Spite, an artifact that points to the greatest mass of wealth nearby",
+        "completed": true
+    },
+    {
+        "name": "Follow the Cylinder of Spite",
+        "nickname": "Follow Cylinder of Spite",
+        "id": "treasure2",
+        "color": "#BF7B02",
+        "info": "After being captured by Baron Powell, Charles tosses the Cylinder into the nearby Tar Pits, practically destroying it. Even though the Baron retrieves it, it's far too damaged to use. Luckily, Charles got a glance of the direction it pointed, and it was northwest.",
+        "reward": "Greatest mass of wealth in the Frontier!",
+        "completed": false
+    },
+    {
+        "name": "Retrieve The Winchester Book",
+        "nickname": "Winchester Book",
+        "id": "treasure3",
+        "color": "#BF7B02",
+        "info": "While delving in the Delian Tomb under the Tesoro Tar Pits, you came upon a journal from another archaelologist. In their notes was specific descriptions of The Winchester Book: a book so magnificent it is said to drive the reader to suicide. If you dare follow the trail, the now-deceased archaeologist believes it lays at the foot of the Black Mountain.",
+        "reward": "The Winchester Book",
+        "completed": false
+    },
+    {
+        "name": "Get the Phoneix Ashes",
+        "nickname": "Phoneix Ashes",
+        "id": "treasure4",
+        "color": "#BF7B02",
+        "info": "After Baldr Raymore healed your Zombie Rot he requested the retrieval of a sacred relic of the Lantern King that has been lost in Wacko Boy territory. The Phoneix Ashes mean quite a lot to the Communion of the Lantern King and having them back to be worshipped at a Candelabra would be honorific. However, Baldr Raymore wishes for them to be returned to him and him alone; while Baldr Mikalaya believes only an Illuminator should retrieve it as their task for ascension to Baldr. Nonetheless, the ashes sit in Wacko Boy territory waiting.",
+        "reward": "The Phoneix Ashes and Baldr Raymore's gratitude or Baldr Mikalya's respect",
+        "completed": false
+    },
+    {
+        "name": "Find the Grandson of the Wind for Information",
+        "nickname": "Grandson of the Wind",
+        "id": "monk1",
+        "color": "#ADDB37",
+        "info": "In crescent canyon lies an old monk, the Grandson of the Wind. Rumor has it he's stepped foot on the Mountain of Prosperity.",
+        "reward": "A path to the Mountain of Prosperity",
+        "completed": true
+    },
+    {
+        "name": "Find Mother Two Lives for Training",
+        "nickname": "Mother Two Lives",
+        "id": "monk2",
+        "color": "#ADDB37",
+        "info": "Atop the Black Mountain is the protege of the Grandson of the Wind. She is more martial focus and perhaps speaks Bazimus' language better. She can help",
+        "reward": "A path to the Mountain of Prosperity, training in the martial arts, and guidance",
+        "completed": false
     }
 ]
