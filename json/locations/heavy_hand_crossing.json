@@ -1,0 +1,13 @@
+{
+        "name": "Heavy Hand Crossing",
+        "id": "hhCrossing",
+        "type": "town",
+        "icon_src": "Temple_2",
+        "found": false,
+        "x": 1100,
+        "y": 1200,
+        "blurb": "A brining town, large inland tanks of brine are the only thing of note",
+        "places": [],
+        "people": [],
+        "misc": ""
+}

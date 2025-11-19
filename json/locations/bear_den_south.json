@@ -1,0 +1,13 @@
+{
+        "name": "Southern Bear Den",
+        "id": "southernBearden",
+        "type": "crytpid",
+        "icon_src": "Mountain_5",
+        "found": false,
+        "x": 1750,
+        "y": 1900,
+        "blurb": "",
+        "places": [],
+        "people": [],
+        "misc": ""
+}

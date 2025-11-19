@@ -1,0 +1,13 @@
+{
+        "name": "Failed Mississippi Caravan",
+        "id": "failedMICaravan",
+        "type": "cryptid",
+        "icon_src": "Horse_2",
+        "found": true,
+        "x": 1430,
+        "y": 1505,
+        "blurb": "",
+        "places": [],
+        "people": [],
+        "misc": ""
+}
