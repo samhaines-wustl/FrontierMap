@@ -1,6 +1,7 @@
 
 /// This file will have the class for locations
 /// Also will prep the locations
+//Renamed file
 
 //Constants
 const SVGNS = "http://www.w3.org/2000/svg";
