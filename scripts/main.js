@@ -1,6 +1,6 @@
 
-import {locations} from './Locations.js';
-import {Location} from './Locations.js';
+import {locations} from './locations.js';
+import {Location} from './locations.js';
 
 import {TravelLine} from './TravelLines.js';
 import {travelLines} from './TravelLines.js';
