@@ -13,14 +13,13 @@ export {locations};
 let locations;
 
 class Location {
-    constructor(name, id, type, src, x, y, found, json) {
+    constructor(name, id, type, src, x, y, json) {
         this.name = name;
         this.id = id;
         this.type = type;
         this.src = "images/icons/" + src + ".png";
         this.x = x;
         this.y = y;
-        this.found = found;
         this.iconSize = 48;
         this.fontSize = 32;
         this.json = json;
@@ -33,13 +32,13 @@ class Location {
         let processedLocs = []
         rawLocs.forEach((loc) => {
             //Setting up objects
-            processedLocs.push(new Location(loc.name, loc.id, loc.type, loc.icon_src, loc.x, loc.y, loc.found, loc));
+            processedLocs.push(new Location(loc.name, loc.id, loc.type, loc.icon_src, loc.x, loc.y, loc));
         });
 
         return processedLocs
     };
 
-    static prepareLocationDropdown(locs, showAll) {
+    static prepareLocationDropdown(locs, idArray) {
         Array.prototype.forEach.call(document.getElementsByClassName("distance-location-select"), function(element) {
             //Clear out previous options
             while (element.firstChild) {
@@ -52,7 +51,7 @@ class Location {
             element.appendChild(option);
 
             locs.forEach((loc) => {
-                if (loc.found || showAll) {
+                if (idArray.includes(loc.id)) {
                     let option = document.createElement("option")
                     option.value = loc.name;
                     option.innerHTML = loc.name;
@@ -113,11 +112,8 @@ class Location {
         //Apending
         g.appendChild(el);
         g.appendChild(txt);
-        if (!this.found) {
-            g.classList.add("location-hidden");
-            g.classList.add("hidden");
-        }
-        g.classList.add("location-marker")
+        g.classList.add("location-marker");
+        g.id = this.id + 'Group';
         document.getElementById('allIconGroup').appendChild(g);
     };
 
@@ -194,7 +190,5 @@ await fetch('./json/manifest.json')
     let valueArray = jsonDataArray.map(obj => obj.value)
     locations = Location.prepareLocations(valueArray);
         console.log("Done all icons");
-    
-    Location.prepareLocationDropdown(locations, false);
         console.log("Locations Fetch Complete");
   })

@@ -49,5 +49,5 @@ PROFILE_FILES.forEach(async (f) => {
     .then(d => {
         profiles.push(new Profile(d.display_name, d.id, d.locations_found, d.quests));
     })
-    console.log("Profiles Fetch Complete");
 });
+console.log("Profiles Fetch Complete");

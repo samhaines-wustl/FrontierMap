@@ -216,10 +216,9 @@ function prepareEventListeners() {
         toggleGridDisplay = toggleDisplaySwitch(toggleGridDisplay, "hidden", "coordinate-grid"); 
     });
 
-    document.getElementById("toggleHidden").addEventListener("click", function(e) {
-        toggleAllLocDisplay = toggleDisplaySwitch(toggleAllLocDisplay, "hidden", "location-hidden");
-        Location.prepareLocationDropdown(locations, toggleAllLocDisplay);
-    });
+    document.getElementById("profileSelect").addEventListener("change", function(e) {
+        changeProfile();
+    })
 
     //Distance event listeners
 
@@ -332,11 +331,23 @@ function toggleDisplaySwitch(setting, className, elementsClass) {
     }
 }
 
+function changeProfile() {
+    let newLocationsShowing = profiles.find((p) => p.id == document.getElementById("profileSelect").value).getLocationsFound();
+        Array.prototype.forEach.call(document.getElementsByClassName("location-marker"), function(g) {
+            g.classList.add("hidden");
+        });
+        newLocationsShowing.forEach((id) => {
+            document.getElementById(id + "Group").classList.remove("hidden");
+        });
+    Location.prepareLocationDropdown(locations, newLocationsShowing);
+}
+
 function resetView() {
     svgCanvas.resetView();
     setFontSize(ICON_TEXT_FONT_SIZE);
     setIconSize(ICON_SIZE);
     setOpacity(.3);
+    changeProfile();
 }
 
 main();
