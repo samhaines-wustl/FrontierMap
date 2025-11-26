@@ -1,7 +1,6 @@
 
 /// This file will have the class for locations
 /// Also will prep the locations
-//Renamed file
 
 //Constants
 const SVGNS = "http://www.w3.org/2000/svg";
@@ -28,9 +27,6 @@ class Location {
         this.parsedInformation = this.parseInformation(this.json);
         
         this.makeElement();
-
-        if (this.id == 'customLocation')
-            document.getElementById(this.id + 'Icon').classList.add('hidden');
     }
 
     static prepareLocations(rawLocs) {
