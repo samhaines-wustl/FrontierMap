@@ -196,5 +196,5 @@ await fetch('./json/manifest.json')
         console.log("Done all icons");
     
     Location.prepareLocationDropdown(locations, false);
-        console.log("Fetch Complete");
+        console.log("Locations Fetch Complete");
   })

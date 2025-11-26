@@ -5,6 +5,9 @@ import {Location} from './Locations.js';
 import {TravelLine} from './TravelLines.js';
 import {travelLines} from './TravelLines.js';
 
+import {Profile} from './Profiles.js';
+import {profiles} from './Profiles.js';
+
 //Constants
 const ICON_SIZE = 48;
 const ICON_TEXT_FONT_SIZE = 32;

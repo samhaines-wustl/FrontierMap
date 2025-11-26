@@ -68,16 +68,9 @@ class Quest {
 await fetch('./json/quests.json')
   .then(res => res.json())
   .then(jsonDataArray => {
-    console.log(jsonDataArray);
     jsonDataArray.forEach((q) => {
         quests.push(new Quest(q.name, q.nickname, q.id, q.color, q.info, q.reward, q.completed))
     });
-    /*x
-    let valueArray = jsonDataArray.map(obj => obj.value)
-    locations = Location.prepareLocations(valueArray);
-        console.log("Done all icons");
-    //parseLocationsInformation(valueArray);
-    
-    Location.prepareLocationDropdown(locations, false);
-        console.log("Fetch Complete"); */
+    console.log("Quests Fetch Complete");
+
   })
