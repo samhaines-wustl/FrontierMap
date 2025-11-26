@@ -15,6 +15,7 @@
   "chest_of_hobb.json",
   "cinderheart_marauder.json",
   "coppervale.json",
+  "cornflower_lake.json",
   "crescent_canyon.json",
   "domain_of_the_remorhaz.json",
   "failed_mississippi_caravan.json",
@@ -39,6 +40,7 @@
   "silverbell_ranch.json",
   "slowspring.json",
   "sonora_ranch.json",
+  "steel_lake.json",
   "tesoro_tar_pits.json",
   "the_empty_room.json",
   "the_long_goodbye.json",
@@ -48,5 +50,6 @@
   "true_world.json",
   "warmpass_quarry.json",
   "winchester_book.json",
-  "windy_crows_peppers.json"
+  "windy_crows_peppers.json",
+  "wolfden_cavern.json"
 ]

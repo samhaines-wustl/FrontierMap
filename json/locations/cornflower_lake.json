@@ -1,0 +1,12 @@
+{
+        "name": "Cornflower Lake",
+        "id": "cornflowerLake",
+        "type": "envSite",
+        "icon_src": "Fish_2",
+        "x": 1601,
+        "y": 505,
+        "blurb": "",
+        "places": [],
+        "people": [],
+        "misc": ""
+}

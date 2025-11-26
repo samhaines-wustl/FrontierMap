@@ -5,8 +5,8 @@
 const PROFILE_FILES = [
     'admin.json',
     'macarthurcaravan.json',
+    'northernExpedition.json',
     'empty.json',
-    'northernExpedition.json'
 ]
 
 //Exports

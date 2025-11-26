@@ -1,0 +1,12 @@
+{
+        "name": "Steel Lake",
+        "id": "steelLake",
+        "type": "envSite",
+        "icon_src": "Shell_1",
+        "x": 1145,
+        "y": 490,
+        "blurb": "",
+        "places": [],
+        "people": [],
+        "misc": ""
+}

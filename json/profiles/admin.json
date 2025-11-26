@@ -18,6 +18,7 @@
     "chestOfHobb",
     "cinderheartMarauder",
     "coppervale",
+    "cornflowerLake",
     "crescentCanyon",
     "domainRemorhaz",
     "failedMICaravan",
@@ -42,6 +43,7 @@
     "silverbellRanch",
     "slowspring",
     "sonoraRanch",
+    "steelLake",
     "tesoroTarPits",
     "emptyRoom",
     "longGoodbye",
@@ -51,7 +53,8 @@
     "trueWorld",
     "warmpassQuarry",
     "winchesterBook",
-    "windyCrowPeppers"
+    "windyCrowPeppers",
+    "wolfdenCavern"
   ],
   "quests": []
 }

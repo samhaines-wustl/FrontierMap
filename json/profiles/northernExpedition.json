@@ -1,6 +1,14 @@
 {
   "display_name": "Northern Expedition",
   "id": "northExp",
-  "locations_found": [],
+  "locations_found": [
+    "wolfdenCavern",
+    "hhCrossing",
+    "steelLake",
+    "cornflowerLake",
+    "gravelMouthDogman",
+    "incandescent",
+    "longGoodbye"
+  ],
   "quests": []
 }

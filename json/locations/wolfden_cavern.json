@@ -1,0 +1,12 @@
+{
+        "name": "Wolfden Cavern",
+        "id": "wolfdenCavern",
+        "type": "locale",
+        "icon_src": "Rock_1",
+        "x": 1261,
+        "y": 448,
+        "blurb": "",
+        "places": [],
+        "people": [],
+        "misc": ""
+}
