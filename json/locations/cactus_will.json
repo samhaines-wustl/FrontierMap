@@ -3,7 +3,6 @@
         "id": "cactusWill",
         "type": "cryptid",
         "icon_src": "Cactus_2",
-        "found": true,
         "x": 1874,
         "y": 1480,
         "blurb": "A colossal cactus leshy",

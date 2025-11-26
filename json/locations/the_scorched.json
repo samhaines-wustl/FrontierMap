@@ -3,7 +3,6 @@
         "id": "scorched",
         "type": "cryptid",
         "icon_src": "Sun_1",
-        "found": false,
         "x": 1260,
         "y": 1400,
         "blurb": "",

@@ -3,7 +3,6 @@
         "id":"bigStoneGulch",
         "type": "town",
         "icon_src": "Town_1",
-        "found": true,
         "x": 1793,
         "y": 1178,
         "blurb": "The settlement for MacArthur Park's newest caravan and your home",

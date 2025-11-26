@@ -3,7 +3,6 @@
         "id": "winchesterBook",
         "type": "treasure",
         "icon_src": "Book_1",
-        "found": true,
         "x": 1100,
         "y": 1460,
         "blurb": "",

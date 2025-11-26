@@ -3,7 +3,6 @@
         "id": "pyre",
         "type": "town",
         "icon_src": "Candle_1",
-        "found": false,
         "x": 990,
         "y": 1325,
         "blurb": "",

@@ -3,7 +3,6 @@
         "id": "tesoroTarPits",
         "type": "treasure",
         "icon_src": "Temple_1",
-        "found": true,
         "x": 1910,
         "y": 1590,
         "blurb": "A collection of thick toxic tar pits",

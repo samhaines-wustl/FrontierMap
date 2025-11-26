@@ -3,7 +3,6 @@
        "id": "scorpionCatacombs",
         "type": "envSite",
         "icon_src": "Cryptid_2",
-        "found": true,
         "x": 1445,
         "y": 1181,
         "blurb": "The safer path to Coppervale",

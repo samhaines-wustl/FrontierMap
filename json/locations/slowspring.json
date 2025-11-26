@@ -3,7 +3,6 @@
         "id": "slowspring",
         "type": "town",
         "icon_src": "Town_1",
-        "found": true,
         "x": 1639,
         "y": 1325,
         "blurb": "The biggest trade town to the East of the Frontier",

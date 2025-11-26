@@ -3,7 +3,6 @@
         "id": "rochdale",
         "type": "town",
         "icon_src": "Mine_1",
-        "found": true,
         "x": 1430,
         "y": 1330,
         "blurb": "A run-down coal mining town",

@@ -3,7 +3,6 @@
         "id": "incandescent",
         "type": "town",
         "icon_src": "Lantern_1",
-        "found": true,
         "x": 1740,
         "y": 870,
         "blurb": "Headquarters for the Communion of the Lantern King in the heart of the Death Basin",

@@ -3,7 +3,6 @@
         "id": "womanTree",
         "type": "cryptid",
         "icon_src": "Tree_2",
-        "found": false,
         "x": 715,
         "y": 1390,
         "blurb": "",

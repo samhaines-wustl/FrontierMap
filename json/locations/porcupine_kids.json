@@ -3,7 +3,6 @@
         "id": "porcupineKids",
         "type": "cryptid",
         "icon_src": "Cryptid_4",
-        "found": false,
         "x": 877,
         "y": 1435,
         "blurb": "The Living Dead walk, arrows littering their bodies do little to slow them down",

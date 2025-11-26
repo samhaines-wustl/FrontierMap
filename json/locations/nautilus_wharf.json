@@ -3,7 +3,6 @@
         "id": "nautilusWharf",
         "type": "town",
         "icon_src": "Squid_1",
-        "found": false,
         "x": 790,
         "y": 1780,
         "blurb": "A small fishing town built on top of the skeleton of a giant whale",

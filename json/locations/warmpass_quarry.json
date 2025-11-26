@@ -3,7 +3,6 @@
         "id": "warmpassQuarry",
         "type": "cryptid",
         "icon_src": "Mine_1",
-        "found": true,
         "x": 1708,
         "y": 1595,
         "blurb": "An old quarry that has been partially flooded",

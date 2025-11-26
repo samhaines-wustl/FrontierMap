@@ -3,7 +3,6 @@
         "id": "lowwoodMiningColony",
         "type": "town",
         "icon_src": "Mine_1",
-        "found": false,
         "x": 1150,
         "y": 1680,
         "blurb": "",
