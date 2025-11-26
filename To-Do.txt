@@ -8,5 +8,5 @@ To-Do List
     - Add more separate javascript files for each class/clean up main js files
 - Add option for info section to be filled in via option areas
 - Add information for factions tab
-- Make profiles
-    - would make you able to view different locations, different quests, etc.
+- Profiles for quests
+- Default viewbox per profile
