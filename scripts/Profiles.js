@@ -17,21 +17,30 @@ export {profiles};
 let profiles = [];
 
 class Profile {
-    constructor(name, id, locations_found, quests) {
+    constructor(name, id, locationsFound, quests, viewBox) {
         this.display_name = name;
         this.id = id;
-        this.locations_found = locations_found;
+        this.locationsFound = locationsFound;
         this.quests = quests;
+        this.viewBox = viewBox;
 
         this.makeElement();
     }
 
     getLocationsFound() {
-        return this.locations_found;
+        return this.locationsFound;
     }
 
     getQuests() {
         return this.quests;
+    }
+
+    getViewBox() {
+        return this.viewBox;
+    }
+
+    getID() {
+        return this.id;
     }
 
     makeElement() {
@@ -47,7 +56,7 @@ PROFILE_FILES.forEach(async (f) => {
     await fetch('./json/profiles/' + f)
     .then(res => res.json())
     .then(d => {
-        profiles.push(new Profile(d.display_name, d.id, d.locations_found, d.quests));
+        profiles.push(new Profile(d.display_name, d.id, d.locations_found, d.quests, d.viewbox));
     })
 });
 console.log("Profiles Fetch Complete");

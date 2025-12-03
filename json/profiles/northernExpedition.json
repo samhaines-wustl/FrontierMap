@@ -12,5 +12,11 @@
     "reidLeather",
     "barnburnHills"
   ],
-  "quests": []
+  "quests": [],
+  "viewbox": {
+    "x": 780,
+    "y": 43,
+    "w": 3550,
+    "h": 3550
+  }
 }

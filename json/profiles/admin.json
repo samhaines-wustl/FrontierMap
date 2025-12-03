@@ -58,5 +58,13 @@
     "windyCrowPeppers",
     "wolfdenCavern"
   ],
-  "quests": []
+  "quests": [
+
+  ],
+  "viewbox": {
+    "x": 35,
+    "y": -75,
+    "w": 6550,
+    "h": 6550
+  }
 }

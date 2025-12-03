@@ -19,7 +19,8 @@ let biomes = [];
 let toggleTextDisplay = false;
 let toggleBiomeDisplay = false;
 let toggleGridDisplay = false;
-let toggleAllLocDisplay = false;
+
+let currentProfile = profiles.find((p) => p.id == "admin");
 
 
 let allBiomesG = document.getElementById('allBiomesGroup');
@@ -43,7 +44,7 @@ class SVGCanvas {
         this.scale = SVGCanvas.DEFAULT_SCALE;
         this.startPoint = {x:0,y:0};
 
-        this.resetView();
+        this.resetView(currentProfile.getViewBox());
         console.log("SVGCanvas constructed")
     }
 
@@ -113,8 +114,8 @@ class SVGCanvas {
         }
     }
 
-    resetView() {
-        this.viewBox = SVGCanvas.DEFAULT_VIEWBOX
+    resetView(vBox) {
+        this.viewBox = vBox
         this.scale = SVGCanvas.DEFAULT_SCALE
         this.startPoint = {x:0,y:0};
         this.image.setAttribute('viewBox', `${this.viewBox.x} ${this.viewBox.y} ${this.viewBox.w} ${this.viewBox.h}`); 
@@ -157,7 +158,7 @@ function main() {
     console.log("Done with Grid");
 
 
-    resetView();
+    resetView(currentProfile.getViewBox());
 
     //Gets rid of lag when first displaying biomes
     toggleBiomeDisplay = toggleDisplaySwitch(toggleBiomeDisplay,  "hidden", "biome-area");
@@ -167,7 +168,8 @@ function main() {
 
     console.log("Finished in main");
 
-    resetView();
+    resetView(currentProfile.getViewBox());
+    changeProfile(currentProfile.getID());
 }
 
 function prepareEventListeners() {
@@ -179,7 +181,7 @@ function prepareEventListeners() {
     //Setting event listeners
 
     document.getElementById("resetView").addEventListener("click", function(e) {
-        resetView();
+        resetView(currentProfile.getViewBox());
     });
 
     document.getElementById("fontSizeSlider").addEventListener("input", function(e) {
@@ -218,7 +220,7 @@ function prepareEventListeners() {
     });
 
     document.getElementById("profileSelect").addEventListener("change", function(e) {
-        changeProfile();
+        changeProfile(e.srcElement.value);
     })
 
     //Distance event listeners
@@ -332,8 +334,9 @@ function toggleDisplaySwitch(setting, className, elementsClass) {
     }
 }
 
-function changeProfile() {
-    let newLocationsShowing = profiles.find((p) => p.id == document.getElementById("profileSelect").value).getLocationsFound();
+function changeProfile(id) {
+    currentProfile = profiles.find((p) => p.id == id);
+    let newLocationsShowing = currentProfile.getLocationsFound();
         Array.prototype.forEach.call(document.getElementsByClassName("location-marker"), function(g) {
             g.classList.add("hidden");
         });
@@ -341,14 +344,14 @@ function changeProfile() {
             document.getElementById(id + "Group").classList.remove("hidden");
         });
     Location.prepareLocationDropdown(locations, newLocationsShowing);
+    resetView(currentProfile.getViewBox());
 }
 
-function resetView() {
-    svgCanvas.resetView();
+function resetView(vBox) {
+    svgCanvas.resetView(vBox);
     setFontSize(ICON_TEXT_FONT_SIZE);
     setIconSize(ICON_SIZE);
     setOpacity(.3);
-    changeProfile();
 }
 
 main();
