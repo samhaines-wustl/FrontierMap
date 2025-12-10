@@ -1,0 +1,12 @@
+{
+        "name": "Bloom's End",
+        "id": "bloomsEnd",
+        "type": "town",
+        "icon_src": "City_1",
+        "x": 625,
+        "y": 560,
+        "blurb": "",
+        "places": [],
+        "people": [],
+        "misc": ""
+}
