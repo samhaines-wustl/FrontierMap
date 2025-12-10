@@ -42,7 +42,7 @@
         "color": "#46464D",
         "info": "Down south, the next Wacko Boy threat is their leader Delilah 'The Whip' Dixie. Not only does Slowspring want you to deal with this, but so does Baldr Mikalya Monmouth. Rumor has it she runs the Silverbell Ranch, a slave planation that most of the Wacko Boys get their food from, besides raiding of course.",
         "reward": "Contraband of your choice from Baldr Mikayla Monmouth and Slowpring contract reward of 30gp",
-        "completed": false
+        "completed": true
     },
     {
         "name": "Cure Zombie Rot",
@@ -105,6 +105,24 @@
         "color": "#ADDB37",
         "info": "Atop the Black Mountain is the protege of the Grandson of the Wind. She is more martial focus and perhaps speaks Bazimus' language better. She can help",
         "reward": "A path to the Mountain of Prosperity, training in the martial arts, and guidance",
+        "completed": false
+    },
+    {
+        "name": "Deal with Malone's Competition",
+        "nickname": "Malone's Contract",
+        "id": "leatherContract1",
+        "color": "#D3AF37",
+        "info": "Willis Malone runs the biggest leather brining operation in the North of the Frontier, and he intends to keep it that way. He's heard word an upstart briner is getting popular just south of the Barnburn Hills. He's task you to take care of it. The less details the better.",
+        "reward": "20 gp a piece. An extra 20 each if done within the week",
+        "completed": false
+    },
+    {
+        "name": "Reid needs those Leathers and those Buffalo Dead too",
+        "nickname": "Reid's Contract",
+        "id": "leatherContract2",
+        "color": "#D3AF37",
+        "info": "You've bargained your way into a hide and leather contract with Ariel Reid. You've promised her no less than 50 hides from the Buffalo out in the Nokomont Midlands. Don't fret though, if the hides are returned to her within the month, the contract is null and void.",
+        "reward": "50 buffalo hides at 1.5gp each. An extra 25% bonus if the innards keg is also retrieved.",
         "completed": false
     }
 ]

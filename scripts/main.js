@@ -336,14 +336,25 @@ function toggleDisplaySwitch(setting, className, elementsClass) {
 
 function changeProfile(id) {
     currentProfile = profiles.find((p) => p.id == id);
-    let newLocationsShowing = currentProfile.getLocationsFound();
-        Array.prototype.forEach.call(document.getElementsByClassName("location-marker"), function(g) {
-            g.classList.add("hidden");
-        });
-        newLocationsShowing.forEach((id) => {
-            document.getElementById(id + "Group").classList.remove("hidden");
-        });
-    Location.prepareLocationDropdown(locations, newLocationsShowing);
+    let locationsShowing = currentProfile.getLocationsFound();
+    let questsShowing = currentProfile.getQuests();
+
+    //Showing & Hiding locations
+    Array.prototype.forEach.call(document.getElementsByClassName("location-marker"), function(g) {
+        g.classList.add("hidden");
+    });
+    locationsShowing.forEach((id) => {
+        document.getElementById(id + "Group").classList.remove("hidden");
+    });
+    Location.prepareLocationDropdown(locations, locationsShowing);
+
+    //Showing & Hiding quests
+    Array.prototype.forEach.call(document.getElementsByClassName("quest-display"), function(q) {
+        q.classList.add("hidden");
+    })
+    questsShowing.forEach((id) => {
+        document.getElementById(id).classList.remove("hidden")
+    });
     resetView(currentProfile.getViewBox());
 }
 

@@ -27,6 +27,7 @@ class Quest {
         // Overall group element
         let bigSpan = document.createElement("span");
         bigSpan.id = this.id;
+        bigSpan.classList.add("quest-display");
         let that = this;
         bigSpan.addEventListener('click', function(e) { //Populates parsed information
             console.log("Quest: " + that.id + " information being populated");

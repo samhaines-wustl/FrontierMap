@@ -16,9 +16,13 @@ with open("./json/manifest.json", 'w') as outfile:
 # Get list of all ids from all locations
 id_list = [json.load(open(path + '/' + j))['id'] for j in cleaned_list]
 
+# Get list of all ids from quests
+q_ids = [i["id"] for i in json.load(open("./json/quests.json"))]
+
 # Set up admin profile locations
 with open("./json/profiles/admin.json", "r+") as admin_file:
     data = json.load(admin_file)
     data['locations_found'] = id_list
+    data['quests'] = q_ids
     admin_file.seek(0)
     json.dump(data, admin_file, indent=2)

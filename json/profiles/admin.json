@@ -59,7 +59,20 @@
     "wolfdenCavern"
   ],
   "quests": [
-
+    "bachosLetters",
+    "florenceBassMedicine",
+    "lanternKingTrade",
+    "wackoBoyLeader1",
+    "wackoBoyLeader2",
+    "disease1",
+    "treasure1",
+    "treasure2",
+    "treasure3",
+    "treasure4",
+    "monk1",
+    "monk2",
+    "leatherContract1",
+    "leatherContract2"
   ],
   "viewbox": {
     "x": 35,

@@ -12,7 +12,10 @@
     "reidLeather",
     "barnburnHills"
   ],
-  "quests": [],
+  "quests": [
+    "leatherContract1",
+    "leatherContract2"
+  ],
   "viewbox": {
     "x": 780,
     "y": 43,
