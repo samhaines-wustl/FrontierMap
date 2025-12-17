@@ -20,7 +20,7 @@ let toggleTextDisplay = false;
 let toggleBiomeDisplay = false;
 let toggleGridDisplay = false;
 
-let currentProfile = profiles.find((p) => p.id == "admin");
+let currentProfile = profiles.find((p) => p.id == "northExp");
 
 
 let allBiomesG = document.getElementById('allBiomesGroup');
@@ -158,8 +158,6 @@ function main() {
     console.log("Done with Grid");
 
 
-    resetView(currentProfile.getViewBox());
-
     //Gets rid of lag when first displaying biomes
     toggleBiomeDisplay = toggleDisplaySwitch(toggleBiomeDisplay,  "hidden", "biome-area");
     setTimeout(function() {
@@ -168,8 +166,9 @@ function main() {
 
     console.log("Finished in main");
 
-    resetView(currentProfile.getViewBox());
+    document.getElementById("profileSelect").value = currentProfile.getID();
     changeProfile(currentProfile.getID());
+    
 }
 
 function prepareEventListeners() {

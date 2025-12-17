@@ -1,0 +1,17 @@
+{
+        "name": "Shale Springs",
+        "id": "shaleSprings",
+        "type": "town",
+        "icon_src": "Mine_1",
+        "x": 1510,
+        "y": 485,
+        "blurb": "The Oil capital of the Frontier!",
+        "places": [
+                "Double Lioness: The only tavern in all of Shale, solely manned by one Ms. Chapman"
+        ],
+        "people": [
+                "Rhoda 'Sundown' Chapman: An older, hardworking human who had to retire to the tavern after an unfortunate drilling accident. Don't worry though, she's found great joy in making sure all the miners are adequately liquored up.",
+                "Representative Nettie 'The Drill' Levy: A dwarven woman who was born in the oil. Molded by the oil. She could find a drop of oil in an ocean of water even if bound and blinded."
+        ],
+        "misc": ""
+}

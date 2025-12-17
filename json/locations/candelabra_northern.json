@@ -1,0 +1,14 @@
+{
+        "name": "Northern Candelabra",
+        "id": "northernCandelabra",
+        "type": "town",
+        "icon_src": "Candle_1",
+        "x": 1610,
+        "y": 422,
+        "blurb": "Northern Outpost for the Communion of the Lantern King",
+        "places": [],
+        "people": [
+                "Baldr Incanes: A conrasu older than the sand that litters the ground; they're organized, fast, and knows they're better than you"
+        ],
+        "misc": ""
+}
