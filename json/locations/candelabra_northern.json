@@ -8,7 +8,9 @@
         "blurb": "Northern Outpost for the Communion of the Lantern King",
         "places": [],
         "people": [
-                "Baldr Incanes: A conrasu older than the sand that litters the ground; they're organized, fast, and knows they're better than you"
+                "Baldr Incanes: A conrasu older than the sand that litters the ground; they're organized, fast, and knows they're better than you",
+                "<s>Illuminator</s> Baldr Bert of the Crater: The top Illuminator, who's a shoe-in for the next Baldr, but Bert will not leave that decision up to chance.",
+                "Illuminator Cecil of the Saved Child: A self-proclaimed opportunist, he's been climbing the ranks quickly."
         ],
         "misc": ""
 }

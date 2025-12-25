@@ -124,5 +124,14 @@
         "info": "You've bargained your way into a hide and leather contract with Ariel Reid. You've promised her no less than 50 hides from the Buffalo out in the Nokomont Midlands. Don't fret though, if the hides are returned to her within the month, the contract is null and void.",
         "reward": "50 buffalo hides at 1.5gp each. An extra 25% bonus if the innards keg is also retrieved.",
         "completed": false
+    },
+    {
+        "name": "Illuminator Bert needs his competition taken care of fast",
+        "nickname": "Bert's Hit",
+        "id": "lanternKingHitjob",
+        "color": "#F3D439",
+        "info": "Illuminator Bert of the Crater believes Baldr Incanes will be promoted to Solaris very soon, which means the Baldr position will be available in the Northern Candelabra. Even though Bert is practically guaranteed to be appointed by Incanes, he does not want to take any chances. Therefore, Bert has hired you to kill his competition: Illuminator Cecil of the Saved Child. Do not fear, Bert has thought of lots of the logisitics. In two nights, the Northern Candelabra will be going through the Phoneix Rites for new Illuminators, a perfect time to commit the act in darkness and distraction.",
+        "reward": "80 gp each, with 30gp already recieved as upfront cost.",
+        "completed": false
     }
 ]
