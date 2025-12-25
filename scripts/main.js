@@ -6,7 +6,7 @@ import {TravelLine} from './TravelLines.js';
 import {travelLines} from './TravelLines.js';
 
 import {Profile} from './Profiles.js';
-import {profiles} from './Profiles.js';
+import {profiles} from './Profiles.js'; 
 
 //Constants
 const ICON_SIZE = 48;
@@ -362,6 +362,25 @@ function resetView(vBox) {
     setFontSize(ICON_TEXT_FONT_SIZE);
     setIconSize(ICON_SIZE);
     setOpacity(.3);
+}
+
+document.getElementById("testButton").addEventListener("click", function(e) {
+        if (Math.random() < .5)
+            doMarkdown("test.md");
+        else
+            doMarkdown("test2.md");
+});
+
+async function doMarkdown(fileName) {
+    var converter = new showdown.Converter();
+    let textMD;
+    await fetch('json/factions/' + fileName) 
+    .then(res => res.text())
+    .then(result => {
+        textMD = result;
+        })
+    .then(() => console.log(textMD));
+     document.getElementById("informationTextBox").innerHTML = converter.makeHtml(textMD);
 }
 
 main();

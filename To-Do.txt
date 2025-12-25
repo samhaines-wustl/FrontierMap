@@ -12,3 +12,4 @@ To-Do List
 - Calendar Section (weather, days, moon cycle, blood moon, meteroid shower, etc.)
 - Make viewbox scale w/ window size
 - Add factions overlay (similar to biomes)
+- Change info (quests, locations, factions, etc.) to use markdown integration.
