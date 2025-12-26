@@ -4,9 +4,5 @@
         "type": "cryptid",
         "icon_src": "Statue_1",
         "x": 1440,
-        "y": 300,
-        "blurb": "",
-        "places": [],
-        "people": [],
-        "misc": ""
+        "y": 300
 }

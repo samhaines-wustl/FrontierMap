@@ -4,9 +4,5 @@
         "type": "cryptid",
         "icon_src": "Horse_2",
         "x": 1430,
-        "y": 1505,
-        "blurb": "",
-        "places": [],
-        "people": [],
-        "misc": ""
+        "y": 1505
 }

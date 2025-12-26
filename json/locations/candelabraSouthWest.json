@@ -4,9 +4,5 @@
         "type": "town",
         "icon_src": "Candle_1",
         "x": 1375,
-        "y": 1591,
-        "blurb": "",
-        "places": [],
-        "people": [],
-        "misc": ""
+        "y": 1591
 }

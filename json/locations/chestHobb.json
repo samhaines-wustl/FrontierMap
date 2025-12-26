@@ -1,0 +1,8 @@
+{
+        "name": "Chest of Hobb",
+        "id": "chestHobb",
+        "type": "treasure",
+        "icon_src": "Statue_1",
+        "x": 1930,
+        "y": 1410
+}

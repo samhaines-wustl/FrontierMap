@@ -4,9 +4,5 @@
         "type": "envSite",
         "icon_src": "Mountain_1",
         "x": 1010,
-        "y": 1550 ,
-        "blurb": "",
-        "places": [],
-        "people": [],
-        "misc": ""
+        "y": 1550
 }

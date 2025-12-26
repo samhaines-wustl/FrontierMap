@@ -1,0 +1,8 @@
+{
+        "name": "Southern Candelabra",
+        "id": "candelabraSouth",
+        "type": "town",
+        "icon_src": "Candle_1",
+        "x": 1820,
+        "y": 1390
+}

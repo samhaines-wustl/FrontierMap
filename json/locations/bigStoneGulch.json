@@ -1,0 +1,8 @@
+{
+        "name": "Big Stone Gulch",
+        "id":"bigStoneGulch",
+        "type": "town",
+        "icon_src": "Town_1",
+        "x": 1793,
+        "y": 1178
+    }

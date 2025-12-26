@@ -4,9 +4,5 @@
         "type": "town",
         "icon_src": "Temple_2",
         "x": 1315,
-        "y": 1620,
-        "blurb": "",
-        "places": [],
-        "people": [],
-        "misc": ""
+        "y": 1620
 }
