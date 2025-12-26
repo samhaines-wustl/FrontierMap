@@ -23,7 +23,7 @@ class Location {
         this.iconSize = 48;
         this.fontSize = 32;
         this.json = json;
-        this.parsedInformation = this.parseInformation(this.json);
+        this.markdown = 'markdown/locations/' + this.id + '.md';
         
         this.makeElement();
     }
@@ -87,7 +87,7 @@ class Location {
         let that = this;
         g.addEventListener('click', function(e) { //Populates parsed information
             console.log(that.name + " information being populated");
-            document.getElementById("informationTextBox").innerHTML = that.parsedInformation;
+            pullMarkdownAndUpdate(that.markdown, "informationTextBox");
         });
         //image
         let el = document.createElementNS(SVGNS, 'image');
@@ -131,44 +131,6 @@ class Location {
 
         let textElement = document.getElementById(this.id + 'Text');
         textElement.style.fontSize = this.fontSize + 'px';
-    };
-
-    parseInformation(locInfo) {
-        let header, blurb, places, people, other = "";
-        header = blurb = places = people = other = "";
-
-        header = "<h2>" + locInfo.name + "</h2>";
-        blurb = "<p>" + locInfo.blurb + "</p>";
-
-        //Places
-        if (locInfo.places && locInfo.places != "") { //Checks if not empty
-            places = "<div> Places <ul>";
-            locInfo.places.forEach( (place) => {
-                let [name, info] = place.split(':')
-                places += "<li>";
-                places +=  `<b>${name}</b>: ${info}`;
-                places += "</li>";
-            })
-            places += "</ul></div></br>";
-        }
-
-        //People
-        if (locInfo.people && locInfo.people != "") { //Checks if not empty
-            people = "<div> People <ul>";
-            locInfo.people.forEach( (person) => {
-                let [name, info] = person.split(':')
-                people += "<li>";
-                people +=  `<b>${name}</b>: ${info}`;
-                people += "</li>";
-            })
-            people += "</ul></div></br>";
-        }
-
-        other = "<i>" + locInfo.misc + "</i>";
-
-        let parsedInfo = header + blurb + places + people + other;
-
-        return parsedInfo;
     };
 }
 

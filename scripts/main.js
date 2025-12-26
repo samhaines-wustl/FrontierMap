@@ -364,23 +364,4 @@ function resetView(vBox) {
     setOpacity(.3);
 }
 
-document.getElementById("testButton").addEventListener("click", function(e) {
-        if (Math.random() < .5)
-            doMarkdown("test.md");
-        else
-            doMarkdown("test2.md");
-});
-
-async function doMarkdown(fileName) {
-    var converter = new showdown.Converter();
-    let textMD;
-    await fetch('json/factions/' + fileName) 
-    .then(res => res.text())
-    .then(result => {
-        textMD = result;
-        })
-    .then(() => console.log(textMD));
-     document.getElementById("informationTextBox").innerHTML = converter.makeHtml(textMD);
-}
-
 main();

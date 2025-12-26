@@ -13,3 +13,4 @@ To-Do List
 - Make viewbox scale w/ window size
 - Add factions overlay (similar to biomes)
 - Change info (quests, locations, factions, etc.) to use markdown integration.
+- Add info on last commit (like a version tracker)
