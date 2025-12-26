@@ -1,8 +1,6 @@
 [
-  "ariel_reid_leather.json",
-  "barnburn_hills.json",
-  "barrel_&_bridle_park.json",
-  "bear_den_south.json",
+  "barnburnHills.json",
+  "barrelAndBridle.json",
   "big_stone_gulch.json",
   "black_mountain.json",
   "blooms_end.json",
@@ -37,6 +35,7 @@
   "porcupine_kids.json",
   "purity_snag.json",
   "rattlebank.json",
+  "reidLeather.json",
   "rochdale.json",
   "scorpion_catacombs.json",
   "seamstress_cavern.json",
