@@ -1,2 +1,0 @@
-
-# Header for second file
