@@ -1,8 +1,0 @@
-{
-        "name": "Winchester Book",
-        "id": "winchesterBook",
-        "type": "treasure",
-        "icon_src": "Book_1",
-        "x": 1100,
-        "y": 1460
-}
