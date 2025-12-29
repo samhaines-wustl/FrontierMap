@@ -1,16 +1,18 @@
 To-Do List
 
-- Add tab for companion rules
+- ~~Add tab for companion rules~~
 - Separate work into async groups
 - Have travel line clean up when switching between found and all locations (get rid of lines that contain a non-found location when it can't be seen)
 - Add load screen while map boots in
 - Reorganize code (~700 lines)
-    - Add more separate javascript files for each class/clean up main js files
+    - ~~Add more separate javascript files for each class/clean up main js files~~
 - Add option for info section to be filled in via option areas
 - Add information for factions tab
 - Add cookies to save profile
 - Calendar Section (weather, days, moon cycle, blood moon, meteroid shower, etc.)
 - Make viewbox scale w/ window size
 - Add factions overlay (similar to biomes)
-- Change info (quests, locations, factions, etc.) to use markdown integration.
-- Add info on last commit (like a version tracker)
+- ~~Change info (quests, locations, factions, etc.) to use markdown integration.~~
+    - Do quests in markdown
+    - Do factions in markdown  
+- Add info on last commit (like a version tracker): version number in blank info screen 
