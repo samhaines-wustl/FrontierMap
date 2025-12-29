@@ -13,6 +13,8 @@ const ICON_SIZE = 48;
 const ICON_TEXT_FONT_SIZE = 32;
 const SVGNS = "http://www.w3.org/2000/svg";
 
+showdown.setOption('strikethrough', 'true');
+
 let settings = [];
 let biomes = [];
 

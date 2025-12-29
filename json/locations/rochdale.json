@@ -4,11 +4,5 @@
         "type": "town",
         "icon_src": "Mine_1",
         "x": 1430,
-        "y": 1330,
-        "blurb": "A run-down coal mining town",
-        "places": [],
-        "people": [
-                "The Bison Who Bleeds Pearls: Deep in the coal mine, lays a chained bison whose blood hardens into blood red pearls. The town collects them and flaunts them, while hiding the source"
-        ],
-        "misc": ""
-    }
+        "y": 1330
+}

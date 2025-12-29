@@ -1,0 +1,8 @@
+{
+        "name": "Seamstress Cavern",
+        "id": "seamstressCavern",
+        "type": "town",
+        "icon_src": "Money_3",
+        "x": 1024,
+        "y": 1024
+}

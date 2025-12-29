@@ -4,11 +4,5 @@
         "type": "town",
         "icon_src": "Town_2",
         "x": 1652,
-        "y": 1488,
-        "blurb": "A small gold panning town that has been ravaged by the Wacko Boys",
-        "places": [],
-        "people": [
-            "Loose-Eye Maddie: A crazed elven leader of the Wacko Boy. She's unpredictable, crazy, and damn near explosive."
-        ],
-        "misc": "The town is in ruins. People hang from tree branches, others are tortured for joy, and some luck few are simply tied up."
-    }
+        "y": 1488
+}

@@ -121,6 +121,7 @@ table.distTableStyling thead th:first-child {
 .information { 
   grid-area: information; 
   border-style: dotted dashed solid double;
+  overflow: scroll;
 }
 
 .map {

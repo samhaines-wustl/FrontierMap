@@ -1,0 +1,8 @@
+{
+        "name": "Shale Springs",
+        "id": "shaleSprings",
+        "type": "town",
+        "icon_src": "Mine_1",
+        "x": 1510,
+        "y": 485
+}
