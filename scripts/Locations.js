@@ -135,22 +135,9 @@ class Location {
     };
 }
 
-await fetch('./json/manifest.json')
-  .then(res => res.json())
-  .then(fileList => {
-    return Promise.allSettled(
-      fileList.map(file => {
-        return fetch(`./json/locations/${file}`).then(res => {
-            if (!res.ok) {
-                return `Couldn't find ${file}`;
-            }
-            return res.json()
-        })
-    })
-    );
-  })
-  .then(jsonDataArray => {
-    let valueArray = jsonDataArray.map(obj => obj.value)
-    locations = Location.prepareLocations(valueArray);
+await fetch('./json/locations.json')
+.then(res => res.json())
+.then(jsonDataArray => {
+    locations = Location.prepareLocations(jsonDataArray);
     console.log("Locations.js loaded");
-  })
+})
