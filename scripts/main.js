@@ -1,4 +1,6 @@
+console.log("main.js started")
 
+//Imports
 import {locations} from './Locations.js';
 import {Location} from './Locations.js';
 
@@ -22,8 +24,7 @@ let toggleTextDisplay = false;
 let toggleBiomeDisplay = false;
 let toggleGridDisplay = false;
 
-let currentProfile = profiles.find((p) => p.id == "northExp");
-
+let currentProfile = profiles.find((p) => p.getID() == "northExp");
 
 let allBiomesG = document.getElementById('allBiomesGroup');
 
@@ -375,3 +376,4 @@ function resetView(vBox) {
 }
 
 main();
+console.log("main.js loaded");

@@ -1,3 +1,4 @@
+console.log("TravelLines.js started");
 /// This file will have the class for TravelLines
 
 //Constants
@@ -88,3 +89,5 @@ class TravelLine {
         allTravelLinesGroup.appendChild(g);
     }
 }
+
+console.log("TravelLines.js loaded");

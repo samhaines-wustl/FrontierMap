@@ -1,3 +1,4 @@
+console.log("Locations.js started");
 
 /// This file will have the class for locations
 /// Also will prep the locations
@@ -151,6 +152,5 @@ await fetch('./json/manifest.json')
   .then(jsonDataArray => {
     let valueArray = jsonDataArray.map(obj => obj.value)
     locations = Location.prepareLocations(valueArray);
-        console.log("Done all icons");
-        console.log("Locations Fetch Complete");
+    console.log("Locations.js loaded");
   })

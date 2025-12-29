@@ -1,4 +1,4 @@
-
+console.log("SuperHelper.js started");
 // This file is for shared functions across classes
 
 function pullMarkdownAndUpdate(fileSRC, elementID) {
@@ -16,4 +16,4 @@ function pullMarkdownAndUpdate(fileSRC, elementID) {
     .catch(error => console.log(error.message));
 }
 
-console.log("SuperHelper load complete")
+console.log("SuperHelper.js loaded");

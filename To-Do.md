@@ -15,4 +15,6 @@ To-Do List
 - ~~Change info (quests, locations, factions, etc.) to use markdown integration.~~
     - Do quests in markdown
     - Do factions in markdown  
-- Add info on last commit (like a version tracker): version number in blank info screen 
+- ~~Add info on last commit (like a version tracker): version number in blank info screen ~~
+- Change location loading (one json file)
+- ~~Change admin & empty profile to be hardcoded~~ 

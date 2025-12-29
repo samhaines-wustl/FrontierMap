@@ -1,3 +1,4 @@
+console.log("Quests.js started");
 /// This file will have the class for Quests
 
 //Constants
@@ -72,6 +73,5 @@ await fetch('./json/quests.json')
     jsonDataArray.forEach((q) => {
         quests.push(new Quest(q.name, q.nickname, q.id, q.color, q.info, q.reward, q.completed))
     });
-    console.log("Quests Fetch Complete");
-
-  })
+    console.log("Quests.js loaded");
+})
