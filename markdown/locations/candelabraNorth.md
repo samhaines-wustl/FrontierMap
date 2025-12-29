@@ -10,7 +10,7 @@
 
  - **~~Illuminator~~ Baldr Bert of the Crater**: A high-performing human Illuminator, who's a shoe-in for the next Baldr. But, Bert will not leave that choice up to chance.
 
- - **Illuminator Cecil of the Saved child**: A self-proclaimed opportunist, he's been climbing the ranks quickly and gaining quite a substantial amount of notoriety.
+ - **Illuminator Cecil of the Saved Child**: A self-proclaimed opportunist, he's been climbing the ranks quickly and gaining quite a substantial amount of notoriety.
 
 *How do they live like this. The heat and the flames? Just how*
 
