@@ -169,17 +169,6 @@ function main() {
 
     document.getElementById("profileSelect").value = currentProfile.getID();
     changeProfile(currentProfile.getID());
-
-    //Display version
-    fetch('https://api.github.com/repos/samhaines-wustl/FrontierMap/commits?per_page=1')
-    .then(res => res.json())
-    .then(res => {
-    let commitMessage = res[0].commit.message;
-    let firstline = commitMessage.slice(0, commitMessage.indexOf("\n"));
-    document.getElementById('informationTextBox').innerHTML = "FrontierMap " + firstline;
-    })
-    
-    console.log("Finished in main");
 }
 
 function prepareEventListeners() {
@@ -374,6 +363,15 @@ function resetView(vBox) {
     setIconSize(ICON_SIZE);
     setOpacity(.3);
 }
+
+//Display version
+await fetch('https://api.github.com/repos/samhaines-wustl/FrontierMap/commits?per_page=1')
+.then(res => res.json())
+.then(res => {
+    let commitMessage = res[0].commit.message;
+    let firstline = commitMessage.slice(0, commitMessage.indexOf("\n"));
+    document.getElementById('informationTextBox').innerHTML = "FrontierMap " + firstline;
+})
 
 main();
 console.log("main.js loaded");
