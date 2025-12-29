@@ -1,8 +1,8 @@
 {
-        "name": "Captain Bradford",
+        "name": "Bradford Crash Site",
         "id": "bradfordCrashSite",
         "type": "cryptid",
         "icon_src": "Space_1",
-        "x": 1130,
-        "y": 1420
+        "x": 1550,
+        "y": 390
 }

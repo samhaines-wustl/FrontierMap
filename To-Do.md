@@ -18,3 +18,4 @@ To-Do List
 - ~~Add info on last commit (like a version tracker): version number in blank info screen ~~
 - Change location loading (one json file)
 - ~~Change admin & empty profile to be hardcoded~~ 
+- Phase out gen_manifest.py
