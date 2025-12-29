@@ -1,0 +1,88 @@
+[
+    {
+        "display_name": "MacArthur's Caravan",
+        "id": "macCaravan",
+        "locations_found": [
+            "bigStoneGulch",
+            "blackMountain",
+            "cactusPass",
+            "cactusWill",
+            "candelabraSouth",
+            "candelabraSouthwest",
+            "caseyAlexanderAbode",
+            "chestnutPeaks",
+            "chestHobb",
+            "coppervale",
+            "crescentCanyon",
+            "domainRemorhaz",
+            "failedMICaravan",
+            "hiddenPlumGrotto",
+            "incandescent",
+            "newAlmondport",
+            "oldWindsCourt",
+            "phoneixAshes",
+            "puritySnag",
+            "rattlebank",
+            "rochdale",
+            "scorpionCatacombs",
+            "seamstressCavern",
+            "silverbellRanch",
+            "slowspring",
+            "sonoraRanch",
+            "tesoroTarPits",
+            "longGoodbye",
+            "trueWorld",
+            "warmpassQuarry",
+            "winchesterBook"
+        ],
+        "quests": [
+            "bachosLetters",
+            "florenceBassMedicine",
+            "lanternKingTrade",
+            "wackoBoyLeader1",
+            "wackoBoyLeader2",
+            "disease1",
+            "treasure1",
+            "treasure2",
+            "treasure3",
+            "treasure4",
+            "monk1",
+            "monk2"
+        ],
+        "viewbox": {
+            "x": 900,
+            "y": 750,
+            "w": 3550,
+            "h": 3550
+        }
+    },
+    {
+        "display_name": "Northern Expedition",
+        "id": "northExp",
+        "locations_found": [
+            "wolfdenCavern",
+            "hhCrossing",
+            "steelLake",
+            "cornflowerLake",
+            "gravelMouthDogman",
+            "incandescent",
+            "longGoodbye",
+            "reidLeather",
+            "barnburnHills",
+            "bloomsEnd",
+            "shaleSprings",
+            "candelabraNorth"
+        ],
+        "quests": [
+            "leatherContract1",
+            "leatherContract2",
+            "lanternKingHitjob"
+        ],
+        "viewbox": {
+            "x": 780,
+            "y": 43,
+            "w": 3550,
+            "h": 3550
+        }
+    }
+]

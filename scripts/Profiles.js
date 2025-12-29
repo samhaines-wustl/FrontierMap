@@ -1,4 +1,4 @@
-
+console.log("Profile.js started");
 // This file will have class for profiles
 
 //Constants
@@ -8,6 +8,9 @@ const PROFILE_FILES = [
     'northernExpedition.json',
     'empty.json',
 ]
+
+import {locations} from './Locations.js';
+import {quests} from './Quests.js';
 
 //Exports
 export {Profile};
@@ -25,6 +28,21 @@ class Profile {
         this.viewBox = viewBox;
 
         this.makeElement();
+    }
+
+    static makeGenericProfile(name, id) {
+        return new Profile(
+            name,
+            id,
+            (id == 'admin') ? locations.map((l) => l.id): [],
+            (id == 'admin') ? quests.map((q) => q.id): [],
+            {
+                "x": 35,
+                "y": -75,
+                "w": 6550,
+                "h": 6550
+            }
+        )
     }
 
     getLocationsFound() {
@@ -50,13 +68,26 @@ class Profile {
 
         document.getElementById('profileSelect').appendChild(optionElement);
     }
+
+    prepareLocationsFound() {
+        if (this.id == 'admin') { //admin profile
+            return ['test']
+        }
+        else { //empty profile
+            return []
+        }
+    }
 }
 
-PROFILE_FILES.forEach(async (f) => {
-    await fetch('./json/profiles/' + f)
-    .then(res => res.json())
-    .then(d => {
+await fetch('./json/profiles.json')
+  .then(res => res.json())
+  .then(jsonDataArray => {
+    jsonDataArray.forEach((d) => {
         profiles.push(new Profile(d.display_name, d.id, d.locations_found, d.quests, d.viewbox));
-    })
-});
-console.log("Profiles Fetch Complete");
+    });
+    profiles.push(Profile.makeGenericProfile('Admin', 'admin'));
+    profiles.push(Profile.makeGenericProfile('Empty', 'empty'));
+
+    console.log("Profiles.js loaded");
+})
+
