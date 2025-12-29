@@ -454,5 +454,13 @@
         "icon_src": "Volcano_1",
         "x":1908,
         "y":206
+    },
+    {
+        "name": "Madame LaRoche's Estate",
+        "id": "laRocheEstate",
+        "type": "locale",
+        "icon_src": "Vase_2",
+        "x": 975,
+        "y": 620
     }
 ]
