@@ -119,7 +119,7 @@
     {
         "name": "Reid needs those Leathers and those Buffalo Dead too",
         "nickname": "Reid's Contract",
-        "id": "leatherContract2",
+        "id": "reidLeatherContract",
         "color": "#D3AF37",
         "info": "You've bargained your way into a hide and leather contract with Ariel Reid. You've promised her no less than 50 hides from the Buffalo out in the Nokomont Midlands. Don't fret though, if the hides are returned to her within the month, the contract is null and void.",
         "reward": "50 buffalo hides at 1.5gp each. An extra 25% bonus if the innards keg is also retrieved.",

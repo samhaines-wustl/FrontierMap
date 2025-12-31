@@ -16,6 +16,8 @@ To-Do List
     - Do quests in markdown
     - Do factions in markdown  
 - ~~Add info on last commit (like a version tracker): version number in blank info screen ~~
-- Change location loading (one json file)
+- ~~Change location loading (one json file)~~
 - ~~Change admin & empty profile to be hardcoded~~ 
-- Phase out gen_manifest.py
+- ~~Phase out gen_manifest.py~~
+- Change horse rules to travel rules (fatigue + exploration activites)
+- Make carrying capacity section

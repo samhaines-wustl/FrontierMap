@@ -11,15 +11,13 @@ export {quests};
 let quests = [];
 
 class Quest {
-    constructor(name, nickname, id, color, info, reward, completed) {
+    constructor(name, nickname, id, color, completed) {
         this.name = name;
         this.nickname = nickname;
         this.id = id;
         this.color = color;
-        this.info = info;
-        this.reward = reward;
         this.completed = completed;
-        this.parsedInformation = this.parseInformation();
+        this.markdown = 'markdown/quests/' + this.id + '.md';
 
         this.makeElement();
     }
@@ -32,7 +30,7 @@ class Quest {
         let that = this;
         bigSpan.addEventListener('click', function(e) { //Populates parsed information
             console.log("Quest: " + that.id + " information being populated");
-            document.getElementById("informationTextBox").innerHTML = that.parsedInformation;
+            pullMarkdownAndUpdate(that.markdown, "informationTextBox");
         });
         if (this.completed) 
             bigSpan.style.textDecoration = "line-through"
@@ -51,27 +49,13 @@ class Quest {
         bigSpan.appendChild(document.createElement("br"));
         document.getElementById("questDetail").append(bigSpan);
     }
-
-    parseInformation() {
-        let header, status, info, reward;
-        header = status = info = reward = "";
-
-        header = "<h2>" + this.name + "</h2>";
-        status = "<p><i>" + (this.completed ? "Completed!" : "Ongoing")+ "</i></p>";
-        info = "<p>" + this.info + "</p>";
-        reward = "<p> <b>Reward: </b>" + this.reward + "</p>";
-
-        let parsedInfo = header + status + info + reward;
-
-        return parsedInfo;
-    }
 }
 
 await fetch('./json/quests.json')
   .then(res => res.json())
   .then(jsonDataArray => {
     jsonDataArray.forEach((q) => {
-        quests.push(new Quest(q.name, q.nickname, q.id, q.color, q.info, q.reward, q.completed))
+        quests.push(new Quest(q.name, q.nickname, q.id, q.color, q.completed))
     });
     console.log("Quests.js loaded");
 })
