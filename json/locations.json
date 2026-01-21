@@ -462,5 +462,29 @@
         "icon_src": "Vase_2",
         "x": 975,
         "y": 620
+    },
+    {
+        "name": "Sapling Express Outpost",
+        "id": "saplingExpressOutpost",
+        "type": "locale",
+        "icon_src": "Horse_1",
+        "x": 1320,
+        "y": 290
+    },
+    {
+        "name": "Red Hills",
+        "id": "redHills",
+        "type": "town",
+        "icon_src": "City_2",
+        "x": 390,
+        "y": 960
+    },
+    {
+        "name": "Hope's Scar",
+        "id": "hopeScar",
+        "type": "town",
+        "icon_src": "Town_2",
+        "x": 1055,
+        "y": 280
     }
 ]
