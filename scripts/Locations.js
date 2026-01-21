@@ -83,7 +83,8 @@ class Location {
         //group element
         let g = document.createElementNS(SVGNS, 'g');
         g.addEventListener('mouseover', (e) => { //Reappends node so that it is drawn first (nothing covers text)
-            document.getElementById('allIconGroup').appendChild(e.target.parentNode);
+            //Need to find new way for hover (possibly seperate text group, but that would require reworking hover mechanics)
+           // document.getElementById('allIconGroup').appendChild(e.target.parentNode); 
         });
         let that = this;
         g.addEventListener('click', function(e) { //Populates parsed information

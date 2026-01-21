@@ -21,3 +21,4 @@ To-Do List
 - ~~Phase out gen_manifest.py~~
 - Change horse rules to travel rules (fatigue + exploration activites)
 - Make carrying capacity section
+- Fix text overlay
