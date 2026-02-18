@@ -468,8 +468,8 @@
         "id": "saplingExpressOutpost",
         "type": "locale",
         "icon_src": "Horse_1",
-        "x": 1320,
-        "y": 290
+        "x": 1190,
+        "y": 340
     },
     {
         "name": "Red Hills",
@@ -486,5 +486,13 @@
         "icon_src": "Town_2",
         "x": 1055,
         "y": 280
-    }
+    },
+	{
+		"name": "Western Candelabra",
+		"id": "candelabraWest",
+		"type": "locale",
+		"icon_src": "Cryptid_2",
+		"x": 1010,
+		"y": 460
+	}
 ]
