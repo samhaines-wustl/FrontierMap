@@ -520,14 +520,6 @@
 		"y": 370
 	},
 	{
-		"name": "Winghaven",
-		"id": "winghaven",
-		"type": "town",
-		"icon_src": "Town_1",
-		"x": 890,
-		"y": 370
-	},
-	{
 		"name": "Tear of Ichor",
 		"id": "tearIchor",
 		"type": "envSite",
