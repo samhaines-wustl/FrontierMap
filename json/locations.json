@@ -488,11 +488,59 @@
         "y": 280
     },
 	{
-		"name": "Western Candelabra",
-		"id": "candelabraWest",
+		"name": "Northwestern Candelabra",
+		"id": "candelabraNorthwest",
 		"type": "locale",
-		"icon_src": "Cryptid_2",
+		"icon_src": "Candle_1",
 		"x": 1010,
 		"y": 460
+	},
+	{
+		"name": "Wax Alcazar",
+		"id": "waxAlcazar",
+		"type": "locale",
+		"icon_src": "Lantern_1",
+		"x": 794,
+		"y": 311
+	},
+	{
+		"name": "Softtown",
+		"id": "softtown",
+		"type": "locale",
+		"icon_src": "Statue_2",
+		"x": 791,
+		"y": 610
+	},
+	{
+		"name": "Winghaven",
+		"id": "winghaven",
+		"type": "town",
+		"icon_src": "Town_1",
+		"x": 890,
+		"y": 370
+	},
+	{
+		"name": "Winghaven",
+		"id": "winghaven",
+		"type": "town",
+		"icon_src": "Town_1",
+		"x": 890,
+		"y": 370
+	},
+	{
+		"name": "Tear of Ichor",
+		"id": "tearIchor",
+		"type": "envSite",
+		"icon_src": "Statue_1",
+		"x": 1071,
+		"y": 412
+	},
+	{
+		"name": "Inferno Butte",
+		"id": "butteFlame",
+		"type": "envSite",
+		"icon_src": "Mountain_2",
+		"x": 887,
+		"y": 767
 	}
 ]
