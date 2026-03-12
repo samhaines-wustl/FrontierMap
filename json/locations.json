@@ -534,5 +534,22 @@
 		"icon_src": "Mountain_2",
 		"x": 887,
 		"y": 767
+	},
+	{
+		"name": "Rachelford Mines",
+		"id": "rachelfordMines",
+		"type": "envSite",
+		"icon_src": "Mine_1",
+		"x": 710,
+		"y": 390
+	},
+	{
+		"name": "Pinnacle's Spine",
+		"id": "pinnacleMountains",
+		"type": "envSite",
+		"icon_src": "Mountain_5",
+		"x": 648,
+		"y": 192
 	}
+
 ]
