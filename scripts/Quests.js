@@ -11,8 +11,7 @@ export {quests};
 let quests = [];
 
 class Quest {
-    constructor(name, nickname, id, color, completed) {
-        this.name = name;
+    constructor(nickname, id, color, completed) {
         this.nickname = nickname;
         this.id = id;
         this.color = color;
@@ -55,7 +54,7 @@ await fetch('./json/quests.json')
   .then(res => res.json())
   .then(jsonDataArray => {
     jsonDataArray.forEach((q) => {
-        quests.push(new Quest(q.name, q.nickname, q.id, q.color, q.completed))
+        quests.push(new Quest(q.nickname, q.id, q.color, q.completed))
     });
     console.log("Quests.js loaded");
 })

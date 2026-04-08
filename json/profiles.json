@@ -90,9 +90,15 @@
             "pinnacleMountains"
         ],
         "quests": [
-            "leatherContract1",
+            "maloneLeatherContract",
             "reidLeatherContract",
-            "lanternKingHitjob"
+            "lanternKingHitjob",
+            "bradforditeGather1",
+            "bradforditeGather2",
+            "laRocheInfilitrate1",
+            "kastResearch1",
+            "bulldozersWish",
+            "tailorsMod"
         ],
         "viewbox": {
             "x": 780,

@@ -108,30 +108,57 @@
         "completed": false
     },
     {
-        "name": "Deal with Malone's Competition",
         "nickname": "Malone's Contract",
-        "id": "leatherContract1",
-        "color": "#D3AF37",
-        "info": "Willis Malone runs the biggest leather brining operation in the North of the Frontier, and he intends to keep it that way. He's heard word an upstart briner is getting popular just south of the Barnburn Hills. He's task you to take care of it. The less details the better.",
-        "reward": "20 gp a piece. An extra 20 each if done within the week",
-        "completed": false
+        "id": "maloneLeatherContract",
+        "color": "#5b3e31",
+        "completed": true
     },
     {
-        "name": "Reid needs those Leathers and those Buffalo Dead too",
         "nickname": "Reid's Contract",
         "id": "reidLeatherContract",
-        "color": "#D3AF37",
-        "info": "You've bargained your way into a hide and leather contract with Ariel Reid. You've promised her no less than 50 hides from the Buffalo out in the Nokomont Midlands. Don't fret though, if the hides are returned to her within the month, the contract is null and void.",
-        "reward": "50 buffalo hides at 1.5gp each. An extra 25% bonus if the innards keg is also retrieved.",
+        "color": "#5b3e31",
         "completed": false
     },
     {
-        "name": "Illuminator Bert needs his competition taken care of fast",
         "nickname": "Bert's Hit",
         "id": "lanternKingHitjob",
-        "color": "#F3D439",
-        "info": "Illuminator Bert of the Crater believes Baldr Incanes will be promoted to Solaris very soon, which means the Baldr position will be available in the Northern Candelabra. Even though Bert is practically guaranteed to be appointed by Incanes, he does not want to take any chances. Therefore, Bert has hired you to kill his competition: Illuminator Cecil of the Saved Child. Do not fear, Bert has thought of lots of the logisitics. In two nights, the Northern Candelabra will be going through the Phoneix Rites for new Illuminators, a perfect time to commit the act in darkness and distraction.",
-        "reward": "80 gp each, with 30gp already recieved as upfront cost.",
+        "color": "#FF3F4C",
+        "completed": true
+    },
+    {
+        "nickname": "Assemble the Old Guard 1",
+        "id": "bradforditeGather1",
+        "color": "#fff220",
+        "completed": true
+    },
+    {
+        "nickname": "Assemble the Old Guard 2",
+        "id": "bradforditeGather2",
+        "color": "#fff220",
+        "completed": false
+    },
+    {
+        "nickname": "Infiltrate the King's Rangers",
+        "id": "laRocheInfilitrate1",
+        "color": "#EAE0C8",
+        "completed": false
+    },
+    {
+        "nickname": "Deep Red's Crystal",
+        "id": "kastResearch1",
+        "color": "#88E788",
+        "completed": false
+    },
+    {
+        "nickname": "Bulldozer's Last Hoorah",
+        "id": "bulldozersWish",
+        "color": "#7575D9",
+        "completed": false
+    },
+    {
+        "nickname": "Better Leather",
+        "id": "tailorsMod",
+        "color": "#a3a092",
         "completed": false
     }
 ]
