@@ -550,6 +550,38 @@
 		"icon_src": "Mountain_5",
 		"x": 648,
 		"y": 192
+	},
+	{
+		"name": "Thompson Ranch",
+		"id": "thompsonRanch",
+		"type": "locale",
+		"icon_src": "Horse_1",
+		"x": 756,
+		"y": 690
+	},
+	{
+		"name": "Fossil Canyon",
+		"id": "fossilCanyon",
+		"type": "envSite",
+		"icon_src": "Mountain_5",
+		"x": 890,
+		"y": 498
+	},
+	{
+		"name": "Domain of the Chimeric Manticore",
+		"id": "domainChimericManticore",
+		"type": "cryptid",
+		"icon_src": "Cryptid_1",
+		"x": 700,
+		"y": 470
+	},
+	{
+		"name": "Barwick Lion Den",
+		"id": "barwickDen",
+		"type": "cryptid",
+		"icon_src": "Cryptid_4",
+		"x": 927,
+		"y": 523
 	}
 
 ]
