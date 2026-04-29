@@ -135,6 +135,12 @@
         "nickname": "Assemble the Old Guard 2",
         "id": "bradforditeGather2",
         "color": "#fff220",
+        "completed": true
+    },
+    {
+        "nickname": "Assemble the Old Guard 3",
+        "id": "bradforditeGather3",
+        "color": "#fff220",
         "completed": false
     },
     {
@@ -153,12 +159,18 @@
         "nickname": "Bulldozer's Last Hoorah",
         "id": "bulldozersWish",
         "color": "#7575D9",
-        "completed": false
+        "completed": true
     },
     {
         "nickname": "Better Leather",
         "id": "tailorsMod",
         "color": "#a3a092",
+        "completed": false
+    },
+    {
+        "nickname": "Hunting Party",
+        "id": "rangers1",
+        "color": "#FF3F4C",
         "completed": false
     }
 ]
