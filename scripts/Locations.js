@@ -139,6 +139,6 @@ class Location {
 await fetch('./json/locations.json')
 .then(res => res.json())
 .then(jsonDataArray => {
-    locations = Location.prepareLocations(jsonDataArray);
+    locations = Location.prepareLocations(jsonDataArray).sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
     console.log("Locations.js loaded");
 })
