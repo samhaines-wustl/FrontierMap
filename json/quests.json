@@ -163,14 +163,20 @@
     },
     {
         "nickname": "Better Leather",
-        "id": "tailorsMod",
+        "id": "tailorsMod1",
         "color": "#a3a092",
-        "completed": false
+        "completed": true
     },
     {
         "nickname": "Hunting Party",
         "id": "rangers1",
         "color": "#FF3F4C",
+        "completed": false
+    },
+    {
+        "nickname": "Better Jewelry",
+        "id": "tailorsMod2",
+        "color": "#a3a092",
         "completed": false
     }
 ]

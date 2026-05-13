@@ -91,7 +91,9 @@
             "thompsonRanch",
             "fossilCanyon",
             "domainChimericManticore",
-            "barwickDen"
+            "barwickDen",
+            "blueShallows",
+            "mamlamboWetlands"
         ],
         "quests": [
             "maloneLeatherContract",
@@ -103,8 +105,9 @@
             "laRocheInfilitrate1",
             "kastResearch1",
             "bulldozersWish",
-            "tailorsMod",
-            "rangers1"
+            "tailorsMod1",
+            "rangers1",
+            "tailorsMod2"
         ],
         "viewbox": {
             "x": 780,
