@@ -250,7 +250,8 @@ function prepareBiomes() {
         new Biome("Mesa", "Mesa.webp"),
         new Biome("Mountains", "Mountains.webp"),
         new Biome("Nokomont Midlands", "Nokomont_Midlands.webp"),
-        new Biome("West Badlands", "West_Badlands.webp")
+        new Biome("West Badlands", "West_Badlands.webp"),
+        new Biome("Thundersnake", "Thundersnake.webp")
     ]
 }
 
