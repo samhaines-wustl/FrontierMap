@@ -598,6 +598,14 @@
 		"icon_src": "Cryptid_1",
 		"x": 922,
 		"y": 1115
+	},
+	{
+		"name": "Morose Seed Pods",
+		"id": "moroseSeedPods",
+		"type": "envSite",
+		"icon_src": "Crop_3",
+		"x": 850,
+		"y": 860
 	}
 
 ]
