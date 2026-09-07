@@ -488,7 +488,7 @@
         "y": 280
     },
 	{
-		"name": "Northwestern Candelabra",
+		"name": "The Crucible",
 		"id": "candelabraNorthwest",
 		"type": "locale",
 		"icon_src": "Candle_1",
@@ -604,8 +604,42 @@
 		"id": "moroseSeedPods",
 		"type": "envSite",
 		"icon_src": "Crop_3",
-		"x": 850,
+		"x": 750,
 		"y": 860
+	},
+	{
+		"name": "Cavalry",
+		"id": "cavalry",
+		"type": "town",
+		"icon_src": "Town_2",
+		"x": 760,
+		"y": 1020
+	},
+	{
+		"name": "Coalreach",
+		"id": "coalreach",
+		"type": "town",
+		"icon_src": "Mine_1",
+		"x": 684,
+		"y": 880
+	},
+	{
+		"name": "Domain of the Capelobo",
+		"id": "domainCapelobo",
+		"type": "cryptid",
+		"icon_src": "Cryptid_3",
+		"x": 644,
+		"y": 860
+	},
+	{
+		"name": "Flight of the Great Ahool",
+		"id": "domainAhool",
+		"type": "cryptid",
+		"icon_src": "Cryptid_4",
+		"x": 530,
+		"y": 1070
 	}
+
+
 
 ]
